@@ -5,13 +5,9 @@ function App() {
     const [backendData, setBackendData] = useState(null);
 
     useEffect(() => {
-        axios.get('/api')
-            .then(response => {
-                setBackendData(response.data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
+        axios.get('/api/data').then(response => {
+            setBackendData(response.data);
+        });
     }, []);
 
     return (
@@ -23,5 +19,3 @@ function App() {
 }
 
 export default App;
-
-
