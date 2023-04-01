@@ -2,25 +2,26 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function App() {
-  const [backendData, setBackendData] = useState(null);
+    const [backendData, setBackendData] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get('http://localhost:3000/');
-      setBackendData(response.data);
-    };
-    fetchData();
-  }, []);
+    useEffect(() => {
+        axios.get('/api')
+            .then(response => {
+                setBackendData(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }, []);
 
-  return (
-      <div className="App">
-        <header className="App-header">
-            <h1>hello</h1>
-          <p>{backendData ? backendData : 'Fetching data...'}</p>
-        </header>
-      </div>
-  );
+    return (
+        <div>
+            <h1>My App</h1>
+            <p>{backendData ? backendData : 'Fetching data...'}</p>
+        </div>
+    );
 }
 
 export default App;
+
 
