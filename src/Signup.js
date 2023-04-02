@@ -65,10 +65,7 @@ function SignUp() {
                         <br />
                         <br />
                         <label>
-                            Already signed up? Sign in{" "}
-                            <a style={{ color: "#1672a0" }} href="/login">
-                                here
-                            </a>
+                            Already signed up? Sign in <a style={{ color: '#1672a0' }} href="/SignIn">here</a>
                         </label>
                     </div>
 
