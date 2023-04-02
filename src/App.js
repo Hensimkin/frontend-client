@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 // import axios from 'axios';
 
 function App() {
-    const [backendData, setBackendData] = useState(null);
+// , { useState, useEffect }
+    // const [backendData, setBackendData] = useState(null);
 
     // useEffect(() => {
     //     axios.get('/api/data').then(response => {
@@ -13,7 +14,7 @@ function App() {
     return (
         <div>
             <h1>My App</h1>
-            <p>{backendData ? backendData : 'Fetching data...'}</p>
+            {/*<p>{backendData ? backendData : 'Fetching data...'}</p>*/}
         </div>
     );
 }
