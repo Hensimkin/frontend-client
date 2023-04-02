@@ -21,6 +21,9 @@ function Navbar() {
                     </li>
                     {/*<li><a href="/About">About</a></li>*/}
                     {/*<li><a href="#">Signup</a></li>*/}
+                    <li>
+                        <Link to = "/SignIn" >SignIn</Link>
+                    </li>
                 </ul>
             </nav>
 

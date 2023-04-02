@@ -6,6 +6,8 @@ import './index.css';
 import {BrowserRouter as Router , Route, Routes} from "react-router-dom";
 import About from "./About.js";
 import Signup from "./Signup.js";
+import SignIn from "./SignIn.js";
+
 
 ReactDOM.render(
 
@@ -14,6 +16,7 @@ ReactDOM.render(
             <Route path= "/" element={<App/>}/>
             <Route path= "/About" element={<About/>}/>
             <Route path= "/Signup" element={<Signup/>}/>
+            <Route path= "/SignIn" element={<SignIn/>}/>
         </Routes>
     </Router>,
 
