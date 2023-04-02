@@ -13,7 +13,7 @@ function App() {
 
     return (
         <div>
-            <h1>My App</h1>
+            <h1>My App1</h1>
             {/*<p>{backendData ? backendData : 'Fetching data...'}</p>*/}
         </div>
     );
