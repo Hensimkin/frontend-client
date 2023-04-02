@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
 function App() {
     const [backendData, setBackendData] = useState(null);
 
-    useEffect(() => {
-        axios.get('/api/data').then(response => {
-            setBackendData(response.data);
-        });
-    }, []);
+    // useEffect(() => {
+    //     axios.get('/api/data').then(response => {
+    //         setBackendData(response.data);
+    //     });
+    // }, []);
 
     return (
         <div>
