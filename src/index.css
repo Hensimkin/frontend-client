@@ -31,11 +31,7 @@ body {
   display: inline;
 }
 
-.description{
-  width: 800px;
-  padding: 30px;
-  margin: 0 auto;
-}
+
 
 .header li {
   margin: 20px;
@@ -49,4 +45,10 @@ body {
 .title1{
   text-align: center;
   color: #e9e5e5;
+}
+
+.description{
+  width: 800px;
+  padding: 30px;
+  margin: 0 auto;
 }
