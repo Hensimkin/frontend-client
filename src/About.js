@@ -1,5 +1,5 @@
 import React from 'react';
-//import './About.css';
+import './About.css';
 import Navbar from './Navbar.js';
 
 function About() {
