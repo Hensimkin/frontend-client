@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./signup.css";
 import Navbar from "./Navbar.js";
+import { Link } from 'react-router-dom';
 
 function SignUp() {
     const [fullName, setFullName] = useState("");
@@ -65,7 +66,7 @@ function SignUp() {
                         <br />
                         <br />
                         <label>
-                            Already signed up? Sign in <a style={{ color: '#1672a0' }} href="/SignIn">here</a>
+                            Already signed up? Sign in <Link to = "/SignIn" >Here</Link>
                         </label>
                     </div>
 
