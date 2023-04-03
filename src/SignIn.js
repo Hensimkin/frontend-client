@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar.js';
 import './SignIn.css';
+import { Link } from 'react-router-dom';
 //import Signup from "./Signup.js";
 //import {Route} from "react-router-dom";
 
@@ -60,7 +61,7 @@ function SignIn() {
                 <br />
                 <br />
                 <label>
-                    New user? Sign up <a style={{ color: '#1672a0' }} href="/Signup">here</a>
+                    New user? Sign up <Link to = "/Signup" >Here</Link>
                 </label>
             </div>
 
