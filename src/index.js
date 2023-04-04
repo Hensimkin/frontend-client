@@ -1,27 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// eslint-disable-next-line import/extensions
 import App from './App.js';
-//import reportWebVitals from './reportWebVitals.js';
+// import reportWebVitals from './reportWebVitals.js';
 import './index.css';
-import {BrowserRouter as Router , Route, Routes} from "react-router-dom";
-import About from "./About.js";
-import Signup from "./Signup.js";
-import SignIn from "./SignIn.js";
-
+// eslint-disable-next-line import/order
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// eslint-disable-next-line import/extensions
+import About from './About.js';
+// eslint-disable-next-line import/extensions
+import Signup from './Signup.js';
+// eslint-disable-next-line import/extensions
+import SignIn from './SignIn.js';
 
 ReactDOM.render(
 
     <Router>
         <Routes>
-            <Route path= "/" element={<App/>}/>
-            <Route path= "/About" element={<About/>}/>
-            <Route path= "/Signup" element={<Signup/>}/>
-            <Route path= "/SignIn" element={<SignIn/>}/>
+            <Route path="/" element={<App />} />
+            <Route path="/About" element={<About />} />
+            <Route path="/Signup" element={<Signup />} />
+            <Route path="/SignIn" element={<SignIn />} />
         </Routes>
     </Router>,
 
-
-    document.getElementById('root')
+    document.getElementById('root'),
 );
 
 // reportWebVitals();

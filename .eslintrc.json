@@ -22,7 +22,9 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "jsx-a11y",
+        "import"
     ],
     "globals": {
         "describe": "readonly",
@@ -32,7 +34,10 @@
         "no-undef": "error",
         "react/react-in-jsx-scope": "off", // disable this rule to allow JSX without importing React
         "linebreak-style": 0,
-        "indent": ["error", 4]
+        "react/jsx-indent" : ["error", 4],
+        "trailing-comma": 0,
+        "no-tabs": 0,
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
     },
     "ignorePatterns": [
         "**/*.css",
