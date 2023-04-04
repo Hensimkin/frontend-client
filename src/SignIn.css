@@ -125,7 +125,7 @@ body{
     margin-top: 80px;
     padding: 30px;
     /* background-color: #15616d; */
-    background-image: url('background.jpg');
+    background-image: url('/images/background.jpg');
     background-size: cover;
     background-position: center;
 
@@ -163,7 +163,7 @@ input[type="password"]:focus {
     padding: 40px;
     width: 300px;
     height: 400px;
-    background-image: url('mainback.jpg');
+    background-image: url('/images/mainback.jpg');
     background-size: cover;
     background-position: center;
     border-radius: 0 2px 2px 0;
