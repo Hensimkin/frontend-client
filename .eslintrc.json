@@ -6,7 +6,8 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "airbnb"
     ],
     "overrides": [
         {
@@ -29,7 +30,9 @@
     },
     "rules": {
         "no-undef": "error",
-        "react/react-in-jsx-scope": "off" // disable this rule to allow JSX without importing React
+        "react/react-in-jsx-scope": "off", // disable this rule to allow JSX without importing React
+        "linebreak-style": 0,
+        "indent": ["error", 4]
     },
     "ignorePatterns": [
         "**/*.css",
