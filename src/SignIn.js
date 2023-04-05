@@ -30,23 +30,25 @@ function SignIn() {
   function handlePasswordChange(event) {
     setPassword(event.target.value);
   }
-
-    // Check email
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-      alert('Please enter a valid email address');
-      return;
-    }
-
-    // Check password
-    if (password.length < 8) {
-      alert('Password must be at least 8 characters long');
-      return;
-    }
+  // function handleSubmit(event) {
+  //   event.preventDefault();
+  //   // Check email
+  //   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //   if (!emailPattern.test(email)) {
+  //     alert('Please enter a valid email address');
+  //     return;
+  //   }
+  //
+  //   // Check password
+  //   if (password.length < 8) {
+  //     alert('Password must be at least 8 characters long');
+  //     return;
+  //   }
+  // }
 
     // If email and password are valid, submit the form
     alert(`Email: ${email}\nPassword: ${password}`);
-  }
+
 
 return (
     <div>
