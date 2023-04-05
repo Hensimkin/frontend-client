@@ -39,7 +39,6 @@
       "last 1 safari version"
     ]
   },
-
   "type": "module",
   "devDependencies": {
     "eslint": "^8.2.0",
@@ -51,4 +50,3 @@
     "yaml-lint": "^1.7.0"
   }
 }
-
