@@ -7,17 +7,19 @@ import Navbar from './Navbar.js';
 function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [serverResponse, setServerResponse] = useState('');
-
+  const [emailResponse, setEmailResponse] = useState('');
+  const [passwordResponse, setPasswordResponse] = useState('');
 
   async function post(e) {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/post_email', { email });
-      console.log(response.data); // Log the response received from the server
-      const response2 = await axios.post('http://localhost:5000/post_password', { password });
-      console.log(response2.data); // Log the response received from the server
-      setServerResponse(response.data); // Set the response from the server to the state variable
+      const response_mail = await axios.post('http://localhost:5000/post_email', { email });
+      console.log(response_mail.data); // Log the response received from the server
+      const response_password = await axios.post('http://localhost:5000/post_password', { password });
+      console.log(response_password.data); // Log the response received from the server
+      setEmailResponse(response_mail.data); // Set the response from the server to the state variable
+      setPasswordResponse(response_password.data); // Set the response from the server to the state variable
+
     } catch (error) {
       console.log(error);
     }
@@ -47,7 +49,7 @@ function SignIn() {
   // }
 
     // If email and password are valid, submit the form
-    alert(`Email: ${email}\nPassword: ${password}`);
+   // alert(`Email: ${email}\nPassword: ${password}`);
 
 
 return (
@@ -64,33 +66,33 @@ return (
             <input type={'text'} value={email} onChange={handleEmailChange} required />
             Enter password:
             <input className="password" type="password" value={password} onChange={handlePasswordChange} required />
-            <button type="submit">Sign in</button>
+            {/* <button type="submit">Sign in</button> */}
+            <input type="submit" value = "Sign in"/>
           </form>
           <div>
-            <p>{serverResponse}</p>
+            <p>{emailResponse}</p>
+            <p>{passwordResponse}</p>
           </div>
-          <br />
-          <br />
-          <label htmlFor="signup">
-            New user? Sign up
-            <Link to="/Signup">Here</Link>
-          </label>
+          {/* <label htmlFor="signup"> */}
+          {/*   New user? Sign up */}
+          {/*   <Link to="/Signup"> Here</Link> */}
+          {/* </label> */}
         </div>
 
         <div className="right">
           <span className="loginwith">Sign in with social network</span>
-          <button type="button" className="social-signin facebook">
-            Log in with Facebook
-          </button>
-          <button type="button" className="social-signin twitter">
-            Log in with Twitter
-          </button>
+            <button type="button" className="social-signin facebook">
+                      Log in with Facebook
+                  </button>
+            <button type="button" className="social-signin twitter">
+                      Log in with Twitter
+                  </button>
           <button type="button" className="social-signin google">
-            Log in with Google+
-          </button>
+                      Log in with Google+
+            </button>
         </div>
 
-        <div className="or">OR</div>
+          <div className="or">OR</div>
       </div>
     </div>
   );
