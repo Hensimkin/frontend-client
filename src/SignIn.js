@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './SignIn.css';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+// eslint-disable-next-line import/extensions
 import Navbar from './Navbar.js';
 
 function SignIn() {
@@ -19,7 +19,6 @@ function SignIn() {
       console.log(response_password.data); // Log the response received from the server
       setEmailResponse(response_mail.data); // Set the response from the server to the state variable
       setPasswordResponse(response_password.data); // Set the response from the server to the state variable
-
     } catch (error) {
       console.log(error);
     }
@@ -48,54 +47,53 @@ function SignIn() {
   //   }
   // }
 
-    // If email and password are valid, submit the form
-   // alert(`Email: ${email}\nPassword: ${password}`);
+  // If email and password are valid, submit the form
+  // alert(`Email: ${email}\nPassword: ${password}`);
 
+  return (
+      <div>
+          <header className="header">
+              <Navbar />
+          </header>
+          <div className="first_label">
+              <div className="left">
+                  <h1>Sign in</h1>
+                  <br />
+                  <form onSubmit={post}>
+                      Enter your email:
+                      <input type="text" value={email} onChange={handleEmailChange} required />
+                      Enter password:
+                      <input className="password" type="password" value={password} onChange={handlePasswordChange} required />
+                      {/* <button type="submit">Sign in</button> */}
+                      <input type="submit" value="Sign in" />
+                  </form>
+                  <div>
+                      <p>{emailResponse}</p>
+                      <p>{passwordResponse}</p>
+                  </div>
 
-return (
-    <div>
-      <header className="header">
-        <Navbar />
-      </header>
-      <div className="first_label">
-        <div className="left">
-          <h1>Sign in</h1>
-          <br />
-          <form onSubmit={post}>
-            Enter your email:
-            <input type={'text'} value={email} onChange={handleEmailChange} required />
-            Enter password:
-            <input className="password" type="password" value={password} onChange={handlePasswordChange} required />
-            {/* <button type="submit">Sign in</button> */}
-            <input type="submit" value = "Sign in"/>
-          </form>
-          <div>
-            <p>{emailResponse}</p>
-            <p>{passwordResponse}</p>
-          </div>
+                  {/* <label htmlFor="signup"> */}
+                  {/*   New user? Sign up */}
+                  {/*   <Link to="/Signup"> Here</Link> */}
+                  {/* </label> */}
+              </div>
 
-          {/* <label htmlFor="signup"> */}
-          {/*   New user? Sign up */}
-          {/*   <Link to="/Signup"> Here</Link> */}
-          {/* </label> */}
-        </div>
-
-        <div className="right">
-          <span className="loginwith">Sign in with social network</span>
-            <button type="button" className="social-signin facebook">
+              <div className="right">
+                  <span className="loginwith">Sign in with social network</span>
+                  <button type="button" className="social-signin facebook">
                       Log in with Facebook
                   </button>
-            <button type="button" className="social-signin twitter">
+                  <button type="button" className="social-signin twitter">
                       Log in with Twitter
                   </button>
-          <button type="button" className="social-signin google">
+                  <button type="button" className="social-signin google">
                       Log in with Google+
-            </button>
-        </div>
+                  </button>
+              </div>
 
-          <div className="or">OR</div>
+              <div className="or">OR</div>
+          </div>
       </div>
-    </div>
   );
 }
 

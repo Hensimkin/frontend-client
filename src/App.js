@@ -15,7 +15,7 @@ function App() {
           <main className="main">
               <h1 className="title1">Social media</h1>
               <p className="description" style={{ color: 'white' }}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse placerat.
+                  Join the NetConnect community today and start sharing your world with others!
               </p>
           </main>
 
