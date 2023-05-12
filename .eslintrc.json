@@ -6,7 +6,7 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended",
+        "plugin:react/recommended"
         "airbnb"
     ],
     "overrides": [
@@ -37,7 +37,25 @@
         "react/jsx-indent" : ["error", 4],
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "camelcase": "off",
-        "max-len": "off"
+        "max-len": "off",
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "js": "never",
+                "jsx": "never",
+                "ts": "never",
+                "tsx": "never"
+            }
+        ],
+        "jsx-a11y/label-has-associated-control": [  // disable label-has-associated-control rule
+            "error",
+            {
+                "required": {
+                    "some": [ "nesting", "id" ]
+                }
+            }
+        ]
     },
     "ignorePatterns": [
         "**/*.css",

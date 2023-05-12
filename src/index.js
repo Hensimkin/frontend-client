@@ -12,6 +12,8 @@ import About from './About.js';
 import Signup from './Signup.js';
 // eslint-disable-next-line import/extensions
 import SignIn from './SignIn.js';
+// eslint-disable-next-line import/extensions
+import MyDatePick from './myDatePicker.js'; // import MyDatePick component
 
 ReactDOM.render(
 
@@ -21,21 +23,10 @@ ReactDOM.render(
             <Route path="/About" element={<About />} />
             <Route path="/Signup" element={<Signup />} />
             <Route path="/SignIn" element={<SignIn />} />
+            <Route path="/datepick" element={<MyDatePick />} />
         </Routes>
     </Router>,
 
     document.getElementById('root'),
 );
 
-// reportWebVitals();
-//
-//
-//
-//
-//
-//
-//
-// // If you want to start measuring performance in your app, pass a function
-// // to log results (for example: reportWebVitals(console.log))
-// // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-// reportWebVitals();

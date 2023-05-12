@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import './signup.css';
 import { Link } from 'react-router-dom';
 // eslint-disable-next-line import/extensions
 import Navbar from './Navbar.js';
-
+import './signup.css';
+// eslint-disable-next-line import/extensions
+import MyDatePick from './myDatePicker.js';
 function SignUp() {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -31,7 +32,6 @@ function SignUp() {
 
   return (
       <>
-          <div className="header"><Navbar /></div>
           <div className="header"><Navbar /></div>
           <form id="signup-form" onSubmit={handleSubmit}>
               <div className="first_label">
@@ -84,10 +84,8 @@ function SignUp() {
                           <br />
                           social network
                       </span>
+                      <div className="hi">< MyDatePick /></div>
 
-                      <button type="button" className="social-signin facebook">
-                          Log in with facebook
-                      </button>
                       <button type="button" className="social-signin twitter">
                           Log in with Twitter
                       </button>
