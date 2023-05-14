@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './SignIn.css';
 import axios from 'axios';
-// eslint-disable-next-line import/extensions
 import Navbar from './Navbar.js';
+import { Link } from 'react-router-dom'
 
 function SignIn() {
   const [email, setEmail] = useState('');
@@ -37,39 +37,34 @@ function SignIn() {
           <header className="header">
               <Navbar />
           </header>
-          <div className="first_label">
-              <div className="left">
-                  <h1>Sign in</h1>
+          <h1 className="main_header">Welcome to MarketMate, your go-to online marketplace for all your shopping needs</h1>
+          <div className="main_signin">
+
+
+                  <h1 className="head">Sign in</h1>
                   <br />
-                  <form onSubmit={post}>
-                      Enter your email:
-                      <input type="text" value={email} onChange={handleEmailChange} required />
-                      Enter password:
-                      <input className="password" type="password" value={password} onChange={handlePasswordChange} required />
-                      {/* <button type="submit">Sign in</button> */}
-                      <input type="submit" value="Sign in" />
-                  </form>
-                  <div>
+                  <div className= "center_fileds">
+                    <form onSubmit={post}>
+                      <label className="fonts">Enter your email:</label>
+                      <input   type="text" value={email} onChange={handleEmailChange} required />
+                      <label className="fonts">Enter password:</label>
+                      <input className="fonts" type="text" value={password} onChange={handlePasswordChange} required />
+                    </form>
+                    <div>
                       <p>{emailResponse}</p>
                       <p>{passwordResponse}</p>
+                    </div>
+
+
+
                   </div>
+            <input type="submit" value="Sign in" style={{ display: 'block', margin: '0 auto',marginBottom:'30px' }} />
+            <label className="fonts1" >
+              Forgot your password? click
+              {' '}
+              <Link to="/SignIn" style={{ color: '#0b6cb3' }}>Here</Link>
+            </label>
 
-              </div>
-
-              <div className="right">
-                  <span className="loginwith">Sign in with social network</span>
-                  <button type="button" className="social-signin facebook">
-                      Log in with Facebook
-                  </button>
-                  <button type="button" className="social-signin twitter">
-                      Log in with Twitter
-                  </button>
-                  <button type="button" className="social-signin google">
-                      Log in with Google+
-                  </button>
-              </div>
-
-              <div className="or">OR</div>
           </div>
       </div>
   );
