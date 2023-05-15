@@ -4,12 +4,13 @@ import Navbar from './Navbar.js';
 import './signup.css';
 import 'react-datepicker/dist/react-datepicker.css'; // import the DatePicker CSS file
 import GoogleFonts from 'google-fonts';
-import axios, { post } from 'axios'
-
+import axios, { post } from 'axios';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
+import moment from 'moment'
 GoogleFonts.add({
   Oswald: 'https://fonts.googleapis.com/css2?family=Oswald&display=swap',
 });
-//import MyDatePick from './MyDatePicker.js';
 function SignUp() {
   const [fullName, setFullName] = useState('');
 
@@ -25,25 +26,21 @@ function SignUp() {
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [dateOfBirthResponse, setDateOfBirthResponse] = useState('');
 
-
+  const [value, setValue] = useState()
   async function post(e) {
     e.preventDefault();
     try {
       const response_mail = await axios.post('http://localhost:5000/post_email', { email });
-      console.log(response_mail.data); // Log the response received from the server
 
       const response_password = await axios.post('http://localhost:5000/post_password', { password });
-      console.log(response_password.data); // Log the response received from the server
 
-      // const response_phoneNumber = await axios.post('http://localhost:5000/post_phoneNumber',{phoneNumber})
-      // console.log(response_phoneNumber.data)
-      //
-      // const response_birthdate = await  axios.post('http://localhost:5000/post_birthdate',dateOfBirth)
-      // console.log(response_birthdate.data)
+       const response_phoneNumber = await axios.post('http://localhost:5000/post_phoneNumber',{phoneNumber})
+
+      const response_birthdate = await axios.post('http://localhost:5000/post_birthdate', dateOfBirth);
 
 
-      setEmailResponse(response_mail.data); // Set the response from the server to the state variable
-      setPasswordResponse(response_password.data); // Set the response from the server to the state variable
+      setEmailResponse(response_mail.data);
+      setPasswordResponse(response_password.data);
       setPhoneNumberResponse(response_phoneNumber.data)
       setDateOfBirthResponse(response_birthdate.data)
 
@@ -60,17 +57,11 @@ function SignUp() {
     setPassword(event.target.value);
   }
 
-  function handlePhoneNumberChange(event) {
-    setPhoneNumber(event.target.value);
-  }
-
   function handleBirthdateChange(event) {
     setDateOfBirth(event.target.value);
   }
 
 
-
-  let handleChange
   return (
       <>
           <div className="header"><Navbar /></div>
@@ -125,17 +116,19 @@ function SignUp() {
                     <label className="fonts">Enter your birthdate:</label>
 
                     <input className="date" type="date" value={dateOfBirth} onChange={handleBirthdateChange}  required/>
-                    {/* max={new Date().toISOString().split("T")[0]} */}
+                    <p className="messages_fonts">{dateOfBirthResponse}</p>
+
                     <label className="fonts">Enter phone number:</label>
-                    <input
-                      className="phoneNumber"
-                      type="text"
-                      name="signup_phoneNumber"
+                    <PhoneInput
+                      type = "text"
                       value={phoneNumber}
-                      onChange={handlePhoneNumberChange}
+                      onChange={setPhoneNumber}
                       required
                     />
-                    <br/>
+                  </div>
+               <p>{phoneNumberResponse}</p>
+
+              <br/>
 
                     <label className="fonts">
                       Already signed up? Sign in
@@ -143,13 +136,11 @@ function SignUp() {
                       <Link to="/SignIn" style={{ color: '#0b6cb3' }}>Here</Link>
                     </label>
 
-                  </div>
               <input type="submit" className="signup-button" value="Sign me up" />
             </div>
           </form>
           <div>
-            <p>{phoneNumberResponse}</p>
-            <p>{dateOfBirthResponse}</p>
+
         </div>
       </>
   );

@@ -20,7 +20,7 @@ function App() {
               <Navbar />
           </header>
           <main className="main">
-              <h1 className="fonts1" style={{marginLeft:'350px'}}>MarketMate</h1>
+              <h1 className="fonts1" style={{marginLeft:'1px'}}>MarketMate</h1>
             <p className="fonts1"style={{marginRight:'150px'}} >
               Welcome to MarketMate, the premier online marketplace for buying and selling products. At MarketMate, we are committed to providing you with a seamless, user-friendly platform that makes it easy to find the items you need and connect with sellers who offer the products you want. <br/><br/>
               Our website offers a wide range of categories, including electronics, fashion, home goods, beauty and health, sports and outdoors, and many more. Whether you're looking for the latest tech gadgets, trendy clothing, or high-quality home decor, you're sure to find it on MarketMate. <br/><br/>

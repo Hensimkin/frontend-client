@@ -7,18 +7,24 @@ import { Link } from 'react-router-dom'
 function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [emailResponse, setEmailResponse] = useState('');
-  const [passwordResponse, setPasswordResponse] = useState('');
+  const [serverResponse, setServerResponse] = useState('');
+
+  let credentials = {
+    email: '',
+    password: ''
+  };
+
 
   async function post(e) {
     e.preventDefault();
     try {
-      const response_mail = await axios.post('http://localhost:5000/post_email', { email });
-      console.log(response_mail.data); // Log the response received from the server
-      const response_password = await axios.post('http://localhost:5000/post_password', { password });
-      console.log(response_password.data); // Log the response received from the server
-      setEmailResponse(response_mail.data); // Set the response from the server to the state variable
-      setPasswordResponse(response_password.data); // Set the response from the server to the state variable
+      credentials = {
+        email: email,
+        password: password
+      };
+      const responseFromServer = await axios.post('http://localhost:5000/post_signin', { credentials });
+      console.log(responseFromServer.data);
+      setServerResponse(responseFromServer.data); // Set the response from the server to the state variable
     } catch (error) {
       console.log(error);
     }
@@ -53,8 +59,12 @@ function SignIn() {
 
                     </form>
                     <div>
-                      <p>{emailResponse}</p>
-                      <p>{passwordResponse}</p>
+                      <p className="messages_fonts">
+                          {serverResponse}
+
+
+                      </p>
+
                     </div>
 
 
