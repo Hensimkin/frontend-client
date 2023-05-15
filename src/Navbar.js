@@ -18,6 +18,9 @@ function Navbar() {
           <li>
             <Link to="/Signup">Signup</Link>
           </li>
+          <li>
+            <Link to="/PersonalArea">Profile</Link>
+          </li>
         </ul>
       </nav>
     </div>
