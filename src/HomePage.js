@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 import AddProductPopup from './AddProductPopup.js';
+import Navbar from './Navbar.js'
 const [popupIsOpen, setPopupIsOpen] = useState(false);
 
 const openPopup = () => {

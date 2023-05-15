@@ -58,7 +58,9 @@ function SignIn() {
 
 
                   </div>
-            <input type="submit" value="Sign in" style={{ display: 'block', margin: '0 auto',marginBottom:'30px' }} />
+
+              <input type="submit" value="Sign in" style={{ display: 'block', margin: '0 auto',marginBottom:'30px' }} />
+
             <label className="fonts1" >
               Forgot your password? click
               {' '}
