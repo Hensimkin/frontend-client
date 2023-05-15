@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.headApp{
+  font-family: 'Oswald', sans-serif;
+  color: #0b6cb3;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 220px;
+}
