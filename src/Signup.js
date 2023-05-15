@@ -1,14 +1,36 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-// eslint-disable-next-line import/extensions
 import Navbar from './Navbar.js';
 import './signup.css';
-// eslint-disable-next-line import/extensions
-import MyDatePick from './myDatePicker.js';
+import 'react-datepicker/dist/react-datepicker.css'; // import the DatePicker CSS file
+import GoogleFonts from 'google-fonts';
+
+GoogleFonts.add({
+  Oswald: 'https://fonts.googleapis.com/css2?family=Oswald&display=swap',
+});
+//import MyDatePick from './MyDatePicker.js';
 function SignUp() {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [phoneNumber, setphoneNumber] = useState('');
+
+  const handleDateOfBirthChange = (event) => {
+    const today = new Date();
+    const birthDate = new Date(event.target.value);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    if (age < 13) {
+      alert("You must be at least 13 years old to register.");
+      setDateOfBirth('');
+    } else {
+      setDateOfBirth(event.target.value);
+    }
+  };
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -30,16 +52,21 @@ function SignUp() {
     console.log('Form submitted:', { fullName, email, password });
   }
 
+  let handleChange
   return (
       <>
           <div className="header"><Navbar /></div>
           <form id="signup-form" onSubmit={handleSubmit}>
-              <div className="first_label">
-                  <div className="left">
-                      <h1>Sign up</h1>
-                      <br />
-                      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                      <label>Enter full name:</label>
+
+            <div className="mainlabel">
+
+              <h1 className="head">Sign up</h1>
+
+                <div className="left">
+                  <br />
+                  <br />
+                  <br />
+                      <label className="fonts">Enter full name:</label>
                       <input
                         type="text"
                         name="signup_name"
@@ -48,8 +75,7 @@ function SignUp() {
                         required
                       />
 
-                      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                      <label>Enter your email:</label>
+                      <label className="fonts">Enter your email:</label>
                       <input
                         type="text"
                         name="signup_email"
@@ -57,43 +83,46 @@ function SignUp() {
                         onChange={(event) => setEmail(event.target.value)}
                         required
                       />
-                      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                      <label>Enter password:</label>
+                      <label className="fonts">Enter password:</label>
                       <input
-                        className="password"
-                        type="password"
+                        type="text"
                         name="signup_password"
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
                         required
                       />
-                      <input type="submit" name="signup_submit" value="Sign me up" />
+                      <input  type="submit" name="signup_submit" value="Sign me up" />
                       <br />
                       <br />
-                      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                      <label>
-                          Already signed up? Sign in
-                          {' '}
-                          <Link to="/SignIn">Here</Link>
-                      </label>
+
                   </div>
 
                   <div className="right">
-                      <span className="loginwith">
-                          Sign in with
-                          <br />
-                          social network
-                      </span>
-                      <div className="hi">< MyDatePick /></div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <label className="fonts">Enter your birthdate:</label>
 
-                      <button type="button" className="social-signin twitter">
-                          Log in with Twitter
-                      </button>
-                      <button type="button" className="social-signin google">
-                          Log in with Google+
-                      </button>
+                    <input className="date" type="date" value={dateOfBirth} onChange={handleDateOfBirthChange} max={new Date().toISOString().split("T")[0]} />
+
+                    <label className="fonts">Enter phone number:</label>
+                    <input
+                      className="phoneNumber"
+                      type="text"
+                      name="signup_phoneNumber"
+                      value={phoneNumber}
+                      onChange={(event) => setphoneNumber(event.target.value)}
+                      required
+                    />
+                    <br/>
+                    <br/>
+                    <label className="fonts">
+                      Already signed up? Sign in
+                      {' '}
+                      <Link to="/SignIn" style={{ color: '#0b6cb3' }}>Here</Link>
+                    </label>
+
                   </div>
-                  <div className="or">OR</div>
               </div>
           </form>
       </>
