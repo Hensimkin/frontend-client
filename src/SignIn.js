@@ -49,6 +49,8 @@ function SignIn() {
                       <input   type="text" value={email} onChange={handleEmailChange} required />
                       <label className="fonts">Enter password:</label>
                       <input className="fonts" type="text" value={password} onChange={handlePasswordChange} required />
+                      <input type="submit" className="signin_button" value="Sign in"  />
+
                     </form>
                     <div>
                       <p>{emailResponse}</p>
@@ -59,7 +61,6 @@ function SignIn() {
 
                   </div>
 
-              <input type="submit" value="Sign in" style={{ display: 'block', margin: '0 auto',marginBottom:'30px' }} />
 
             <label className="fonts1" >
               Forgot your password? click
