@@ -5,8 +5,13 @@
       <option name="myValues">
         <value>
           <list size="2">
+<<<<<<< HEAD
             <item index="0" class="java.lang.String" itemvalue="type" />
             <item index="1" class="java.lang.String" itemvalue="name" />
+=======
+            <item index="0" class="java.lang.String" itemvalue="link" />
+            <item index="1" class="java.lang.String" itemvalue="to" />
+>>>>>>> origin/main
           </list>
         </value>
       </option>
