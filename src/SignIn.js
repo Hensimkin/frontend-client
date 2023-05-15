@@ -23,8 +23,10 @@ function SignIn() {
         password: password
       };
       const responseFromServer = await axios.post('http://localhost:5000/post_signin', { credentials });
-      console.log(responseFromServer.data);
       setServerResponse(responseFromServer.data); // Set the response from the server to the state variable
+      if (responseFromServer.data === 'Welcome Back!') {
+        window.location.href = '/homepage';
+      }
     } catch (error) {
       console.log(error);
     }
@@ -55,7 +57,7 @@ function SignIn() {
                       <input   type="text" value={email} onChange={handleEmailChange} required />
                       <label className="fonts">Enter password:</label>
                       <input className="fonts" type="text" value={password} onChange={handlePasswordChange} required />
-                      <input type="submit" className="signin_button" value="Sign in"  />
+                      <input type="submit" className="signin_button" value="Sign in" onClick={post} />
 
                     </form>
                     <div>

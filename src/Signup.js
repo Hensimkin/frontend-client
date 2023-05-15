@@ -8,11 +8,13 @@ import axios, { post } from 'axios';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import moment from 'moment'
+import { Checkbox } from 'semantic-ui-react'
 GoogleFonts.add({
   Oswald: 'https://fonts.googleapis.com/css2?family=Oswald&display=swap',
 });
 function SignUp() {
   const [fullName, setFullName] = useState('');
+  const [checked, setChecked] = React.useState(false);
 
   const [email, setEmail] = useState('');
   const [emailResponse, setEmailResponse] = useState('');
@@ -21,12 +23,12 @@ function SignUp() {
   const [passwordResponse, setPasswordResponse] = useState('');
 
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [phoneNumberResponse, setPhoneNumberResponse] = useState('');
 
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [dateOfBirthResponse, setDateOfBirthResponse] = useState('');
 
-  const [value, setValue] = useState()
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [serverResponse, setServerResponse] = useState('');
   async function post(e) {
     e.preventDefault();
     try {
@@ -34,15 +36,19 @@ function SignUp() {
 
       const response_password = await axios.post('http://localhost:5000/post_password', { password });
 
-       const response_phoneNumber = await axios.post('http://localhost:5000/post_phoneNumber',{phoneNumber})
-
       const response_birthdate = await axios.post('http://localhost:5000/post_birthdate', dateOfBirth);
+
+      const responseFromServer =  await axios.post('http://localhost:5000/post_approve');
 
 
       setEmailResponse(response_mail.data);
       setPasswordResponse(response_password.data);
-      setPhoneNumberResponse(response_phoneNumber.data)
       setDateOfBirthResponse(response_birthdate.data)
+
+      if(responseFromServer.data === 'yes')
+      {
+        window.location.href = '/homepage';
+      }
 
     } catch (error) {
       console.log(error);
@@ -60,7 +66,9 @@ function SignUp() {
   function handleBirthdateChange(event) {
     setDateOfBirth(event.target.value);
   }
-
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
+  };
 
   return (
       <>
@@ -124,19 +132,37 @@ function SignUp() {
                       value={phoneNumber}
                       onChange={setPhoneNumber}
                       required
+                      defaultCountry="IL"
                     />
+                    <div className= "fonts">
+                      <Checkbox
+                        checked={checked}
+                        onChange={handleChange}
+                        required
+                        inputProps={{ 'aria-label': 'controlled' }}
+                        label="Im agree with the privacy policies"
+                      />
+
+                    </div>
+
                   </div>
-               <p>{phoneNumberResponse}</p>
 
-              <br/>
 
-                    <label className="fonts">
-                      Already signed up? Sign in
-                      {' '}
-                      <Link to="/SignIn" style={{ color: '#0b6cb3' }}>Here</Link>
-                    </label>
 
-              <input type="submit" className="signup-button" value="Sign me up" />
+                <input type="submit" className="signup-button" value="Sign me up" />
+
+              <div className= "alreadySignIn">
+
+                <label>
+                  Already signed up? Sign in
+                  {' '}
+                  <Link to="/SignIn" style={{ color: '#0b6cb3' }}>Here</Link>
+                </label>
+
+              </div>
+
+
+
             </div>
           </form>
           <div>
