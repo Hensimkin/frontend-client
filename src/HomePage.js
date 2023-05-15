@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './index.css';
 import Navbar from './Navbar.js'; // import the Navbar component
 import AddProductPopup from './AddProductPopup.js';
+import './HomePage.css';
 
 function HomePage() {
   const [popupIsOpen, setPopupIsOpen] = useState(false);
@@ -22,7 +23,7 @@ function HomePage() {
       </header>
       <main className="main">
         {!popupIsOpen && (
-          <button type="button" onClick={openPopup}>
+          <button type="button"  onClick={openPopup}>
             Add Product
           </button>
         )}
