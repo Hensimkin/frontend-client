@@ -70,7 +70,6 @@ function SignUp() {
     setDateOfBirth(event.target.value);
   }
 
-
   return (
       <>
           <div className="header"><Navbar /></div>
