@@ -1,6 +1,8 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 import './AddProductPopup.css';
+import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 function AddProductPopup(props) {
   const [category, setCategory] = useState('Select Category');
@@ -8,6 +10,50 @@ function AddProductPopup(props) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [pictures, setPictures] = useState([]);
+  const [titleResponse, setTitleResponse] = useState('');
+
+  async function post(e) {
+    e.preventDefault();
+    try {
+      const response_title = await axios.post('http://localhost:5000/post_title', { title: title });
+      setTitleResponse(response_title.data); // Set the response from the server to the state variable
+      console.log(response_title); // Log the response received from the server
+
+      const response_price = await axios.post('http://localhost:5000/post_price', { price: price });
+      setTitleResponse(response_price.data); // Set the response from the server to the state variable
+      console.log(response_price); // Log the response received from the server
+
+      const response_category = await axios.post('http://localhost:5000/post_category', { category: category });
+      setTitleResponse(response_category.data); // Set the response from the server to the state variable
+      console.log(response_category); // Log the response received from the server
+
+      const response_description = await axios.post('http://localhost:5000/post_description', { description: description });
+      setTitleResponse(response_description.data); // Set the response from the server to the state variable
+      console.log(response_description); // Log the response received from the server
+
+
+      const formData = new FormData();
+      for (let i = 0; i < pictures.length; i++) {
+        formData.append('pictures', pictures[i]);
+      }
+      const response_pictures = await axios.post('http://localhost:5000/post_pictures', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      setTitleResponse(response_pictures.data); // Set the response from the server to the state variable
+      console.log(response_pictures); // Log the response received from the server
+
+
+
+      props.closePopup();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+
 
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);
@@ -38,7 +84,7 @@ function AddProductPopup(props) {
     <div className="popup">
       <div className="popup-inner">
         <h2>Add a new product</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={post}>
           <label>
             Category:
             <select value={category} onChange={handleCategoryChange}>
@@ -77,7 +123,7 @@ function AddProductPopup(props) {
             />
           </label>
           <br></br>
-          <button type="submit" onClick={props.closePopup}>Submit</button>
+          <button type="submit" >Submit</button>
         </form>
         <button type="button" onClick={props.closePopup}>Close</button>
       </div>

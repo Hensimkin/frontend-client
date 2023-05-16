@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './index.css';
 import Navbar from './Navbar.js'; // import the Navbar component
 import AddProductPopup from './AddProductPopup.js';
+import axios from 'axios';
 import './HomePage.css';
 
 function HomePage() {
