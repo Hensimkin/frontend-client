@@ -69,9 +69,7 @@ function SignUp() {
   function handleBirthdateChange(event) {
     setDateOfBirth(event.target.value);
   }
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked);
-  };
+
 
   return (
       <>

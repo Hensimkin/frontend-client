@@ -224,3 +224,37 @@ header li a {
     margin-top: 20px;
 
 }
+
+.privacy-policies-button {
+    border: none;
+    background-color: transparent;
+    text-decoration: none;
+    padding: 0;
+    position: relative;
+    font-family: 'Oswald', sans-serif;
+    color: #0b6cb3;
+    margin-left: 4px;
+    font-size: 14px;
+    margin-top: 30px;
+    cursor: pointer;
+
+}
+
+.privacy-policies-button:after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #0b6cb3;
+
+}
+
+.fonts2{
+    font-size: 14px;
+    font-family: 'Oswald', sans-serif;
+    color: #0b6cb3;
+
+
+}

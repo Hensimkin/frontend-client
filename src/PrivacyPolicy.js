@@ -9,29 +9,84 @@ function PrivacyPopup() {
       <label className="fonts2">
         I agree with the
         <Popup
-          trigger={<button type="button" className="privacy-policies-button">privacy policies</button>}
+          trigger={
+            <button type="button" className="privacy-policies-button">
+              privacy policies
+            </button>
+          }
           position="right center"
           modal
           closeOnDocumentClick
         >
-          <div className="popup-content">
-            <h2>Privacy Policies</h2>
-            <p>Privacy Policy
+          <div className="fonts">
 
-              Introduction
-              1.We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, and safeguard your personal data when you interact with our website and services.
+            <h2>Privacy Policy</h2>
+            <p>
+              Introduction<br />
+              We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, and safeguard your personal data when you interact with our website and services.
+            </p>
 
-              Information We Collect
-              2.We may collect various types of personal information from you, including but not limited to:
+            <p>
+              Information We Collect<br />
+              We may collect various types of personal information from you, including but not limited to:<br />
+              <ul>
+                <li>Name, email address, and contact details</li>
+                <li>Demographic information</li>
+                <li>Usage data and analytics</li>
+              </ul>
+            </p>
 
-              Name, email address, and contact details
-              Demographic information
-              Usage data and analytics
-              Use of Information
-              We use the collected information for the following purposes:
+            <p>
+              Use of Information<br />
+              We use the collected information for the following purposes:<br />
+              <ul>
+                <li>Providing and improving our products and services</li>
+                <li>Personalizing your experience</li>
+                <li>Communicating with you</li>
+                <li>Analyzing usage trends and patterns</li>
+              </ul>
+            </p>
 
+            <p>
+              Data Sharing and Disclosure<br />
+              We do not sell, trade, or rent your personal information to third parties without your explicit consent. However, we may share your information with trusted third-party service providers who assist us in operating our website and conducting our business.
+            </p>
 
-             </p>
+            <p>
+              Data Security<br />
+              We take reasonable measures to protect your personal information from unauthorized access, disclosure, alteration, or destruction. However, please be aware that no method of transmission over the internet or electronic storage is 100% secure.
+            </p>
+
+            <p>
+              Cookies and Similar Technologies<br />
+              We may use cookies and similar technologies to enhance your browsing experience, gather usage information, and analyze trends. You can modify your browser settings to disable cookies, but this may affect certain features and functionality of our website.
+            </p>
+
+            <p>
+              Third-Party Links<br />
+              Our website may contain links to third-party websites or services. We have no control over the content or practices of these websites and are not responsible for their privacy policies or practices. We encourage you to review the privacy policies of those third-party websites.
+            </p>
+
+            <p>
+              Children's Privacy<br />
+              Our services are not intended for individuals under the age of 13. We do not knowingly collect personal information from children. If you believe that we may have inadvertently collected personal information from a child, please contact us immediately.
+            </p>
+
+            <p>
+              Your Rights<br />
+              You have the right to access, update, correct, and delete your personal information. You may also have the right to restrict or object to certain processing activities. To exercise your rights, please contact us using the information provided at the end of this Privacy Policy.
+            </p>
+
+            <p>
+              Changes to this Privacy Policy<br />
+              We may update this Privacy Policy from time to time. Any changes will be posted on this page, and the revised policy will take effect immediately upon posting.
+            </p>
+
+            <p>
+              Contact Us<br />
+              If you have any questions or concerns regarding this Privacy Policy or our privacy practices, please contact us.
+            </p>
+
 
           </div>
         </Popup>

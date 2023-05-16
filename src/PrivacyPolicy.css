@@ -1,9 +1,12 @@
 .popup-content {
     background-color: #fff;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    max-width: 500px;
+    max-width: 800px; /* Increase or decrease the max-width as desired */
+    width: 90%; /* Adjust the width percentage as desired */
+    max-height: 80vh; /* Increase or decrease the max-height as desired */
+    overflow-y: auto; /* Add vertical scrollbar if content exceeds max-height */
 }
 
 .popup-content h2 {
@@ -11,5 +14,5 @@
 }
 
 .popup-content p {
-    margin-bottom: 1em;
+    margin-bottom: 10px; /* Add some bottom margin to create space between paragraphs */
 }
