@@ -30,8 +30,8 @@ function SignUp() {
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [dateOfBirthResponse, setDateOfBirthResponse] = useState('');
 
-  const [isFormValid, setIsFormValid] = useState(false);
-  const [serverResponse, setServerResponse] = useState('');
+  const [showLastChar, setShowLastChar] = useState(false);
+  const [lastChar, setLastChar] = useState('');
   async function post(e) {
     e.preventDefault();
     try {
@@ -69,6 +69,19 @@ function SignUp() {
   function handleBirthdateChange(event) {
     setDateOfBirth(event.target.value);
   }
+  const handleKeyUp = (event) => {
+    const input = event.target;
+    const lastCharEntered = input.value.slice(-1); // Get the last character entered
+
+    setShowLastChar(true);
+    setLastChar(lastCharEntered);
+
+    // Clear the displayed last character after 1 second
+    setTimeout(() => {
+      setShowLastChar(false);
+      setLastChar('');
+    }, 1000);
+  };
 
   return (
       <>
@@ -103,13 +116,18 @@ function SignUp() {
 
 
                   <label  className="fonts">Enter password:</label>
-                      <input
-                        type="text"
-                        name="signup_password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                        required
-                      />
+
+                  <div >
+                    <input
+                      type="password"
+                      className="password-input-row"
+                      value={password}
+                      onChange={handlePasswordChange}
+                      onKeyUp={handleKeyUp}
+                      required
+                    />
+                    {showLastChar && <span className="fonts">{lastChar}</span>}
+                  </div>
                   <p className="messages_fonts">{passwordResponse}  </p>
 
                       <br />
