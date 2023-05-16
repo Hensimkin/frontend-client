@@ -18,8 +18,8 @@
 .mainlabel{
     position: relative;
     margin: 5% auto;
-    width: 600px;
-    height: 400px;
+    width: 700px;
+    height: 500px;
     background: #FFF;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
@@ -40,6 +40,13 @@ h2 {
     font-weight: 300;
     font-size: 28px;
 }
+
+.messages_fonts{
+    font-size: 14px; /* adjust font size as needed */
+    color: red;
+
+}
+
 
 
 .left {
@@ -97,7 +104,7 @@ input[type="date"] {
     margin-bottom: 20px;
     padding: 4px;
     width: 220px;
-    height: 32px;
+    height: 22px;
     border: none;
     border-bottom: 1px solid #AAA;
     font-family: 'Roboto', sans-serif;
@@ -114,9 +121,9 @@ input[type="date"] {
 
 
 
-input[type="submit"] {
-    margin-left: 200px;
-    margin-top: 30px;
+.signup-button {
+    margin-left: 290px;
+    margin-top: 300px;
     display: block;
     width: 120px;
     height: 32px;
@@ -131,14 +138,14 @@ input[type="submit"] {
     cursor: pointer;
 }
 
-input[type="submit"]:hover,
-input[type="submit"]:focus {
+.signup-button:hover,
+.signup-button:focus {
     opacity: 0.8;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     transition: 0.1s ease;
 }
 
-input[type="submit"]:active {
+.signup-button:active {
     opacity: 1;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
     transition: 0.1s ease;
@@ -167,7 +174,7 @@ input[type="text"]
     margin-bottom: 20px;
     padding: 4px;
     width: 220px;
-    height: 32px;
+    height: 22px;
     border: none;
     border-bottom: 1px solid #AAA;
     font-family: 'Roboto', sans-serif;
@@ -179,6 +186,7 @@ input[type="text"]
     transition: 0.2s ease;
     text-align: left;
     outline: none;
+    position: relative;
 }
 
 
@@ -207,4 +215,12 @@ header li {
 header li a {
     color: black;
     text-decoration: none;
+}
+
+.alreadySignIn{
+    font-family: 'Oswald', sans-serif;
+    color: #0b6cb3;
+    margin-left: 250px;
+    margin-top: 20px;
+
 }

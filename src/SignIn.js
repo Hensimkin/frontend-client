@@ -7,18 +7,26 @@ import { Link } from 'react-router-dom'
 function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [emailResponse, setEmailResponse] = useState('');
-  const [passwordResponse, setPasswordResponse] = useState('');
+  const [serverResponse, setServerResponse] = useState('');
+
+  let credentials = {
+    email: '',
+    password: ''
+  };
+
 
   async function post(e) {
     e.preventDefault();
     try {
-      const response_mail = await axios.post('http://localhost:5000/post_email', { email });
-      console.log(response_mail.data); // Log the response received from the server
-      const response_password = await axios.post('http://localhost:5000/post_password', { password });
-      console.log(response_password.data); // Log the response received from the server
-      setEmailResponse(response_mail.data); // Set the response from the server to the state variable
-      setPasswordResponse(response_password.data); // Set the response from the server to the state variable
+      credentials = {
+        email: email,
+        password: password
+      };
+      const responseFromServer = await axios.post('http://localhost:5000/post_signin', { credentials });
+      setServerResponse(responseFromServer.data); // Set the response from the server to the state variable
+      if (responseFromServer.data === 'Welcome Back!') {
+        window.location.href = '/homepage';
+      }
     } catch (error) {
       console.log(error);
     }
@@ -49,17 +57,22 @@ function SignIn() {
                       <input   type="text" value={email} onChange={handleEmailChange} required />
                       <label className="fonts">Enter password:</label>
                       <input className="fonts" type="text" value={password} onChange={handlePasswordChange} required />
+                      <input type="submit" className="signin_button" value="Sign in" onClick={post} />
+
                     </form>
                     <div>
-                      <p>{emailResponse}</p>
-                      <p>{passwordResponse}</p>
+                      <p className="messages_fonts">
+                          {serverResponse}
+
+
+                      </p>
+
                     </div>
 
 
 
                   </div>
 
-              <input type="submit" value="Sign in" style={{ display: 'block', margin: '0 auto',marginBottom:'30px' }} />
 
             <label className="fonts1" >
               Forgot your password? click
