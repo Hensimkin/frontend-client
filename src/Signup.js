@@ -7,8 +7,11 @@ import GoogleFonts from 'google-fonts';
 import axios, { post } from 'axios';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
-import moment from 'moment'
-import { Checkbox } from 'semantic-ui-react'
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import PrivacyPopup from './PrivacyPolicy.js'
+import PrivacyPolicy from './PrivacyPolicy.js'
+
 GoogleFonts.add({
   Oswald: 'https://fonts.googleapis.com/css2?family=Oswald&display=swap',
 });
@@ -134,16 +137,10 @@ function SignUp() {
                       required
                       defaultCountry="IL"
                     />
-                    <div className= "fonts">
-                      <Checkbox
-                        checked={checked}
-                        onChange={handleChange}
-                        required
-                        inputProps={{ 'aria-label': 'controlled' }}
-                        label="Im agree with the privacy policies"
-                      />
-
+                    <div>
+                      <PrivacyPolicy/>
                     </div>
+
 
                   </div>
 
