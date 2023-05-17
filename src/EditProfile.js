@@ -4,17 +4,17 @@ import './EditProfile.css';
 
 
 function EditProfile({ onClose }) {
-  const [FirstName, setFirstName] = useState('');
-  const [LastName, setLastName] = useState('');
+  const [FullName, setFullName] = useState('');
+  const [PhoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
   const [bio, setBio] = useState('');
 
-  const handleFirstName = (event) => {
-    setFirstName(event.target.value);
+  const handleFullName = (event) => {
+    setFullName(event.target.value);
   };
 
-  const handleLastName = (event) => {
-    setLastName(event.target.value);
+  const handlePhoneNumber = (event) => {
+    setPhoneNumber(event.target.value);
   };
 
   const handleEmailChange = (event) => {
@@ -27,42 +27,34 @@ function EditProfile({ onClose }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Handle form submission logic
     onClose();
   };
 
   return (
     <div className="popup">
       <div className="popup-inner">
-        <h2>Edit Profile</h2>
+        <h1 className="head">Edit Profile</h1>
         <form onSubmit={handleSubmit}>
           <br></br>
-          <label>
-            First Name:
-            <input type="text" value={FirstName} onChange={handleFirstName} />
-          </label>
+            <label className="fonts">Full Name: </label>
+            <input type="text" value={FullName} onChange={handleFullName} />
           <br></br>
-          <label>
-            Last Name:
-            <input type="text" value={LastName} onChange={handleLastName} />
-          </label>
+            <label className="fonts">Phone Number: </label>
+            <input type="text" value={PhoneNumber} onChange={handlePhoneNumber} />
           <br></br>
-          <label>
-            Email:
+            <label className="fonts">Email: </label>
             <input type="text" value={email} onChange={handleEmailChange} />
-          </label>
           <br></br>
-          <label>
-            Bio:
+            <label className="fonts">Bio: </label>
             <textarea
               value={bio}
               onChange={handleBioChange}
             />
-          </label>
           <br></br>
-          <button type="submit">Save Changes</button>
+          <input type="submit" className="save_button" value="Save Changes" style={{textAlign:'center'}} />
         </form>
-        <button onClick={onClose}>Close</button>
+        <br></br>
+        <input onClick={onClose} className="save_button" value="Close" style={{textAlign:'center'}} />
       </div>
     </div>
   );
