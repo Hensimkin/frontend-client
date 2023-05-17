@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import './EditProfile.css';
 
-
 function EditProfile({ onClose }) {
   const [FullName, setFullName] = useState('');
   const [PhoneNumber, setPhoneNumber] = useState('');
@@ -33,28 +32,30 @@ function EditProfile({ onClose }) {
   return (
     <div className="popup">
       <div className="popup-inner">
+        <span className="close-button" onClick={onClose}>
+          x
+        </span>
         <h1 className="head">Edit Profile</h1>
         <form onSubmit={handleSubmit}>
-          <br></br>
-            <label className="fonts">Full Name: </label>
-            <input type="text" value={FullName} onChange={handleFullName} />
-          <br></br>
-            <label className="fonts">Phone Number: </label>
-            <input type="text" value={PhoneNumber} onChange={handlePhoneNumber} />
-          <br></br>
-            <label className="fonts">Email: </label>
-            <input type="text" value={email} onChange={handleEmailChange} />
-          <br></br>
-            <label className="fonts">Bio: </label>
-            <textarea
-              value={bio}
-              onChange={handleBioChange}
-            />
-          <br></br>
-          <input type="submit" className="save_button" value="Save Changes" style={{textAlign:'center'}} />
+          <br />
+          <label className="fonts">Full Name: </label>
+          <input type="text" value={FullName} onChange={handleFullName} />
+          <br />
+          <label className="fonts">Phone Number: </label>
+          <input type="text" value={PhoneNumber} onChange={handlePhoneNumber} />
+          <br />
+          <label className="fonts">Email: </label>
+          <input type="text" value={email} onChange={handleEmailChange} />
+          <br />
+          <label className="fonts">Bio: </label>
+          <textarea value={bio} onChange={handleBioChange} />
+          <br />
+          <button type="submit">Save Changes</button>
         </form>
-        <br></br>
-        <input onClick={onClose} className="save_button" value="Close" style={{textAlign:'center'}} />
+        <br />
+        <button type="button" onClick={onClose}>
+          Close
+        </button>
       </div>
     </div>
   );
