@@ -50,7 +50,7 @@ function SignUp() {
 
       if(responseFromServer.data === 'yes')
       {
-        window.location.href = '/homepage';
+        window.location.href = '/emailValidation';
       }
 
     } catch (error) {

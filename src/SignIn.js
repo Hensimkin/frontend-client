@@ -24,7 +24,7 @@ function SignIn() {
       };
       const responseFromServer = await axios.post('http://localhost:5000/post_signin', { credentials });
       setServerResponse(responseFromServer.data); // Set the response from the server to the state variable
-      if (responseFromServer.data === 'Welcome Back!') {
+      if (responseFromServer.data === 'Welcome !') {
         window.location.href = '/homepage';
       }
     } catch (error) {
