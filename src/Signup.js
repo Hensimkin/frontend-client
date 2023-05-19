@@ -41,12 +41,14 @@ function SignUp() {
 
       const response_birthdate = await axios.post('http://localhost:5000/post_birthdate', dateOfBirth);
 
+      await axios.post('http://localhost:5000/post_phoneNumber', phoneNumber);
+
       const responseFromServer =  await axios.post('http://localhost:5000/post_approve');
 
 
       setEmailResponse(response_mail.data);
       setPasswordResponse(response_password.data);
-      setDateOfBirthResponse(response_birthdate.data)
+      setDateOfBirthResponse(response_birthdate.data);
 
       if(responseFromServer.data === 'yes')
       {
