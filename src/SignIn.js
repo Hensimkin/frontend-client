@@ -23,7 +23,7 @@ function SignIn() {
         password: password
       };
       const responseFromServer = await axios.post('http://localhost:5000/post_signin', { credentials });
-      setServerResponse(responseFromServer.data); // Set the response from the server to the state variable
+      setServerResponse(responseFromServer.data);
       if (responseFromServer.data === 'Welcome !') {
         window.location.href = '/homepage';
       }
@@ -77,7 +77,7 @@ function SignIn() {
             <label className="fonts1" >
               Forgot your password? click
               {' '}
-              <Link to="/SignIn" style={{ color: '#0b6cb3' }}>Here</Link>
+              <Link to="/ForgotPassword" style={{ color: '#0b6cb3' }}>Here</Link>
             </label>
 
           </div>
