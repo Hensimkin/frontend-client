@@ -8,6 +8,8 @@ import SignIn from './SignIn.js';
 import HomePage from './HomePage.js';
 import PersonalArea from './PersonalArea.js';
 import ValidMAil from './emailValidation.js'
+import ForgotPass from './ForgotPassword.js'
+import ResetMess from './ResetMessage.js'
 // import EditProfile from './EditProfile.js';
 // import  FollowersList from './FollowersList.js';
 
@@ -21,11 +23,10 @@ ReactDOM.render(
             <Route path="/HomePage" element={<HomePage />} />
             <Route path="/PersonalArea" element={<PersonalArea />} />
           <Route path="/emailValidation" element={<ValidMAil />} />
+          <Route path="/ForgotPassword" element={<ForgotPass />} />
+          <Route path="/ResetMessage" element={<ResetMess />} />
 
-          {/* <Route path="/EditProfile" element={<EditProfile />} /> */}
-            {/* <Route path="/FollowersList" element={<FollowersList />} /> */}
 
-          {/* <Route path="/datepick" element={<MyDatePick />} /> */}
         </Routes>
     </Router>,
 
