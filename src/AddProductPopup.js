@@ -15,22 +15,17 @@ function AddProductPopup(props) {
   async function post(e) {
     e.preventDefault();
     try {
-      const response_title = await axios.post('http://localhost:5000/post_title', { title: title });
-      setTitleResponse(response_title.data); // Set the response from the server to the state variable
-      console.log(response_title); // Log the response received from the server
+      const data = {
+        title: title,
+        price: price,
+        category: category,
+        description: description,
+        pictures: pictures
+      };
 
-      const response_price = await axios.post('http://localhost:5000/post_price', { price: price });
-      setTitleResponse(response_price.data); // Set the response from the server to the state variable
-      console.log(response_price); // Log the response received from the server
-
-      const response_category = await axios.post('http://localhost:5000/post_category', { category: category });
-      setTitleResponse(response_category.data); // Set the response from the server to the state variable
-      console.log(response_category); // Log the response received from the server
-
-      const response_description = await axios.post('http://localhost:5000/post_description', { description: description });
-      setTitleResponse(response_description.data); // Set the response from the server to the state variable
-      console.log(response_description); // Log the response received from the server
-
+      const response = await axios.post('http://localhost:5000/post_all', data);
+      setTitleResponse(response.data);
+      console.log(response);
 
       const formData = new FormData();
       for (let i = 0; i < pictures.length; i++) {
@@ -43,7 +38,6 @@ function AddProductPopup(props) {
       });
       setTitleResponse(response_pictures.data); // Set the response from the server to the state variable
       console.log(response_pictures); // Log the response received from the server
-
 
 
       props.closePopup();
