@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import './index.css';
 import Navbar from './Navbar.js'; // import the Navbar component
 import AddProductPopup from './AddProductPopup.js';
@@ -8,6 +8,7 @@ import './HomePage.css';
 
 function HomePage() {
   const [popupIsOpen, setPopupIsOpen] = useState(false);
+  const [storedData, setStoredData] = useState({});
 
   const openPopup = () => {
     setPopupIsOpen(true);
@@ -16,6 +17,22 @@ function HomePage() {
   const closePopup = () => {
     setPopupIsOpen(false);
   };
+
+  const fetchStoredData = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/get_stored_data');
+      setStoredData(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchStoredData();
+  }, []);
+
+
 
   return (
     <div className="App">
@@ -36,6 +53,10 @@ function HomePage() {
               Join the NetConnect community today and start sharing your world
               with others!
             </p>
+            <p>Title: {storedData.title}</p>
+            <p>Description: {storedData.description}</p>
+            <p>Category: {storedData.category}</p>
+            <p>Price: {storedData.price}</p>
           </>
         )}
       </main>
