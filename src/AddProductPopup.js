@@ -11,6 +11,8 @@ function AddProductPopup(props) {
   const [description, setDescription] = useState('');
   const [pictures, setPictures] = useState([]);
   const [titleResponse, setTitleResponse] = useState('');
+  const [priceError, setPriceError] = useState('');
+  const [formError, setFormError] = useState('');
 
   async function post(e) {
     e.preventDefault();
@@ -54,7 +56,13 @@ function AddProductPopup(props) {
   };
 
   const handlePriceChange = (event) => {
-    setPrice(event.target.value);
+    const newPrice = event.target.value;
+    setPrice(newPrice);
+    if (isNaN(newPrice)) {
+      setPriceError('Price must be a number');
+    } else {
+      setPriceError('');
+    }
   };
 
   const handleTitleChange = (event) => {
@@ -92,7 +100,8 @@ function AddProductPopup(props) {
           <br></br>
           <label>
             Price:
-            <input type="text" value={price} onChange={handlePriceChange} />
+            <input type="text" pattern="[0-9]*" value={price} onChange={handlePriceChange} />
+            {priceError && <span className="error">{priceError}</span>}
           </label>
           <br></br>
           <label>
