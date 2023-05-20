@@ -3,6 +3,7 @@ import EditProfile from './EditProfile.js';
 import FollowersList from './FollowersList.js';
 import FollowingList from './FollowingList.js'
 import Navbar from './Navbar.js';
+import './PersonalArea.css';
 
 function PersonalArea() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
@@ -30,14 +31,14 @@ function PersonalArea() {
 
   return (
     <div>
-      <h1>Profile</h1>
+      <h1 className="fontsP">Profile</h1>
       <header className="header">
         <Navbar />
       </header>
+      <main className="mainP">
       <button onClick={handleEditProfileClick}>Edit Profile</button>
       <button onClick={handleFollowersListClick}>Followers List</button>
       <button onClick={handleFollowingListClick}>Following List</button>
-
 
       {isEditProfileOpen && (
         <EditProfile onClose={handleCloseModal} />
@@ -50,6 +51,7 @@ function PersonalArea() {
       {isFollowingListOpen && (
         <FollowingList onClose={handleCloseModal} />
       )}
+      </main>
     </div>
   );
 }
