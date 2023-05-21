@@ -14,6 +14,7 @@ function AddProductPopup(props) {
   const [priceError, setPriceError] = useState('');
   const [formError, setFormError] = useState('');
   const [categoryError, setCategoryError] = useState('');
+  const [titleError, setTitleError] = useState("");
 
   async function post(e) {
     e.preventDefault();
@@ -67,7 +68,15 @@ function AddProductPopup(props) {
   };
 
   const handleTitleChange = (event) => {
-    setTitle(event.target.value);
+    const value = event.target.value;
+    setTitle(value);
+    if (/[^\w\s]/.test(value)) {
+      setTitleError("Title can only contain letters, numbers, and spaces");
+    } else if (value.trim() === "") {
+      setTitleError("Please enter a title");
+    } else {
+      setTitleError("");
+    }
   };
 
   const handleDescriptionChange = (event) => {
@@ -112,7 +121,8 @@ function AddProductPopup(props) {
           <br></br>
           <label>
             Title:
-            <input type="text" value={title} onChange={handleTitleChange} />
+            <input type="text" pattern="[0-9a-zA-Z]*" value={title} onChange={handleTitleChange} />
+            {titleError && <span className="error" style={{ color: 'red' }}>{titleError}</span>}
           </label>
           <br></br>
           <label>
@@ -132,7 +142,7 @@ function AddProductPopup(props) {
             />
           </label>
           <br></br>
-          <button type="submit" disabled={category === "Select Category"}>Submit</button>
+          <button type="submit" disabled={category === "Select Category"|| title.trim() === "" || price.trim() === ""}>Submit</button>
         </form>
         <button type="button" onClick={props.closePopup}>Close</button>
       </div>
