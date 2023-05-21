@@ -43,7 +43,7 @@ function SignUp() {
 
       await axios.post('http://localhost:5000/post_phoneNumber', phoneNumber);
 
-      const responseFromServer =  await axios.post('http://localhost:5000/post_approve');
+      const responseFromServer =  await axios.post('http://localhost:5000/post_approve',fullName);
 
 
       setEmailResponse(response_mail.data);

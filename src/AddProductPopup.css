@@ -89,8 +89,25 @@
 }
 
 
+
+
+.popup-inner button[type="submit"]:hover {
+    background-color: #1c80c9;
+
+
+
+}
+
 .popup-inner button[type="submit"] {
     margin-right: 0;
     margin-top: 10px;
     align-self: flex-end;
+    background: #0b6cb3;
+
 }
+
+.error {
+    color: red;
+    /* Add any other desired error styling */
+}
+
