@@ -1,0 +1,23 @@
+/* Navbar.css */
+
+ul.ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+    padding: 0;
+}
+
+li.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+input[type="text"] {
+    /* Your input styles */
+}
+
+button.switch-button {
+    /* Your button styles */
+    margin-left: 10px; /* Adjust the margin as needed */
+}
