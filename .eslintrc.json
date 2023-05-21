@@ -37,7 +37,7 @@
         "react/jsx-indent" : ["error", 4],
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "camelcase": "off",
-        "max-len": ["error", { "code": 80 }],
+        "max-len": ["error", { "code": 100 }],
         "import/extensions": [
             "error",
             "ignorePackages",
