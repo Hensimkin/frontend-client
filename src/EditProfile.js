@@ -1,12 +1,27 @@
 /* eslint-disable */
 import React, { useState } from 'react';
 import './EditProfile.css';
+import './ProfilePopup.css';
+import axios from 'axios';
 
 function EditProfile({ onClose }) {
   const [FullName, setFullName] = useState('');
   const [PhoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
   const [bio, setBio] = useState('');
+
+
+  async function post(e) {
+    e.preventDefault();
+    try {
+      const response_name = await axios.post('http://localhost:5000/edit_name', { FullName })
+      onClose();
+    }
+
+    catch (error) {
+      console.log(error)
+    }
+  }
 
   const handleFullName = (event) => {
     setFullName(event.target.value);
@@ -31,12 +46,13 @@ function EditProfile({ onClose }) {
 
   return (
     <div className="popup">
+      <div onClick={onClose} className="overlay"></div>
       <div className="popup-inner">
         <span className="close-button" onClick={onClose}>
           x
         </span>
         <h1 className="head">Edit Profile</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={post}>
           <br />
           <label className="fonts">Full Name: </label>
           <input type="text" value={FullName} onChange={handleFullName} />

@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React, { useState } from 'react';
+import './ProfilePopup.css'
 
 function FollowersList({ onClose }) {
 
@@ -10,6 +11,7 @@ function FollowersList({ onClose }) {
 
   return (
     <div className="popup">
+      <div onClick={onClose} className="overlay"></div>
       <div className="popup-inner">
         <span className="close-button" onClick={onClose}>
           x
