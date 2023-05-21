@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './ProfilePopup.css';
+import axios from 'axios';
 
 function FollowingList({ onClose }) {
   const [followers, setFollowers] = useState([
@@ -8,17 +9,31 @@ function FollowingList({ onClose }) {
     { id: 3, username: 'user3' },
   ]);
 
+  const [followerError, setFollowerError] = useState('');
+
+  async function post(unfollowedUser) {
+    try {
+      const responseUnfollow = await axios.post('http://localhost:5000/unfollow', { unfollowedUser });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     onClose();
   };
 
-  const handleUnfollow = (followerId) => {
-    // Logic to unfollow the user with the provided followerId
-    console.log( followerId )
-    setFollowers((prevFollowers) =>
-      prevFollowers.filter((follower) => follower.id !== followerId)
-    );
+  const handleUnfollow = (event) => {
+    const value = event.target.value;
+    const unfollowedUser = followers.find((follower) => follower.username === value);
+
+    if (unfollowedUser) {
+      setFollowers((prevFollowers) =>
+        prevFollowers.filter((follower) => follower.id !== unfollowedUser.id)
+      );
+      post(unfollowedUser);
+    }
   };
 
   return (
@@ -28,15 +43,17 @@ function FollowingList({ onClose }) {
         <span className="close-button" onClick={onClose}>
           x
         </span>
-        <h1 className="head">Followers</h1>
+        <h1 className="head">Following</h1>
         <form onSubmit={handleSubmit}>
           <ul>
             {followers.map((follower) => (
               <li key={follower.id}>
                 <a href={`/${follower.username}`}>{follower.username}</a>
                 <button
-                  className="unfollow-button" type="button"
-                  onClick={() => handleUnfollow(follower.id)}
+                  className="unfollow-button"
+                  type="button"
+                  value={follower.username}
+                  onClick={handleUnfollow}
                 >
                   Unfollow
                 </button>

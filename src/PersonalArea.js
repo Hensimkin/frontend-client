@@ -36,9 +36,9 @@ function PersonalArea() {
         <UserNavbar />
       </header>
       <main className="mainP">
-      <button onClick={handleEditProfileClick}>Edit Profile</button>
-      <button onClick={handleFollowersListClick}>Followers List</button>
-      <button onClick={handleFollowingListClick}>Following List</button>
+      <button className="buttonP" onClick={handleEditProfileClick}>Edit Profile</button>
+      <button className="buttonP" onClick={handleFollowersListClick}>Followers List</button>
+      <button className="buttonP" onClick={handleFollowingListClick}>Following List</button>
 
       {isEditProfileOpen && (
         <EditProfile onClose={handleCloseModal} />
