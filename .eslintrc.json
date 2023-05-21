@@ -2,7 +2,7 @@
     "env": {
         "browser": true,
         "es2021": true,
-        "jest": true // add Jest environment for testing
+        "jest": true
     },
     "extends": [
         "eslint:recommended",
@@ -11,9 +11,9 @@
     ],
     "overrides": [
         {
-            "files": ["*/.test.js"], // add configuration for test files
+            "files": ["*/.test.js"],
             "env": {
-                "jest": true // add Jest environment for test files
+                "jest": true
             }
         }
     ],
@@ -32,12 +32,12 @@
     },
     "rules": {
         "no-undef": "error",
-        "react/react-in-jsx-scope": "off", // disable this rule to allow JSX without importing React
+        "react/react-in-jsx-scope": "off",
         "linebreak-style": 0,
         "react/jsx-indent" : ["error", 4],
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "camelcase": "off",
-        "max-len": "off",
+        "max-len": ["error", { "code": 80 }],
         "import/extensions": [
             "error",
             "ignorePackages",
@@ -48,14 +48,15 @@
                 "tsx": "never"
             }
         ],
-        "jsx-a11y/label-has-associated-control": [  // disable label-has-associated-control rule
+        "jsx-a11y/label-has-associated-control": [
             "error",
             {
                 "required": {
                     "some": [ "nesting", "id" ]
                 }
             }
-        ]
+        ],
+        "no-unused-vars": "error"
     },
     "ignorePatterns": [
         "**/*.css",
