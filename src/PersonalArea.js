@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import EditProfile from './EditProfile.js';
 import FollowersList from './FollowersList.js';
 import FollowingList from './FollowingList.js'
-import Navbar from './Navbar.js';
+import UserNavbar from './UserNavbar.js'
 import './PersonalArea.css';
 
 function PersonalArea() {
@@ -33,7 +33,7 @@ function PersonalArea() {
     <div>
       <h1 className="fontsP">Profile</h1>
       <header className="header">
-        <Navbar />
+        <UserNavbar />
       </header>
       <main className="mainP">
       <button onClick={handleEditProfileClick}>Edit Profile</button>

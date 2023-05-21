@@ -3,18 +3,22 @@ import React, { useState } from 'react';
 import './EditProfile.css';
 import './ProfilePopup.css';
 import axios from 'axios';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 
 function EditProfile({ onClose }) {
   const [FullName, setFullName] = useState('');
   const [PhoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
-  const [bio, setBio] = useState('');
+  const [nameError, setNameError] = useState('');
+  const [phoneError, setPhoneError] = useState('');
 
 
   async function post(e) {
     e.preventDefault();
     try {
       const response_name = await axios.post('http://localhost:5000/edit_name', { FullName })
+      const response_phone_number = await axios.post('http://localhost:5000/edit_phone_number', { PhoneNumber })
       onClose();
     }
 
@@ -23,26 +27,38 @@ function EditProfile({ onClose }) {
     }
   }
 
+
   const handleFullName = (event) => {
-    setFullName(event.target.value);
+    const value = event.target.value;
+    setFullName(value);
+    if (typeof value !== "string" || /\d/.test(value)) {
+      setNameError("Please enter a valid input");
+    } else {
+      setNameError("");
+    }
   };
 
+
   const handlePhoneNumber = (event) => {
-    setPhoneNumber(event.target.value);
+    const value = event.target.value;
+    setPhoneNumber(value);
+    if (typeof value !== "string" || !/^\d{10}$/.test(value)) {
+      setPhoneError("Please enter a valid phone number");
+    } else {
+      setPhoneError("");
+    }
   };
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
 
-  const handleBioChange = (event) => {
-    setBio(event.target.value);
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     onClose();
   };
+
 
   return (
     <div className="popup">
@@ -54,17 +70,26 @@ function EditProfile({ onClose }) {
         <h1 className="head">Edit Profile</h1>
         <form onSubmit={post}>
           <br />
-          <label className="fonts">Full Name: </label>
-          <input type="text" value={FullName} onChange={handleFullName} />
+          <label className="fonts">
+            Full Name:
+            <input type="text" pattern="[a-zA-Z\s]*" value={FullName} onChange={handleFullName} />
+            {nameError && <span className="error" style={{ color: 'red' }}>{nameError}</span>}
+          </label>
           <br />
-          <label className="fonts">Phone Number: </label>
-          <input type="text" value={PhoneNumber} onChange={handlePhoneNumber} />
+          <label className="fonts">Phone Number:</label>
+          <PhoneInput
+            type = "text"
+            value={PhoneNumber}
+            onChange={setPhoneNumber}
+            required
+            defaultCountry="IL"
+          />
+          {/* <label className="fonts">Phone Number: </label> */}
+          {/* <input type="text" pattern="[0-9]*" value={PhoneNumber} onChange={handlePhoneNumber} /> */}
+          {/* { phoneError&& <span className="error" style={{ color: 'red' }}>{phoneError}</span>} */}
           <br />
           <label className="fonts">Email: </label>
-          <input type="text" value={email} onChange={handleEmailChange} />
-          <br />
-          <label className="fonts">Bio: </label>
-          <textarea value={bio} onChange={handleBioChange} />
+          <label value={email}  />
           <br />
           <button type="submit">Save Changes</button>
         </form>
