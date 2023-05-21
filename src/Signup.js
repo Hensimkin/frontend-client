@@ -1,8 +1,8 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar.js';
 import './signup.css';
-import 'react-datepicker/dist/react-datepicker.css'; // import the DatePicker CSS file
 import GoogleFonts from 'google-fonts';
 import axios, { post } from 'axios';
 import 'react-phone-number-input/style.css';

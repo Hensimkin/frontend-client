@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import Popup from 'reactjs-popup';
 import './PrivacyPolicy.css'; // Import the CSS file

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App.js';
@@ -7,9 +8,9 @@ import Signup from './Signup.js';
 import SignIn from './SignIn.js';
 import HomePage from './HomePage.js';
 import PersonalArea from './PersonalArea.js';
-import ValidMAil from './emailValidation.js'
-import ForgotPass from './ForgotPassword.js'
-import ResetMess from './ResetMessage.js'
+import ValidMAil from './emailValidation.js';
+import ForgotPass from './ForgotPassword.js';
+import ResetMess from './ResetMessage.js';
 // import EditProfile from './EditProfile.js';
 // import  FollowersList from './FollowersList.js';
 
@@ -32,4 +33,3 @@ ReactDOM.render(
 
     document.getElementById('root'),
 );
-

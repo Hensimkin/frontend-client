@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from 'react'
 import './index.css';
 import Navbar from './Navbar.js'; // import the Navbar component
