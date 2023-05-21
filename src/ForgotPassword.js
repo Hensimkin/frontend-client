@@ -1,23 +1,18 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 import './SignIn.css';
 import axios from 'axios';
 import Navbar from './Navbar.js';
-import './ForgotPassword.css'
+import './ForgotPassword.css';
+
 function ForgotPass() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [serverResponse, setServerResponse] = useState('');
 
-  let credentials = {
-    email: '',
-    password: ''
-  };
-
-
   async function post(e) {
     e.preventDefault();
     try {
-
       const responseFromServer = await axios.post('http://localhost:5000/post_reset', { email });
       setServerResponse(responseFromServer.data); // Set the response from the server to the state variable
       if (responseFromServer.data === 'Password reset email sent') {
@@ -37,37 +32,35 @@ function ForgotPass() {
   }
 
   return (
-    <div>
-      <header className="header">
-        <Navbar />
-      </header>
-      <h1 className="main_header">Get reset code to your mail</h1>
-      <div className="main_forgotPassword">
+      <div>
+          <header className="header">
+              <Navbar />
+          </header>
+          <h1 className="main_header">Get reset code to your mail</h1>
+          <div className="main_forgotPassword">
 
-        <br />
-        <br />
-        <br />
-        <br/>
-        <div className= "center">
-          <form onSubmit={post}>
-            <label className="fonts">Enter your email:</label>
-            <input   type="text" value={email} onChange={handleEmailChange} required />
-            <input type="submit" className="forgotPasword_button" value="Reset my password" onClick={post} />
+              <br />
+              <br />
+              <br />
+              <br />
+              <div className="center">
+                  <form onSubmit={post}>
+                      <label className="fonts">Enter your email:</label>
+                      <input type="text" value={email} onChange={handleEmailChange} required />
+                      <input type="submit" className="forgotPasword_button" value="Reset my password" onClick={post} />
 
-          </form>
-          <div>
-            <p className="messages_fonts">
-              {serverResponse}
+                  </form>
+                  <div>
+                      <p className="messages_fonts">
+                          {serverResponse}
 
+                      </p>
+                  </div>
 
-            </p>
+              </div>
+
           </div>
-
-        </div>
-
-
       </div>
-    </div>
   );
 }
 

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Navbar from './Navbar.js'; // import the Navbar component
 
 function ValidMAil() {

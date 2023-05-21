@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 import EditProfile from './EditProfile.js';
 import FollowersList from './FollowersList.js';
