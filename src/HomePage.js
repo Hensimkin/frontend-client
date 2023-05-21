@@ -5,6 +5,7 @@ import Navbar from './Navbar.js'; // import the Navbar component
 import AddProductPopup from './AddProductPopup.js';
 import axios from 'axios';
 import './HomePage.css';
+import UserNavbar from './UserNavbar.js'
 
 function HomePage() {
   const [popupIsOpen, setPopupIsOpen] = useState(false);
@@ -37,7 +38,7 @@ function HomePage() {
   return (
     <div className="App">
       <header className="header">
-        <Navbar />
+        <UserNavbar />
       </header>
       <main className="main">
         {!popupIsOpen && (

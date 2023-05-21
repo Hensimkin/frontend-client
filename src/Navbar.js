@@ -1,14 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 function Navbar() {
-  const [searchType, setSearchType] = useState('products');
-
-  const handleSwitchSearchType = () => {
-    setSearchType(searchType === 'products' ? 'users' : 'products');
-  };
-
   return (
     <div className="main">
       <nav className="item">
@@ -17,25 +11,10 @@ function Navbar() {
             <Link to="/">About</Link>
           </li>
           <li>
-            <Link to="/HomePage">Home</Link>
+            <Link to="/SignIn">Sign In</Link>
           </li>
           <li>
-            <Link to="/SignIn">SignIn</Link>
-          </li>
-          <li>
-            <Link to="/Signup">Signup</Link>
-          </li>
-          <li>
-            <Link to="/PersonalArea">Profile</Link>
-          </li>
-          <li className="search-bar">
-            <input type="text" placeholder="Search" />
-            <button className="switch-button" onClick={handleSwitchSearchType}>
-              {searchType === 'products' ? 'Switch to User Search' : 'Switch to Product Search'}
-            </button>
-          </li>
-          <li>
-            <Link to="/LikedProducts">Liked</Link>
+            <Link to="/Signup">Sign Up</Link>
           </li>
         </ul>
       </nav>
@@ -44,3 +23,4 @@ function Navbar() {
 }
 
 export default Navbar;
+
