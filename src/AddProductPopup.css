@@ -94,3 +94,8 @@
     margin-top: 10px;
     align-self: flex-end;
 }
+
+.error {
+    color: red;
+    /* Add any other desired error styling */
+}

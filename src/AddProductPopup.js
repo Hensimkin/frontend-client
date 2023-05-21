@@ -13,6 +13,7 @@ function AddProductPopup(props) {
   const [titleResponse, setTitleResponse] = useState('');
   const [priceError, setPriceError] = useState('');
   const [formError, setFormError] = useState('');
+  const [categoryError, setCategoryError] = useState('');
 
   async function post(e) {
     e.preventDefault();
@@ -79,7 +80,11 @@ function AddProductPopup(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Here you can add your logic for submitting the form data to your server or saving it in a state
+    const category = event.target.category.value;
+    if (!category) {
+      alert("Please choose a category.");
+      return; // Stop form submission
+    }
   };
 
   return (
@@ -89,19 +94,20 @@ function AddProductPopup(props) {
         <form onSubmit={post}>
           <label>
             Category:
-            <select value={category} onChange={handleCategoryChange}>
-              <option disabled>Select Category</option>
+            <select value={category} onChange={handleCategoryChange} required={category !== "Select Category"}>
+              <option value="Select Category">Select Category</option>
               <option value="computers">Computers</option>
               <option value="electronics">Electronics</option>
               <option value="furniture">Furniture</option>
               <option value="books">Books</option>
             </select>
+            {category === "Select Category" && <span className="error" style={{ color: 'red' }}>Please select a category</span>}
           </label>
           <br></br>
           <label>
             Price:
             <input type="text" pattern="[0-9]*" value={price} onChange={handlePriceChange} />
-            {priceError && <span className="error">{priceError}</span>}
+            {priceError && <span className="error" style={{ color: 'red' }}>{priceError}</span>}
           </label>
           <br></br>
           <label>
@@ -126,7 +132,7 @@ function AddProductPopup(props) {
             />
           </label>
           <br></br>
-          <button type="submit" >Submit</button>
+          <button type="submit" disabled={category === "Select Category"}>Submit</button>
         </form>
         <button type="button" onClick={props.closePopup}>Close</button>
       </div>
