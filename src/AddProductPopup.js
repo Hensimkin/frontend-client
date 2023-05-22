@@ -1,8 +1,6 @@
-/* eslint-disable */
 import React, { useState } from 'react';
 import './AddProductPopup.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 function AddProductPopup(props) {
   const [category, setCategory] = useState('Select Category');
@@ -10,10 +8,8 @@ function AddProductPopup(props) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [pictures, setPictures] = useState([]);
-  const [titleResponse, setTitleResponse] = useState('');
+  const [, setTitleResponse] = useState('');
   const [priceError, setPriceError] = useState('');
-  const [formError, setFormError] = useState('');
-  const [categoryError, setCategoryError] = useState('');
   const [titleError, setTitleError] = useState('');
 
   async function post(e) {
@@ -32,6 +28,7 @@ function AddProductPopup(props) {
       console.log(response);
 
       const formData = new FormData();
+      // eslint-disable-next-line no-plusplus
       for (let i = 0; i < pictures.length; i++) {
         formData.append('pictures', pictures[i]);
       }
@@ -40,9 +37,11 @@ function AddProductPopup(props) {
           'Content-Type': 'multipart/form-data',
         },
       });
+      // eslint-disable-next-line max-len
       setTitleResponse(response_pictures.data); // Set the response from the server to the state variable
       console.log(response_pictures); // Log the response received from the server
 
+      // eslint-disable-next-line react/destructuring-assignment,react/prop-types
       props.closePopup();
     } catch (error) {
       console.log(error);
@@ -56,6 +55,7 @@ function AddProductPopup(props) {
   const handlePriceChange = (event) => {
     const newPrice = event.target.value;
     setPrice(newPrice);
+    // eslint-disable-next-line no-restricted-globals
     if (isNaN(newPrice)) {
       setPriceError('Price must be a number');
     } else {
@@ -83,14 +83,14 @@ function AddProductPopup(props) {
     setPictures(event.target.files);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const category = event.target.category.value;
-    if (!category) {
-      alert('Please choose a category.');
-      // Stop form submission
-    }
-  };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const category = event.target.category.value;
+  //   if (!category) {
+  //     alert('Please choose a category.');
+  //     // Stop form submission
+  //   }
+  // };
 
   return (
       <div className="popup">
@@ -116,13 +116,17 @@ function AddProductPopup(props) {
                   <br />
                   <label>
                       Price:
+                      {/* eslint-disable-next-line max-len */}
                       <input type="text" pattern="[0-9]*" value={price} onChange={handlePriceChange} />
+                      {/* eslint-disable-next-line max-len */}
                       {priceError && <span className="error" style={{ color: 'red' }}>{priceError}</span>}
                   </label>
                   <br />
                   <label>
                       Title:
+                      {/* eslint-disable-next-line max-len */}
                       <input type="text" pattern="[0-9a-zA-Z]*" value={title} onChange={handleTitleChange} />
+                      {/* eslint-disable-next-line max-len */}
                       {titleError && <span className="error" style={{ color: 'red' }}>{titleError}</span>}
                   </label>
                   <br />
@@ -145,11 +149,13 @@ function AddProductPopup(props) {
                   <br />
                   <button
                     type="submit"
+                    // eslint-disable-next-line max-len
                     disabled={category === 'Select Category' || title.trim() === '' || price.trim() === ''}
                   >
                       Submit
                   </button>
               </form>
+              {/* eslint-disable-next-line react/destructuring-assignment,react/prop-types */}
               <button type="button" onClick={props.closePopup}>Close</button>
           </div>
       </div>

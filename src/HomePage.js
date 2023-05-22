@@ -1,11 +1,13 @@
-/* eslint-disable */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import './index.css';
-import Navbar from './Navbar.js'; // import the Navbar component
-import AddProductPopup from './AddProductPopup.js';
 import axios from 'axios';
+// import the Navbar component
+// eslint-disable-next-line max-len
+// eslint-disable-next-line import/extensions,import/no-named-as-default,import/no-named-as-default-member
+import AddProductPopup from './AddProductPopup.js';
 import './HomePage.css';
-import UserNavbar from './UserNavbar.js'
+// eslint-disable-next-line import/extensions
+import UserNavbar from './UserNavbar.js';
 
 function HomePage() {
   const [popupIsOpen, setPopupIsOpen] = useState(false);
@@ -15,6 +17,7 @@ function HomePage() {
       const response = await axios.get('http://localhost:5000/user_listings');
       setUserListings(response.data);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error:', error);
     }
   };
@@ -30,46 +33,56 @@ function HomePage() {
     setPopupIsOpen(false);
   };
 
-
   return (
-    <div className="App">
-      <header className="header">
-        <UserNavbar />
-      </header>
-      <main className="main">
-        {!popupIsOpen && (
-          <button type="button"  onClick={openPopup}>
-            Add Product
-          </button>
-        )}
-        {popupIsOpen && <AddProductPopup closePopup={closePopup} />}
-        {!popupIsOpen && (
-          <>
+      <div className="App">
+          <header className="header">
+              <UserNavbar />
+          </header>
+          <main className="main">
+              {!popupIsOpen && (
+              <button type="button" onClick={openPopup}>
+                  Add Product
+              </button>
+              )}
+              {popupIsOpen && <AddProductPopup closePopup={closePopup} />}
+              {!popupIsOpen && (
+              <>
 
+              </>
+              )}
+          </main>
+          <div className="listings">
+              <div className="fonts">
+                  <h3>Your Listings</h3>
+                  <ul>
+                      {userListings.map((listing) => (
+                          <li key={listing.id}>
+                              <p>
+                                  Title:
+                                  {listing.title}
+                              </p>
+                              <p>
+                                  Price:
+                                  {listing.price}
+                              </p>
+                              <p>
+                                  Category:
+                                  {listing.category}
+                              </p>
+                              <p>
+                                  Description:
+                                  {listing.description}
+                              </p>
+                              {/* Render additional listing details as needed */}
+                          </li>
+                      ))}
+                  </ul>
 
-          </>
-        )}
-      </main>
-      <div className="listings">
-        <div className="fonts">
-          <h3>Your Listings</h3>
-          <ul >
-            {userListings.map((listing) => (
-              <li key={listing.id}>
-                <p>Title: {listing.title}</p>
-                <p>Price: {listing.price}</p>
-                <p>Category: {listing.category}</p>
-                <p>Description: {listing.description}</p>
-                {/* Render additional listing details as needed */}
-              </li>
-            ))}
-          </ul>
+              </div>
 
-        </div>
+          </div>
 
       </div>
-
-    </div>
   );
 }
 
