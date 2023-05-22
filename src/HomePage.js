@@ -14,7 +14,7 @@ function HomePage() {
   const [userListings, setUserListings] = useState([]);
   const fetchUserListings = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/user_listings');
+      const response = await axios.get('http://localhost:5000/home_listings');
       setUserListings(response.data);
     } catch (error) {
       // eslint-disable-next-line no-console
