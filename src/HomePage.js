@@ -40,26 +40,6 @@ function HomePage() {
     window.location.reload();
   };
 
-  const handleLike = (listingId) => {
-    // Handle like button click for the specific listing
-    // Perform necessary actions, such as updating the like count
-  };
-
-  const handleShare = (listingId) => {
-    // Handle share button click for the specific listing
-    // Perform necessary actions, such as opening a share dialog
-  };
-
-  const handleContactDetails = (listingId) => {
-    // Handle contact details button click for the specific listing
-    // Perform necessary actions, such as displaying contact information
-  };
-
-  const handleBuy = (listingId) => {
-    // Handle buy button click for the specific listing
-    // Perform necessary actions, such as initiating a purchase flow
-  };
-
   return (
       <div className="App">
           <header className="header">
@@ -100,16 +80,6 @@ function HomePage() {
                                   Description:
                                   {listing.description}
                               </p>
-
-                              {/* Additional buttons */}
-                              {/* eslint-disable-next-line react/button-has-type */}
-                              <button onClick={() => handleLike(listing.id)}>Like</button>
-                              {/* eslint-disable-next-line react/button-has-type */}
-                              <button onClick={() => handleShare(listing.id)}>Share</button>
-                              {/* eslint-disable-next-line max-len,react/button-has-type */}
-                              <button onClick={() => handleContactDetails(listing.id)}>Contact Details</button>
-                              {/* eslint-disable-next-line react/button-has-type */}
-                              <button onClick={() => handleBuy(listing.id)}>Buy</button>
                           </li>
                       ))}
                   </ul>
