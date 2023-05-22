@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import './index.css';
 import axios from 'axios';
@@ -80,6 +81,10 @@ function HomePage() {
                                   Description:
                                   {listing.description}
                               </p>
+                            <p>
+                              Phone Number:
+                              {listing.phone}
+                            </p>
                           </li>
                       ))}
                   </ul>
