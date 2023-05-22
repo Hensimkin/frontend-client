@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import './EditProfile.css';
 import './ProfilePopup.css';
 import axios from 'axios';
@@ -12,6 +12,7 @@ function EditProfile({ onClose }) {
   const [PhoneNumber, setPhoneNumber] = useState('');
   const email = null;
   const [nameError, setNameError] = useState('');
+  const [UserDetails, setUserDetails] = useState([]);
 
   async function post(e) {
     e.preventDefault();
@@ -24,6 +25,19 @@ function EditProfile({ onClose }) {
       console.log(error);
     }
   }
+
+  const fetchUserDetails = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/user_details');
+      setUserDetails(response.data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserDetails();
+  }, []);
 
   const handleFullName = (event) => {
     const { value } = event.target;
@@ -49,7 +63,7 @@ function EditProfile({ onClose }) {
                   <br />
                   <label className="fonts">
                       Full Name:
-                      <input type="text" pattern="[a-zA-Z\s]*" value={FullName} onChange={handleFullName} />
+                      <input type="text" id="output" pattern="[a-zA-Z\s]*" value={FullName} onChange={handleFullName} />
                       {nameError && <span className="error" style={{ color: 'red' }}>{nameError}</span>}
                   </label>
                   <br />

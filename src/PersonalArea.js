@@ -1,16 +1,46 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import EditProfile from './EditProfile.js';
 import FollowersList from './FollowersList.js';
 import FollowingList from './FollowingList.js'
 import UserNavbar from './UserNavbar.js'
 import './PersonalArea.css';
+import './HomePage.css'
+import axios from 'axios'
 
 function PersonalArea() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const [isFollowersListOpen, setIsFollowersListOpen] = useState(false);
   const [isFollowingListOpen, setIsFollowingListOpen] = useState(false);
+  const [userListings, setUserListings] = useState([]);
+  const [UserDetails, setUserDetails] = useState([]);
 
+  const fetchUserListings = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/user_listings');
+      setUserListings(response.data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+
+  useEffect(() => {
+    fetchUserListings();
+  }, []);
+
+  const fetchUserDetails = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/user_details');
+      setUserDetails(response.data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserDetails();
+  }, []);
 
   const handleEditProfileClick = () => {
     setIsEditProfileOpen(true);
@@ -53,6 +83,33 @@ function PersonalArea() {
         <FollowingList onClose={handleCloseModal} />
       )}
       </main>
+      <div className="listings">
+      <ul>
+        {userListings.map((listing) => (
+          <li key={listing.id}>
+            <p>
+              Title:
+              {listing.title}
+            </p>
+            <p>
+              Price:
+              {listing.price}
+            </p>
+            <p>
+              Category:
+              {listing.category}
+            </p>
+            <p>
+              Description:
+              {listing.description}
+            </p>
+            <p>
+              User: {UserDetails.length > 0 ? UserDetails[0].name : ''}
+            </p>
+          </li>
+        ))}
+      </ul>
+      </div>
     </div>
   );
 }
