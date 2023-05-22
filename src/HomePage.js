@@ -9,8 +9,19 @@ import UserNavbar from './UserNavbar.js'
 
 function HomePage() {
   const [popupIsOpen, setPopupIsOpen] = useState(false);
-  const [storedData, setStoredData] = useState({});
+  const [userListings, setUserListings] = useState([]);
+  const fetchUserListings = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/user_listings');
+      setUserListings(response.data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
+  useEffect(() => {
+    fetchUserListings();
+  }, []);
   const openPopup = () => {
     setPopupIsOpen(true);
   };
@@ -18,21 +29,6 @@ function HomePage() {
   const closePopup = () => {
     setPopupIsOpen(false);
   };
-
-  const fetchStoredData = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/get_stored_data');
-      setStoredData(response.data);
-      console.log(response.data);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchStoredData();
-  }, []);
-
 
 
   return (
@@ -49,18 +45,30 @@ function HomePage() {
         {popupIsOpen && <AddProductPopup closePopup={closePopup} />}
         {!popupIsOpen && (
           <>
-            <h1 className="title1">Social media</h1>
-            <p className="description" style={{ color: 'white' }}>
-              Join the NetConnect community today and start sharing your world
-              with others!
-            </p>
-            <p>Title: {storedData.title}</p>
-            <p>Description: {storedData.description}</p>
-            <p>Category: {storedData.category}</p>
-            <p>Price: {storedData.price}</p>
+
+
           </>
         )}
       </main>
+      <div className="listings">
+        <div className="fonts">
+          <h3>Your Listings</h3>
+          <ul >
+            {userListings.map((listing) => (
+              <li key={listing.id}>
+                <p>Title: {listing.title}</p>
+                <p>Price: {listing.price}</p>
+                <p>Category: {listing.category}</p>
+                <p>Description: {listing.description}</p>
+                {/* Render additional listing details as needed */}
+              </li>
+            ))}
+          </ul>
+
+        </div>
+
+      </div>
+
     </div>
   );
 }
