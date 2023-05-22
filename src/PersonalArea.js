@@ -5,8 +5,8 @@ import FollowersList from './FollowersList.js';
 import FollowingList from './FollowingList.js'
 import UserNavbar from './UserNavbar.js'
 import './PersonalArea.css';
-import './HomePage.css'
-import axios from 'axios'
+import './HomePage.css';
+import axios from 'axios';
 
 function PersonalArea() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);

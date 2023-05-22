@@ -49,6 +49,14 @@ function EditProfile({ onClose }) {
     }
   };
 
+  const setElementNameValue = (event) => {
+    setFullName(UserDetails.length > 0 ? UserDetails[0].name : '')
+  }
+
+  const setElementPhoneValue = (event) => {
+    setPhoneNumber(UserDetails.length > 0 ? '+' +  UserDetails[0].phone : '')
+  }
+
   return (
       <div className="popup">
           {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
@@ -63,7 +71,7 @@ function EditProfile({ onClose }) {
                   <br />
                   <label className="fonts">
                       Full Name:
-                      <input type="text" id="output" pattern="[a-zA-Z\s]*" value={FullName} onChange={handleFullName} />
+                      <input type="text" id="output" pattern="[a-zA-Z\s]*" value={FullName} onClick={setElementNameValue} onChange={handleFullName} />
                       {nameError && <span className="error" style={{ color: 'red' }}>{nameError}</span>}
                   </label>
                   <br />
@@ -72,6 +80,7 @@ function EditProfile({ onClose }) {
                   <PhoneInput
                     type="text"
                     value={PhoneNumber}
+                    onClick={setElementPhoneValue}
                     onChange={setPhoneNumber}
                     required
                     defaultCountry="IL"
@@ -80,7 +89,7 @@ function EditProfile({ onClose }) {
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label className="fonts">Email: </label>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                  <label value={email} />
+                  <label className="fonts"> {UserDetails.length > 0 ? UserDetails[0].mail : ''} </label>
                   <br />
                   <button type="submit">Save Changes</button>
               </form>
