@@ -62,7 +62,7 @@ function UserNavbar() {
                       </button>
                   </li>
                   <li>
-                      <Link to="/LikedProducts">
+                      <Link to="/Saved">
                           <FontAwesomeIcon icon={faBookmark} />
                       </Link>
                   </li>

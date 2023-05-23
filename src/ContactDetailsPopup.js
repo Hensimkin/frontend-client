@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import './ContactDetailsPopup.css';
 import { FloatingWhatsApp } from 'react-floating-whatsapp';
@@ -14,6 +13,7 @@ function ContactDetailsPopup({ listing, closePopup }) {
   };
 
   // Function to handle the WhatsApp click and open a WhatsApp chat
+  // eslint-disable-next-line no-unused-vars
   const handleWhatsAppClick = () => {
     window.location.href = `https://wa.me/${formattedPhoneNumber}`;
   };

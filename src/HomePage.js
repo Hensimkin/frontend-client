@@ -60,8 +60,25 @@ function HomePage() {
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
-  const openSaveForLaterPage = () => {
-    window.location.href = '/Saved';
+
+  const saveListingForLater = async (listing, userId) => {
+    try {
+      await axios.post('http://localhost:5000/save', { listing, userId });
+    } catch (error) {
+      throw new Error('Error saving listing:', error);
+    }
+  };
+
+  const openSaveForLaterPage = async (listing) => {
+    const userId = listing.userid;
+
+    try {
+      await saveListingForLater(listing, userId);
+      console.log(`Listing saved for later in user with ID ${userId}`);
+      // window.location.href = '/Saved';
+    } catch (error) {
+      console.error('Error saving listing:', error);
+    }
   };
 
   return (
@@ -122,7 +139,7 @@ function HomePage() {
                               </button>
                               <button
                                 type="button"
-                                onClick={() => openSaveForLaterPage()}
+                                onClick={() => openSaveForLaterPage(listing)}
                                 className="buttonH"
                               >
                                   <FontAwesomeIcon icon={faBookmark} />
