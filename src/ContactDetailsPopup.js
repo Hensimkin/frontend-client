@@ -20,7 +20,15 @@ function ContactDetailsPopup({ listing, closePopup }) {
 
   return (
     <div className="popup">
+      {/* eslint-disable-next-line max-len */}
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,react/destructuring-assignment,jsx-a11y/no-static-element-interactions,react/prop-types */}
+      <div onClick={closePopup} className="overlay" />
       <div className="popup-inner">
+        {/* eslint-disable-next-line max-len */}
+        {/* eslint-disable-next-line react/prop-types,jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions,react/destructuring-assignment */}
+        <span className="close-button" onClick={closePopup}>
+                  x
+              </span>
         <div className= "fonts">
           <h2>Contact Details</h2>
           <p>
