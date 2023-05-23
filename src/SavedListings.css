@@ -1,0 +1,11 @@
+.saved-listings-container {
+    padding: 20px;
+    background-color: #f5f5f5;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
