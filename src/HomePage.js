@@ -77,7 +77,6 @@ function HomePage() {
             Add Product
           </button>
         )}
-        {/* Rest of the code... */}
       </main>
       <div className="listings">
         <div className="fonts">
@@ -95,13 +94,16 @@ function HomePage() {
                     {listing.name}
                   </Link>
                 </p>
-                <button
-                  type="button"
-                  onClick={() => openContactDetailsPopup(listing)}
-                  className="button2"
-                >
-                  Contact Details
-                </button>
+                <main className="main">
+                  <button
+                    type="button"
+                    onClick={() => openContactDetailsPopup(listing)}
+                    className="button2"
+                  >
+                    Contact Details
+                  </button>
+                </main>
+
               </li>
             ))}
           </ul>
@@ -114,6 +116,7 @@ function HomePage() {
         <ContactDetailsPopup
           listing={selectedListing}
           phoneNumber={selectedListing.phoneNumber}
+          name ={selectedListing.name}
           closePopup={closeContactDetailsPopup}
         />
       )}
