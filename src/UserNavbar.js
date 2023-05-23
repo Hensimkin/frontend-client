@@ -33,6 +33,11 @@ function UserNavbar() {
     <div className="main">
       <nav className="item">
         <ul className="ul">
+          <li className="logo-container">
+            <Link to="/HomePage" className="logo-link">
+              <img src="https://i.ibb.co/JBSRQjR/output-onlinepngtools.png" alt="Logo" className="logo-image" />
+            </Link>
+          </li>
 
           <li className="search-bar">
             <input
@@ -51,6 +56,7 @@ function UserNavbar() {
               <FontAwesomeIcon icon={faSearch} />
             </button>
           </li>
+
           <li>
             <Link to="/LikedProducts">
               <FontAwesomeIcon icon={faBookmark} />
