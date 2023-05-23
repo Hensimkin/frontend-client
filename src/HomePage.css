@@ -96,8 +96,6 @@
 }
 
 
-
-
 .popup-inner button[type="button"] {
     background-color: #ccc;
     color: black;
@@ -107,14 +105,38 @@
     background-color: #bbb;
 }
 
-.listings{
+.listings {
     text-align: center;
 }
-
 
 .listings li {
     margin-bottom: 10px;
     padding: 10px;
     background-color: #f2f2f2;
     border-radius: 5px;
+    list-style-type: none; /* Add this line to remove the list dots */
 }
+
+.listings li .buttonH {
+    margin-top: 10px;
+    margin-right: 20px; /* Add margin-right to create space between buttons */
+    padding: 15px 25px; /* Increase padding to make the buttons bigger */
+    border-radius: 5px;
+    border: none;
+    background-color: deepskyblue;
+    color: white;
+    cursor: pointer;
+}
+
+.listings li .buttonH:hover {
+    background-color: #0D95E8;
+}
+
+.listings li .buttonH:first-child {
+    margin-right: 5px; /* Adjust the margin as per your preference */
+}
+
+.listings li .buttonH:last-child {
+    margin-right: 0; /* Remove margin-right for the last button */
+}
+
