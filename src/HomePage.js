@@ -90,7 +90,7 @@ function HomePage() {
                 <p>Description: {listing.description}</p>
                 <p>check: {listing.userid}</p>
                 <p>User:
-                  <Link to={`/User/${listing.userid}`} onMouseOver={() => handleMouseOver(listing.userid)}>
+                  <Link to={`/User/${listing.userid}`}>
                     {listing.name}
                   </Link>
                 </p>
