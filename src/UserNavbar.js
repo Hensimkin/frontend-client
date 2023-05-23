@@ -4,17 +4,11 @@ import './UserNavbar.css';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faBookmark, faHome, faUser, faSignOutAlt, faSearch,
+  faBookmark, faHome, faUser, faSignOutAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
 function UserNavbar() {
-  const [searchType, setSearchType] = useState('products');
   const [searchTerm, setSearchTerm] = useState('');
-
-  const handleSwitchSearchType = () => {
-    setSearchType(searchType === 'products' ? 'users' : 'products');
-  };
-
   const handleLogout = async () => {
     await axios.post('http://localhost:5000/signOut');
   };
@@ -52,14 +46,10 @@ function UserNavbar() {
                         onKeyPress={handleSearchEnter}
                       />
                       {/* eslint-disable-next-line react/button-has-type */}
-                      <button className="switch-button" onClick={handleSwitchSearchType}>
-                          {/* eslint-disable-next-line max-len */}
-                          {searchType === 'products' ? 'Switch to User Search' : 'Switch to Product Search'}
-                      </button>
-                      {/* eslint-disable-next-line react/button-has-type */}
-                      <button className="search-button" onClick={handleSearchEnter}>
-                          <FontAwesomeIcon icon={faSearch} />
-                      </button>
+                      <div className="main">
+                          {/* eslint-disable-next-line react/button-has-type */}
+                      </div>
+
                   </li>
                   <li>
                       <Link to="/Saved">
