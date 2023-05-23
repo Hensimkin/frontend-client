@@ -51,7 +51,7 @@ function UserNavbar() {
                       </button>
                   </li>
                   <li>
-                      <Link to="/LikedProducts">Saved</Link>
+                      <Link to="/Saved">Saved</Link>
                   </li>
 
                   <li>

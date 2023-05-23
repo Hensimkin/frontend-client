@@ -11,6 +11,7 @@ import PersonalArea from './PersonalArea.js';
 import ValidMAil from './emailValidation.js';
 import ForgotPass from './ForgotPassword.js';
 import ResetMess from './ResetMessage.js';
+import Saved from './Saved.js'
 // import EditProfile from './EditProfile.js';
 // import  FollowersList from './FollowersList.js';
 
@@ -26,6 +27,7 @@ ReactDOM.render(
           <Route path="/emailValidation" element={<ValidMAil />} />
           <Route path="/ForgotPassword" element={<ForgotPass />} />
           <Route path="/ResetMessage" element={<ResetMess />} />
+          <Route path="/Saved" element={<Saved />} />
 
 
         </Routes>
