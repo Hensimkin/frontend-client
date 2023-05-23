@@ -8,9 +8,9 @@ function UserNavbar(props) {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    // Perform logout logic here
-    console.log('User logged out');
+  const handleLogout = async () => {
+    await axios.post('http://localhost:5000/signOut');
+
   };
 
   const handleSearchEnter = async (event) => {
