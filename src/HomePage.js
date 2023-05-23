@@ -6,6 +6,8 @@ import './HomePage.css';
 import UserNavbar from './UserNavbar.js';
 import AddProductPopup from './AddProductPopup.js';
 import ContactDetailsPopup from './ContactDetailsPopup.js';
+import { Link } from 'react-router-dom'
+
 
 function HomePage() {
   const [addProductPopupIsOpen, setAddProductPopupIsOpen] = useState(false);
@@ -60,6 +62,10 @@ function HomePage() {
     setSearchTerm(event.target.value);
   };
 
+  const handleMouseOver = (userId) => {
+    fetchUserListings(userId);
+  };
+
   return (
     <div className="App">
       <header className="header">
@@ -78,11 +84,17 @@ function HomePage() {
           <h3>Your Listings</h3>
           <ul>
             {filteredUserListings.map((listing) => (
-              <li key={listing.id}>
+              <li key={listing.userid}>
                 <p>Title: {listing.title}</p>
                 <p>Price: {listing.price}</p>
                 <p>Category: {listing.category}</p>
                 <p>Description: {listing.description}</p>
+                <p>check: {listing.userid}</p>
+                <p>User:
+                  <Link to={`/User/${listing.userid}`}>
+                    {listing.name}
+                  </Link>
+                </p>
                 <button
                   type="button"
                   onClick={() => openContactDetailsPopup(listing)}
