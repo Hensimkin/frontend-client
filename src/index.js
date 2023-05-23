@@ -26,7 +26,8 @@ ReactDOM.render(
           <Route path="/emailValidation" element={<ValidMAil />} />
           <Route path="/ForgotPassword" element={<ForgotPass />} />
           <Route path="/ResetMessage" element={<ResetMess />} />
-          <Route path="/User/:id" element={<User />} />
+          <Route path="/User/:uid" element={<User />} />
+
 
 
 

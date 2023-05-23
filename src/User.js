@@ -4,8 +4,10 @@ import UserNavbar from './UserNavbar.js';
 import './PersonalArea.css';
 import './HomePage.css';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-function User({ uid }) { // Destructure the uid prop here
+function User() {
+  const { uid } = useParams();
   const [userListings, setUserListings] = useState([]);
   const [userDetails, setUserDetails] = useState([]);
 
