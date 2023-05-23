@@ -94,16 +94,13 @@ function HomePage() {
                     {listing.name}
                   </Link>
                 </p>
-                <main className="main">
-                  <button
-                    type="button"
-                    onClick={() => openContactDetailsPopup(listing)}
-                    className="button2"
-                  >
-                    Contact Details
-                  </button>
-                </main>
-
+                <button
+                  type="button"
+                  onClick={() => openContactDetailsPopup(listing)}
+                  className="button2"
+                >
+                  Contact Details
+                </button>
               </li>
             ))}
           </ul>
