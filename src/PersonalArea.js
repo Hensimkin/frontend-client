@@ -89,22 +89,18 @@ function PersonalArea() {
         {userListings.map((listing) => (
           <li key={listing.id}>
             <p>
-              Title:
-              {listing.title}
+              Title: {listing.title}
             </p>
             <p>
-              Price:
-              {listing.price}
+              Price: {listing.price}
             </p>
             <p>
-              Category:
-              {listing.category}
+              Category: {listing.category}
             </p>
             <p>
-              Description:
-              {listing.description}
+              Description: {listing.description}
             </p>
-            <index  name={UserDetails.length > 0 ? UserDetails[0].uid : ''} />
+            <index name={UserDetails.length > 0 ? UserDetails[0].uid : ''} />
           </li>
         ))}
       </ul>

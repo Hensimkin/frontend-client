@@ -1,12 +1,14 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react';
-import './index.css';
 import axios from 'axios';
 import './HomePage.css';
 import UserNavbar from './UserNavbar.js';
 import AddProductPopup from './AddProductPopup.js';
 import ContactDetailsPopup from './ContactDetailsPopup.js';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMessage, faBookmark } from '@fortawesome/free-solid-svg-icons';
+
 
 
 function HomePage() {
@@ -85,7 +87,7 @@ function HomePage() {
       </main>
       <div className="listings">
         <div className="fonts">
-          <h3>Your Listings</h3>
+          <h2>Your Listings</h2>
           <ul>
             {filteredUserListings.map((listing) => (
               <li key={listing.userid}>
@@ -93,26 +95,24 @@ function HomePage() {
                 <p>Price: {listing.price}</p>
                 <p>Category: {listing.category}</p>
                 <p>Description: {listing.description}</p>
-                <p>User:
-                  <Link to={`/User/${listing.userid}`}>
+                <p>User: <Link to={`/User/${listing.userid}`}>
                     {listing.name}
                   </Link>
                 </p>
                 <button
                   type="button"
                   onClick={() => openContactDetailsPopup(listing)}
-                  className="button2"
+                  className="buttonH"
                 >
-                  Contact Details
+                  <FontAwesomeIcon icon={faMessage} /> {/* Contact Details Icon */}
                 </button>
-
 
                 <button
                   type="button"
                   onClick={() => openSaveForLaterPage(listing)}
-                  className="button3"
+                  className="buttonH"
                 >
-                  Save for Later
+                  <FontAwesomeIcon icon={faBookmark} /> {/* Save for Later Icon */}
                 </button>
 
 
