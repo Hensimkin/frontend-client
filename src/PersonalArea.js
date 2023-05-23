@@ -7,6 +7,7 @@ import UserNavbar from './UserNavbar.js'
 import './PersonalArea.css';
 import './HomePage.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom'
 
 function PersonalArea() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
@@ -103,8 +104,12 @@ function PersonalArea() {
               Description:
               {listing.description}
             </p>
+            <index  name={UserDetails.length > 0 ? UserDetails[0].uid : ''} />
             <p>
-              User: {UserDetails.length > 0 ? UserDetails[0].name : ''}
+              User:
+              <Link to={`/User/${UserDetails.length > 0 ? UserDetails[0].uid : ''}`}>
+                {UserDetails.length > 0 ? UserDetails[0].name : ''}
+              </Link>
             </p>
           </li>
         ))}
