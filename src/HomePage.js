@@ -6,7 +6,7 @@ import './HomePage.css';
 import UserNavbar from './UserNavbar.js';
 import AddProductPopup from './AddProductPopup.js';
 import ContactDetailsPopup from './ContactDetailsPopup.js';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 
 function HomePage() {

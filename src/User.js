@@ -10,6 +10,7 @@ function User() {
   const { uid } = useParams();
   const [userListings, setUserListings] = useState([]);
   const [userDetails, setUserDetails] = useState([]);
+  const [Follow, setFollow] = useState([]);
 
   const fetchUserListings = async () => {
     try {
@@ -38,6 +39,22 @@ function User() {
     fetchUserDetails();
   }, []);
 
+
+  async function post(e) {
+    e.preventDefault();
+    try {
+      await axios.post('http://localhost:5000/follow', { Follow });
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const setFollowValue = (event) => {
+    setFollow(uid);
+    post(event)
+  }
+
   return (
     <div>
       <h1 className="fontsP">{userListings.name} Profile</h1>
@@ -56,6 +73,9 @@ function User() {
             </li>
           ))}
         </ul>
+        <button type="button" onClick={setFollowValue}>
+          Follow
+        </button>
       </div>
     </div>
   );
