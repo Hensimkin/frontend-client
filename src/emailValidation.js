@@ -1,25 +1,20 @@
-/* eslint-disable */
 import Navbar from './Navbar.js'; // import the Navbar component
 
 function ValidMAil() {
-
   return (
-    <div className="App">
+      <div className="App">
 
-      <header className="header">
-        <Navbar />
-      </header>
-      <main className="main_header" >
+          <header className="header">
+              <Navbar />
+          </header>
+          <main className="main_header">
 
-          <h1>Verification link sent to your mail please verify before sign in</h1>
+              <h1>Verification link sent to your mail please verify before sign in</h1>
 
-      </main>
+          </main>
 
-    </div>
+      </div>
   );
 }
 
 export default ValidMAil;
-
-
-

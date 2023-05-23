@@ -1,8 +1,8 @@
-/* eslint-disable */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App.js';
 import './index.css';
+// eslint-disable-next-line import/order
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Signup from './Signup.js';
 import SignIn from './SignIn.js';
@@ -11,10 +11,8 @@ import PersonalArea from './PersonalArea.js';
 import ValidMAil from './emailValidation.js';
 import ForgotPass from './ForgotPassword.js';
 import ResetMess from './ResetMessage.js';
-import User from './User.js'
-import Saved from './Saved.js'
-// import EditProfile from './EditProfile.js';
-// import  FollowersList from './FollowersList.js';
+import User from './User.js';
+import Saved from './Saved.js';
 
 ReactDOM.render(
 
@@ -25,11 +23,11 @@ ReactDOM.render(
             <Route path="/SignIn" element={<SignIn />} />
             <Route path="/HomePage" element={<HomePage />} />
             <Route path="/PersonalArea" element={<PersonalArea />} />
-          <Route path="/emailValidation" element={<ValidMAil />} />
-          <Route path="/ForgotPassword" element={<ForgotPass />} />
-          <Route path="/ResetMessage" element={<ResetMess />} />
-          <Route path="/User/:uid" element={<User />} />
-          <Route path="/Saved" element={<Saved />} />
+            <Route path="/emailValidation" element={<ValidMAil />} />
+            <Route path="/ForgotPassword" element={<ForgotPass />} />
+            <Route path="/ResetMessage" element={<ResetMess />} />
+            <Route path="/User/:uid" element={<User />} />
+            <Route path="/Saved" element={<Saved />} />
 
         </Routes>
     </Router>,

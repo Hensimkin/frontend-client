@@ -1,13 +1,12 @@
-/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './HomePage.css';
-import UserNavbar from './UserNavbar.js';
-import AddProductPopup from './AddProductPopup.js';
-import ContactDetailsPopup from './ContactDetailsPopup.js';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage, faBookmark } from '@fortawesome/free-solid-svg-icons';
+import UserNavbar from './UserNavbar.js';
+import AddProductPopup from './AddProductPopup.js';
+import ContactDetailsPopup from './ContactDetailsPopup.js';
 
 function HomePage() {
   const [addProductPopupIsOpen, setAddProductPopupIsOpen] = useState(false);
@@ -33,9 +32,8 @@ function HomePage() {
 
   useEffect(() => {
     // Filter the user listings based on the search term
-    const filteredListings = userListings.filter(listing =>
-      listing.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    // eslint-disable-next-line max-len
+    const filteredListings = userListings.filter((listing) => listing.title.toLowerCase().includes(searchTerm.toLowerCase()));
     setFilteredUserListings(filteredListings);
   }, [userListings, searchTerm]);
 
@@ -62,76 +60,92 @@ function HomePage() {
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
-
-  const handleMouseOver = (userId) => {
-    fetchUserListings(userId);
-  };
-
-  const openSaveForLaterPage = (listing) => {
-    window.location.href = `/Saved`;
+  const openSaveForLaterPage = () => {
+    window.location.href = '/Saved';
   };
 
   return (
-    <div className="App">
-      <header className="header">
-        <UserNavbar handleSearchChange={handleSearchChange} />
-      </header>
-      <main className="main">
-        {!addProductPopupIsOpen && (
-          <button type="button" onClick={openAddProductPopup}>
-            Add Product
-          </button>
-        )}
-        <button type="button" onClick={() => setIsGridView(!isGridView)}>
-          {isGridView ? 'Row View' : 'Grid View'}
-        </button> {/* Added button for view mode */}
-      </main>
-      <div className="listings">
-        <div className="fonts">
-          <h2>Your Listings</h2>
-          <ul className={`list ${isGridView ? 'grid-view' : ''}`}> {/* Added dynamic class */}
-            {filteredUserListings.map((listing) => (
-              <li key={listing.userid}>
-                <p>Title: {listing.title}</p>
-                <p>Price: {listing.price}</p>
-                <p>Category: {listing.category}</p>
-                <p>Description: {listing.description}</p>
-                <p>User: <Link to={`/User/${listing.userid}`}>
-                  {listing.name}
-                </Link>
-                </p>
-                <button
-                  type="button"
-                  onClick={() => openContactDetailsPopup(listing)}
-                  className="buttonH"
-                >
-                  <FontAwesomeIcon icon={faMessage} /> {/* Contact Details Icon */}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => openSaveForLaterPage(listing)}
-                  className="buttonH"
-                >
-                  <FontAwesomeIcon icon={faBookmark} /> {/* Save for Later Icon */}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <div className="App">
+          <header className="header">
+              <UserNavbar handleSearchChange={handleSearchChange} />
+          </header>
+          <main className="main">
+              {!addProductPopupIsOpen && (
+              <button type="button" onClick={openAddProductPopup}>
+                  Add Product
+              </button>
+              )}
+              <button type="button" onClick={() => setIsGridView(!isGridView)}>
+                  {isGridView ? 'Row View' : 'Grid View'}
+              </button>
+              {' '}
+              {/* Added button for view mode */}
+          </main>
+          <div className="listings">
+              <div className="fonts">
+                  <h2>Your Listings</h2>
+                  <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
+                      {' '}
+                      {/* Added dynamic class */}
+                      {filteredUserListings.map((listing) => (
+                          <li key={listing.userid}>
+                              <p>
+                                  Title:
+                                  {listing.title}
+                              </p>
+                              <p>
+                                  Price:
+                                  {listing.price}
+                              </p>
+                              <p>
+                                  Category:
+                                  {listing.category}
+                              </p>
+                              <p>
+                                  Description:
+                                  {listing.description}
+                              </p>
+                              <p>
+                                  User:
+                                  <Link to={`/User/${listing.userid}`}>
+                                      {listing.name}
+                                  </Link>
+                              </p>
+                              <button
+                                type="button"
+                                onClick={() => openContactDetailsPopup(listing)}
+                                className="buttonH"
+                              >
+                                  <FontAwesomeIcon icon={faMessage} />
+                                  {' '}
+                                  {/* Contact Details Icon */}
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => openSaveForLaterPage()}
+                                className="buttonH"
+                              >
+                                  <FontAwesomeIcon icon={faBookmark} />
+                                  {' '}
+                                  {/* Save for Later Icon */}
+                              </button>
+                          </li>
+                      ))}
+                  </ul>
+              </div>
+          </div>
+          {addProductPopupIsOpen && (
+          <AddProductPopup closePopup={closeAddProductPopup} />
+          )}
+          {contactDetailsPopupIsOpen && selectedListing && (
+          <ContactDetailsPopup
+            listing={selectedListing}
+            phoneNumber={selectedListing.phoneNumber}
+            name={selectedListing.name}
+            closePopup={closeContactDetailsPopup}
+          />
+          )}
       </div>
-      {addProductPopupIsOpen && (
-        <AddProductPopup closePopup={closeAddProductPopup} />
-      )}
-      {contactDetailsPopupIsOpen && selectedListing && (
-        <ContactDetailsPopup
-          listing={selectedListing}
-          phoneNumber={selectedListing.phoneNumber}
-          name={selectedListing.name}
-          closePopup={closeContactDetailsPopup}
-        />
-      )}
-    </div>
   );
 }
 

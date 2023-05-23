@@ -15,7 +15,6 @@ function SignIn() {
     password: ''
   };
 
-
   async function post(e) {
     e.preventDefault();
     try {
@@ -48,8 +47,6 @@ function SignIn() {
           </header>
           <h1 className="main_header">Welcome to MarketMate, your go-to online marketplace for all your shopping needs</h1>
           <div className="main_signin">
-
-
                   <h1 className="head">Sign in</h1>
                   <br />
                   <div className= "center_fileds">
@@ -59,22 +56,13 @@ function SignIn() {
                       <label className="fonts">Enter password:</label>
                       <input className="passtype" type="password" value={password} onChange={handlePasswordChange} required />
                       <input type="submit" className="signin_button" value="Sign in" onClick={post} />
-
                     </form>
                     <div>
                       <p className="messages_fonts">
                           {serverResponse}
-
-
                       </p>
-
                     </div>
-
-
-
                   </div>
-
-
             <label className="fonts1" >
               Forgot your password? click
               {' '}

@@ -38,24 +38,20 @@
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "camelcase": "off",
         "max-len": ["error", { "code": 100 }],
-        "import/extensions": [
-            "error",
-            "ignorePackages",
-            {
-                "js": "never",
-                "jsx": "never",
-                "ts": "never",
-                "tsx": "never"
-            }
-        ],
-        "jsx-a11y/label-has-associated-control": [
-            "error",
-            {
-                "required": {
-                    "some": [ "nesting", "id" ]
-                }
-            }
-        ],
+        "import/extensions": "off",
+        "react/prop-types": "off",
+        "no-console": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
+        "jsx-a11y/label-has-associated-control": "off",
+//        "jsx-a11y/label-has-associated-control": [
+//            "error",
+//            {
+//                "required": {
+//                    "some": [ "nesting", "id" ]
+//                }
+//            }
+//        ],
         "no-unused-vars": "error"
     },
     "ignorePatterns": [

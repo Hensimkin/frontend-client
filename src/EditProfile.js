@@ -1,24 +1,28 @@
 /* eslint-disable */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import './EditProfile.css';
 import './ProfilePopup.css';
 import axios from 'axios';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 
-// eslint-disable-next-line react/prop-types
 function EditProfile({ onClose }) {
   const [FullName, setFullName] = useState('');
   const [PhoneNumber, setPhoneNumber] = useState('');
-  const email = null;
   const [nameError, setNameError] = useState('');
   const [UserDetails, setUserDetails] = useState([]);
 
   async function post(e) {
     e.preventDefault();
     try {
-      const response_name = await axios.post('http://localhost:5000/edit_name', { FullName });
-      const response_phone_number = await axios.post('http://localhost:5000/edit_phone_number', { PhoneNumber });
+      const response_name = await axios.post(
+        'http://localhost:5000/edit_name',
+        { FullName },
+      );
+      const response_phone_number = await axios.post(
+        'http://localhost:5000/edit_phone_number',
+        { PhoneNumber },
+      );
       console.log(response_name, response_phone_number);
       onClose();
     } catch (error) {
@@ -50,19 +54,17 @@ function EditProfile({ onClose }) {
   };
 
   const setElementNameValue = (event) => {
-    setFullName(UserDetails.length > 0 ? UserDetails[0].name : '')
-  }
+    setFullName(UserDetails.length > 0 ? UserDetails[0].name : '');
+  };
 
   const setElementPhoneValue = (event) => {
-    setPhoneNumber(UserDetails.length > 0 ? '+' +  UserDetails[0].phone : '')
-  }
+    setPhoneNumber(UserDetails.length > 0 ? `+${UserDetails[0].phone}` : '');
+  };
 
   return (
       <div className="popup">
-          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
           <div onClick={onClose} className="overlay" />
           <div className="popup-inner">
-              {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
               <span className="close-button" onClick={onClose}>
                   x
               </span>
@@ -71,11 +73,24 @@ function EditProfile({ onClose }) {
                   <br />
                   <label className="fonts">
                       Full Name:
-                      <input type="text" id="output" pattern="[a-zA-Z\s]*" value={FullName} onClick={setElementNameValue} onChange={handleFullName} />
-                      {nameError && <span className="error" style={{ color: 'red' }}>{nameError}</span>}
+                      <input
+                        type="text"
+                        id="output"
+                        pattern="[a-zA-Z\s]*"
+                        value={FullName}
+                        onClick={setElementNameValue}
+                        onChange={handleFullName}
+                      />
+                      {nameError && (
+                      <span
+                        className="error"
+                        style={{ color: 'red' }}
+                      >
+                          {nameError}
+                      </span>
+                      )}
                   </label>
                   <br />
-                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label className="fonts">Phone Number:</label>
                   <PhoneInput
                     type="text"
@@ -86,10 +101,12 @@ function EditProfile({ onClose }) {
                     defaultCountry="IL"
                   />
                   <br />
-                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label className="fonts">Email: </label>
-                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                  <label className="fonts"> {UserDetails.length > 0 ? UserDetails[0].mail : ''} </label>
+                  <label className="fonts">
+                      {' '}
+                      {UserDetails.length > 0 ? UserDetails[0].mail : ''}
+                      {' '}
+                  </label>
                   <br />
                   <button type="submit">Save Changes</button>
               </form>
