@@ -77,7 +77,6 @@ function HomePage() {
             Add Product
           </button>
         )}
-        {/* Rest of the code... */}
       </main>
       <div className="listings">
         <div className="fonts">
@@ -89,7 +88,6 @@ function HomePage() {
                 <p>Price: {listing.price}</p>
                 <p>Category: {listing.category}</p>
                 <p>Description: {listing.description}</p>
-                <p>check: {listing.userid}</p>
                 <p>User:
                   <Link to={`/User/${listing.userid}`}>
                     {listing.name}
@@ -114,6 +112,7 @@ function HomePage() {
         <ContactDetailsPopup
           listing={selectedListing}
           phoneNumber={selectedListing.phoneNumber}
+          name ={selectedListing.name}
           closePopup={closeContactDetailsPopup}
         />
       )}

@@ -40,7 +40,7 @@ function User() {
 
   return (
     <div>
-      <h1 className="fontsP">Profile</h1>
+      <h1 className="fontsP">{userListings.name} Profile</h1>
       <header className="header">
         <UserNavbar />
       </header>
