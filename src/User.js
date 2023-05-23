@@ -57,19 +57,18 @@ function User() {
 
   return (
     <div>
-      <h1 className="fontsP">{userListings.name} Profile</h1>
+      <h1 className="fontsP">{userListings.length > 0 ? `${userListings[0].name}'s Listings` : ''}</h1>
       <header className="header">
         <UserNavbar />
       </header>
       <div className="listings">
-        <ul>
+        <ul className="fonts">
           {userListings.map((listing) => (
             <li key={listing.id}>
               <p>Title: {listing.title}</p>
               <p>Price: {listing.price}</p>
               <p>Category: {listing.category}</p>
               <p>Description: {listing.description}</p>
-              <p>User: {listing.name}</p>
             </li>
           ))}
         </ul>

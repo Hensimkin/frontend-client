@@ -85,7 +85,7 @@ function PersonalArea() {
       )}
       </main>
       <div className="listings">
-      <ul>
+      <ul className="fonts">
         {userListings.map((listing) => (
           <li key={listing.id}>
             <p>
@@ -105,12 +105,6 @@ function PersonalArea() {
               {listing.description}
             </p>
             <index  name={UserDetails.length > 0 ? UserDetails[0].uid : ''} />
-            <p>
-              User:
-              <Link to={`/User/${UserDetails.length > 0 ? UserDetails[0].uid : ''}`}>
-                {UserDetails.length > 0 ? UserDetails[0].name : ''}
-              </Link>
-            </p>
           </li>
         ))}
       </ul>

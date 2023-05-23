@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './UserNavbar.css';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBookmark, faHome, faUser, faSignOutAlt, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 function UserNavbar() {
   const [searchType, setSearchType] = useState('products');
@@ -14,7 +16,6 @@ function UserNavbar() {
 
   const handleLogout = async () => {
     await axios.post('http://localhost:5000/signOut');
-
   };
 
   const handleSearchEnter = (event) => {
@@ -29,45 +30,52 @@ function UserNavbar() {
   };
 
   return (
-      <div className="main">
-          <nav className="item">
-              <ul className="ul">
+    <div className="main">
+      <nav className="item">
+        <ul className="ul">
 
-                  <li className="search-bar">
-                      <input
-                        type="text"
-                        placeholder="Search"
-                        value={searchTerm}
-                        onChange={handleSearchChange}
-                        onKeyPress={handleSearchEnter}
-                      />
-                      R{/* eslint-disable-next-line react/button-has-type */}
-                      <button className="switch-button" onClick={handleSwitchSearchType}>
-                          {searchType === 'products' ? 'Switch to User Search' : 'Switch to Product Search'}
-                      </button>
-                      {/* eslint-disable-next-line react/button-has-type */}
-                      <button className="search-button" onClick={handleSearchEnter}>
-                          Enter
-                      </button>
-                  </li>
-                  <li>
-                      <Link to="/LikedProducts">Saved</Link>
-                  </li>
+          <li className="search-bar">
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              onKeyPress={handleSearchEnter}
+            />
+            {/* eslint-disable-next-line react/button-has-type */}
+            <button className="switch-button" onClick={handleSwitchSearchType}>
+              {searchType === 'products' ? 'Switch to User Search' : 'Switch to Product Search'}
+            </button>
+            {/* eslint-disable-next-line react/button-has-type */}
+            <button className="search-button" onClick={handleSearchEnter}>
+              <FontAwesomeIcon icon={faSearch} />
+            </button>
+          </li>
+          <li>
+            <Link to="/LikedProducts">
+              <FontAwesomeIcon icon={faBookmark} />
+            </Link>
+          </li>
 
-                  <li>
-                      <Link to="/HomePage">Home</Link>
-                  </li>
-                  <li>
-                      <Link to="/PersonalArea">Profile</Link>
-                  </li>
+          <li>
+            <Link to="/HomePage">
+              <FontAwesomeIcon icon={faHome} />
+            </Link>
+          </li>
+          <li>
+            <Link to="/PersonalArea">
+              <FontAwesomeIcon icon={faUser} />
+            </Link>
+          </li>
 
-                  <li>
-                      <Link to="/Signin" onClick={handleLogout}>Sign-out</Link>
-                  </li>
-
-              </ul>
-          </nav>
-      </div>
+          <li>
+            <Link to="/Signin" onClick={handleLogout}>
+              <FontAwesomeIcon icon={faSignOutAlt} />
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    </div>
   );
 }
 

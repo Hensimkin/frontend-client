@@ -46,7 +46,7 @@ function FollowingList({ onClose }) {
         </span>
         <h1 className="head">Following</h1>
         <form onSubmit={handleSubmit}>
-          <ul>
+          <ul className="fonts">
             {followers.map((follower) => (
               <li key={follower.id}>
                 <a href={`/${follower.username}`}>{follower.username}</a>
