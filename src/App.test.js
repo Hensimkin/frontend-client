@@ -8,6 +8,4 @@ test('renders learn react link', () => {
           <App />
       </Router>,
   );
-  // const linkElement = screen.getByText('Join the NetConnect community today and start sharing your world with others!');
-  // expect(linkElement).toBeInTheDocument();
 });
