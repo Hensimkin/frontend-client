@@ -93,7 +93,6 @@ function HomePage() {
                 <p>Price: {listing.price}</p>
                 <p>Category: {listing.category}</p>
                 <p>Description: {listing.description}</p>
-                <p>check: {listing.userid}</p>
                 <p>User:
                   <Link to={`/User/${listing.userid}`}>
                     {listing.name}
