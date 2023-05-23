@@ -11,6 +11,8 @@ function User() {
   const [userListings, setUserListings] = useState([]);
   const [userDetails, setUserDetails] = useState([]);
   const [isFollowing, setIsFollowing] = useState(false);
+  const [isGridView, setIsGridView] = useState(false); // Added state variable
+
 
   const fetchUserListings = async () => {
     try {
@@ -66,12 +68,17 @@ function User() {
 
   return (
     <div>
-      <h1 className="fontsP">{userListings.length > 0 ? `${userListings[0].name}'s Listings` : ''}</h1>
+      <h1 className="listings">{userListings.length > 0 ? `${userListings[0].name}'s Listings` : ''}</h1>
       <header className="header">
         <UserNavbar />
       </header>
+      <main className="mainP">
+      <button type="button" className="buttonP" onClick={() => setIsGridView(!isGridView)}>
+        {isGridView ? 'Row View' : 'Grid View'}
+      </button> {/* Added button for view mode */}
+    </main>
       <div className="listings">
-        <ul className="fontsP">
+        <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
           {userListings.map((listing) => (
             <li key={listing.id}>
               <p>Title: {listing.title}</p>

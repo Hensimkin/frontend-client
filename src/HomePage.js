@@ -9,8 +9,6 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage, faBookmark } from '@fortawesome/free-solid-svg-icons';
 
-
-
 function HomePage() {
   const [addProductPopupIsOpen, setAddProductPopupIsOpen] = useState(false);
   const [contactDetailsPopupIsOpen, setContactDetailsPopupIsOpen] = useState(false);
@@ -18,6 +16,7 @@ function HomePage() {
   const [userListings, setUserListings] = useState([]);
   const [filteredUserListings, setFilteredUserListings] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isGridView, setIsGridView] = useState(false); // Added state variable
 
   const fetchUserListings = async () => {
     try {
@@ -68,7 +67,6 @@ function HomePage() {
     fetchUserListings(userId);
   };
 
-
   const openSaveForLaterPage = (listing) => {
     window.location.href = `/Saved`;
   };
@@ -84,11 +82,14 @@ function HomePage() {
             Add Product
           </button>
         )}
+        <button type="button" onClick={() => setIsGridView(!isGridView)}>
+          {isGridView ? 'Row View' : 'Grid View'}
+        </button> {/* Added button for view mode */}
       </main>
       <div className="listings">
         <div className="fonts">
           <h2>Your Listings</h2>
-          <ul>
+          <ul className={`list ${isGridView ? 'grid-view' : ''}`}> {/* Added dynamic class */}
             {filteredUserListings.map((listing) => (
               <li key={listing.userid}>
                 <p>Title: {listing.title}</p>
@@ -96,8 +97,8 @@ function HomePage() {
                 <p>Category: {listing.category}</p>
                 <p>Description: {listing.description}</p>
                 <p>User: <Link to={`/User/${listing.userid}`}>
-                    {listing.name}
-                  </Link>
+                  {listing.name}
+                </Link>
                 </p>
                 <button
                   type="button"
@@ -114,9 +115,6 @@ function HomePage() {
                 >
                   <FontAwesomeIcon icon={faBookmark} /> {/* Save for Later Icon */}
                 </button>
-
-
-
               </li>
             ))}
           </ul>
@@ -129,7 +127,7 @@ function HomePage() {
         <ContactDetailsPopup
           listing={selectedListing}
           phoneNumber={selectedListing.phoneNumber}
-          name ={selectedListing.name}
+          name={selectedListing.name}
           closePopup={closeContactDetailsPopup}
         />
       )}

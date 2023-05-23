@@ -7,7 +7,6 @@ import UserNavbar from './UserNavbar.js'
 import './PersonalArea.css';
 import './HomePage.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom'
 
 function PersonalArea() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
@@ -15,6 +14,7 @@ function PersonalArea() {
   const [isFollowingListOpen, setIsFollowingListOpen] = useState(false);
   const [userListings, setUserListings] = useState([]);
   const [UserDetails, setUserDetails] = useState([]);
+  const [isGridView, setIsGridView] = useState(false); // Added state variable
 
   const fetchUserListings = async () => {
     try {
@@ -63,7 +63,7 @@ function PersonalArea() {
 
   return (
     <div>
-      <h1 className="fontsP">Profile</h1>
+      <h1 className="listings">Profile</h1>
       <header className="header">
         <UserNavbar />
       </header>
@@ -71,7 +71,6 @@ function PersonalArea() {
       <button className="buttonP" onClick={handleEditProfileClick}>Edit Profile</button>
       <button className="buttonP" onClick={handleFollowersListClick}>Followers List</button>
       <button className="buttonP" onClick={handleFollowingListClick}>Following List</button>
-
       {isEditProfileOpen && (
         <EditProfile onClose={handleCloseModal} />
       )}
@@ -83,9 +82,12 @@ function PersonalArea() {
       {isFollowingListOpen && (
         <FollowingList onClose={handleCloseModal} />
       )}
+        <button type="button" className="buttonP" onClick={() => setIsGridView(!isGridView)}>
+          {isGridView ? 'Row View' : 'Grid View'}
+        </button> {/* Added button for view mode */}
       </main>
       <div className="listings">
-      <ul className="fonts">
+      <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
         {userListings.map((listing) => (
           <li key={listing.id}>
             <p>

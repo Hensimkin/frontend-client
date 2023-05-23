@@ -74,9 +74,10 @@
 
 .main {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
+    gap: 10px;
 }
 
 .main button[type="button"] {
@@ -142,3 +143,8 @@
     margin-right: 0; /* Remove margin-right for the last button */
 }
 
+.listings ul.grid-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
