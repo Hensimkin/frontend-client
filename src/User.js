@@ -10,21 +10,20 @@ function User() {
   const { uid } = useParams();
   const [userListings, setUserListings] = useState([]);
   const [userDetails, setUserDetails] = useState([]);
-  const [Follow, setFollow] = useState([]);
+  const [isFollowing, setIsFollowing] = useState(false);
 
   const fetchUserListings = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/User/${uid}`); // Pass the uid value in the URL
+      const response = await axios.get(`http://localhost:5000/User/${uid}`);
       setUserListings(response.data);
     } catch (error) {
       console.error('Error:', error);
     }
   };
 
-
   useEffect(() => {
     fetchUserListings();
-  }, [uid]); // Include uid as a dependency to refetch listings when it changes
+  }, [uid]);
 
   const fetchUserDetails = async () => {
     try {
@@ -39,41 +38,52 @@ function User() {
     fetchUserDetails();
   }, []);
 
-
-  async function post(e) {
-    e.preventDefault();
+  const followUser = async () => {
     try {
-      await axios.post('http://localhost:5000/follow', { Follow });
-
+      await axios.post('http://localhost:5000/follow', { uid });
+      setIsFollowing(true);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-  const setFollowValue = (event) => {
-    setFollow(uid);
-    post(event)
-  }
+  const unfollowUser = async () => {
+    try {
+      await axios.post('http://localhost:5000/unfollow', { uid });
+      setIsFollowing(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const toggleFollow = () => {
+    if (isFollowing) {
+      unfollowUser();
+    } else {
+      followUser();
+    }
+  };
 
   return (
     <div>
-      <h1 className="fontsP">{userListings.length > 0 ? `${userListings[0].name}'s Listings` : ''}</h1>
+      <h1 className="fontsP">{userListings.name} Profile</h1>
       <header className="header">
         <UserNavbar />
       </header>
       <div className="listings">
-        <ul className="fonts">
+        <ul>
           {userListings.map((listing) => (
             <li key={listing.id}>
               <p>Title: {listing.title}</p>
               <p>Price: {listing.price}</p>
               <p>Category: {listing.category}</p>
               <p>Description: {listing.description}</p>
+              <p>User: {listing.name}</p>
             </li>
           ))}
         </ul>
-        <button type="button" onClick={setFollowValue}>
-          Follow
+        <button type="button" onClick={toggleFollow}>
+          {isFollowing ? 'Unfollow' : 'Follow'}
         </button>
       </div>
     </div>
