@@ -123,13 +123,15 @@
     padding: 15px 25px; /* Increase padding to make the buttons bigger */
     border-radius: 5px;
     border: none;
-    background-color: deepskyblue;
+    background-color: #0b6cb3;
     color: white;
     cursor: pointer;
 }
 
 .listings li .buttonH:hover {
-    background-color: #0D95E8;
+    opacity: 0.8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    transition: 0.1s ease;
 }
 
 .listings li .buttonH:first-child {
