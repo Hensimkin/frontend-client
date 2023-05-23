@@ -12,6 +12,8 @@ function HomePage() {
   const [contactDetailsPopupIsOpen, setContactDetailsPopupIsOpen] = useState(false);
   const [selectedListing, setSelectedListing] = useState(null);
   const [userListings, setUserListings] = useState([]);
+  const [filteredUserListings, setFilteredUserListings] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const fetchUserListings = async () => {
     try {
@@ -25,6 +27,14 @@ function HomePage() {
   useEffect(() => {
     fetchUserListings();
   }, []);
+
+  useEffect(() => {
+    // Filter the user listings based on the search term
+    const filteredListings = userListings.filter(listing =>
+      listing.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredUserListings(filteredListings);
+  }, [userListings, searchTerm]);
 
   const openAddProductPopup = () => {
     setAddProductPopupIsOpen(true);
@@ -46,10 +56,14 @@ function HomePage() {
     setSelectedListing(null);
   };
 
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   return (
     <div className="App">
       <header className="header">
-        <UserNavbar />
+        <UserNavbar handleSearchChange={handleSearchChange} />
       </header>
       <main className="main">
         {!addProductPopupIsOpen && (
@@ -63,7 +77,7 @@ function HomePage() {
         <div className="fonts">
           <h3>Your Listings</h3>
           <ul>
-            {userListings.map((listing) => (
+            {filteredUserListings.map((listing) => (
               <li key={listing.id}>
                 <p>Title: {listing.title}</p>
                 <p>Price: {listing.price}</p>
@@ -96,4 +110,3 @@ function HomePage() {
 }
 
 export default HomePage;
-
