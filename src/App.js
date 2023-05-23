@@ -15,16 +15,12 @@ function App() {
     setPopupIsOpen(false);
   };
 
-  const handleSearchChange = (event) => {
-    // Implement your search logic here
-    console.log('Search term:', event.target.value);
-  };
 
   return (
     <div className="App">
       <header className="header">
         {/* Render the UserNavbar component and pass handleSearchChange as a prop */}
-        <UserNavbar handleSearchChange={handleSearchChange} />
+        <Navbar  />
       </header>
       <main className="main">
         <h1 className="fonts1" style={{ marginLeft: '1px' }}>
