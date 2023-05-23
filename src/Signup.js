@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // eslint-disable-next-line import/order

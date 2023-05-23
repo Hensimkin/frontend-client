@@ -9,10 +9,7 @@ function App() {
               {/* Render the UserNavbar component and pass handleSearchChange as a prop */}
               <Navbar />
           </header>
-          <main className="main">
-              <h1 className="fonts1" style={{ marginLeft: '1px' }}>
-                  MarketMate
-              </h1>
+          <main className="mainP">
               <p className="fonts1" style={{ marginRight: '150px' }}>
                   {/* eslint-disable-next-line max-len */}
                   Welcome to MarketMate, the premier online marketplace for buying and selling products. At MarketMate, we are committed to providing you with a seamless, user-friendly platform that makes it easy to find the items you need and connect with sellers who offer the products you want.

@@ -1,5 +1,5 @@
-/* eslint-disable */
 import React, { useEffect, useState } from 'react';
+// eslint-disable-next-line import/order
 import UserNavbar from './UserNavbar.js';
 import './PersonalArea.css';
 import './HomePage.css';
@@ -42,7 +42,7 @@ function User() {
   const followUser = async () => {
     try {
       await axios.post('http://localhost:5000/follow', {
-        uid: uid,
+        uid,
         currentUserUid: userDetails.uid,
       });
       setIsFollowing(true);
@@ -54,7 +54,7 @@ function User() {
   const unfollowUser = async () => {
     try {
       await axios.post('http://localhost:5000/unfollow', {
-        uid: uid,
+        uid,
         currentUserUid: userDetails.uid,
       });
       setIsFollowing(false);
@@ -72,35 +72,47 @@ function User() {
   };
 
   return (
-    <div>
-      <h1 className="listings">{userListings.length > 0 ? `${userListings[0].name}'s Listings` : ''}</h1>
-      <header className="header">
-        <UserNavbar />
-      </header>
-      <main className="main">
-      <button type="button" onClick={() => setIsGridView(!isGridView)}>
-        {isGridView ? 'Row View' : 'Grid View'}
-      </button>
-    </main>
-      <div className="listings">
-        <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
-          {' '}
-          {/* Added dynamic class */}
-          {userListings.map((listing) => (
-            <li key={listing.id}>
-              <p>Title: {listing.title}</p>
-              <p>Price: {listing.price}</p>
-              <p>Category: {listing.category}</p>
-              <p>Description: {listing.description}</p>
-              <p>User: {listing.name}</p>
-            </li>
-          ))}
-        </ul>
-        <button type="button" onClick={toggleFollow}>
-          {isFollowing ? 'Unfollow' : 'Follow'}
-        </button>
+      <div>
+          {/* eslint-disable-next-line max-len */}
+          <h1 className="listings">{userListings.length > 0 ? `${userListings[0].name}'s Listings` : ''}</h1>
+          <header className="header">
+              <UserNavbar />
+          </header>
+          <main className="main">
+              <button type="button" onClick={() => setIsGridView(!isGridView)}>
+                  {isGridView ? 'Row View' : 'Grid View'}
+              </button>
+          </main>
+          <div className="listings">
+              <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
+                  {' '}
+                  {/* Added dynamic class */}
+                  {userListings.map((listing) => (
+                      <li key={listing.id}>
+                          <p>
+                              Title:
+                              {listing.title}
+                          </p>
+                          <p>
+                              Price:
+                              {listing.price}
+                          </p>
+                          <p>
+                              Category:
+                              {listing.category}
+                          </p>
+                          <p>
+                              Description:
+                              {listing.description}
+                          </p>
+                      </li>
+                  ))}
+              </ul>
+              <button type="button" onClick={toggleFollow}>
+                  {isFollowing ? 'Unfollow' : 'Follow'}
+              </button>
+          </div>
       </div>
-    </div>
   );
 }
 

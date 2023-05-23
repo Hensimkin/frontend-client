@@ -1,14 +1,13 @@
-/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './SavedListings.css';
 import UserNavbar from './UserNavbar.js';
 
-
 function SavedListings() {
   const [savedListings, setSavedListings] = useState([]);
 
   useEffect(() => {
+    // eslint-disable-next-line no-use-before-define
     fetchSavedListings();
   }, []);
 
@@ -33,23 +32,39 @@ function SavedListings() {
   };
 
   return (
-    <div className="saved-listings-container">
-      <header className="header">
-        <UserNavbar />
-      </header>
-      <h1>Saved Items</h1>
-      <ul>
-        {savedListings.map((listing) => (
-          <li key={listing.userid}>
-            <p>Title: {listing.title}</p>
-            <p>Price: {listing.price}</p>
-            <p>Category: {listing.category}</p>
-            <p>Description: {listing.description}</p>
-            <Link to={`/User/${listing.userid}`}>View User</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+      <div className="saved-listings-container">
+
+          <header className="header">
+              <UserNavbar />
+          </header>
+          <div className="fonts">
+              <h1>Saved Items</h1>
+              <ul>
+                  {savedListings.map((listing) => (
+                      <li key={listing.userid}>
+                          <p>
+                              Title:
+                              {listing.title}
+                          </p>
+                          <p>
+                              Price:
+                              {listing.price}
+                          </p>
+                          <p>
+                              Category:
+                              {listing.category}
+                          </p>
+                          <p>
+                              Description:
+                              {listing.description}
+                          </p>
+                          <Link to={`/User/${listing.userid}`}>View User</Link>
+                      </li>
+                  ))}
+              </ul>
+          </div>
+
+      </div>
   );
 }
 
