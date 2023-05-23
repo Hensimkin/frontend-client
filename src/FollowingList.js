@@ -1,68 +1,84 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ProfilePopup.css';
 import axios from 'axios';
 
 function FollowingList({ onClose }) {
-  const [followers, setFollowers] = useState([
-    { id: 1, username: 'user1' },
-    { id: 2, username: 'user2' },
-    { id: 3, username: 'user3' },
-  ]);
-  async function post(unfollowedUser) {
+  const [following, setFollowing] = useState([]);
+  const [followingError, setFollowingError] = useState('');
+
+  useEffect(() => {
+    fetchFollowing();
+  }, []);
+
+  const fetchFollowing = async () => {
     try {
-      await axios.post('http://localhost:5000/unfollow', { unfollowedUser });
+      const response = await axios.get('http://localhost:5000/following');
+      setFollowing(response.data);
     } catch (error) {
       console.log(error);
+      setFollowingError('Failed to fetch following list.');
+    }
+  };
+
+  async function unfollowUser(unfollowedUser) {
+    try {
+      const response = await axios.post('http://localhost:5000/unfollow', { unfollowedUser }, {
+        headers: { Authorization: authToken }, // Include the authentication token in the request headers
+      });
+      console.log(response.data); // "Unfollow successful"
+      setFollowing((prevFollowing) => prevFollowing.filter((user) => user.id !== unfollowedUser.id));
+    } catch (error) {
+      console.log(error);
+      setFollowingError('Failed to unfollow user.');
     }
   }
+
+
+
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
     onClose();
   };
 
-  const handleUnfollow = (event) => {
-    const { value } = event.target;
-    const unfollowedUser = followers.find((follower) => follower.username === value);
-
-    if (unfollowedUser) {
-      // eslint-disable-next-line max-len
-      setFollowers((prevFollowers) => prevFollowers.filter((follower) => follower.id !== unfollowedUser.id));
-      post(unfollowedUser);
-    }
+  const handleUnfollow = (event, user) => {
+    event.preventDefault();
+    unfollowUser(user);
   };
 
   return (
-      <div className="modal">
-          <div onClick={onClose} className="overlay" />
-          <div className="modal-content">
-              <span className="close-button" onClick={onClose}>
-                  x
-              </span>
-              <h1 className="head">Following</h1>
-              <form onSubmit={handleSubmit}>
-                  <ul className="fonts">
-                      {followers.map((follower) => (
-                          <li key={follower.id}>
-                              <a href={`/${follower.username}`}>{follower.username}</a>
-                              <button
-                                className="unfollow-button"
-                                type="button"
-                                value={follower.username}
-                                onClick={handleUnfollow}
-                              >
-                                  Unfollow
-                              </button>
-                          </li>
-                      ))}
-                  </ul>
-                  <br />
-                  <button type="submit">Close</button>
-              </form>
-              <br />
-          </div>
+    <div className="modal">
+      <div onClick={onClose} className="overlay" />
+      <div className="modal-content">
+        <span className="close-button" onClick={onClose}>
+          x
+        </span>
+        <h1 className="head">Following</h1>
+        <form onSubmit={handleSubmit}>
+          <ul className="fonts">
+            {following.map((user) => (
+              <li key={user.id}>
+                <span>{user.name}</span>
+                <span> ({user.username})</span> {/* Display the username */}
+                <button
+                  className="unfollow-button"
+                  type="button"
+                  onClick={(event) => handleUnfollow(event, user)}
+                >
+                  Unfollow
+                </button>
+              </li>
+            ))}
+          </ul>
+          {followingError && <p className="error-message">{followingError}</p>}
+          <br />
+          <button type="submit">Close</button>
+        </form>
+        <br />
       </div>
+    </div>
   );
 }
 

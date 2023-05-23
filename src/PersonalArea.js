@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import EditProfile from './EditProfile.js';
 import FollowersList from './FollowersList.js';
@@ -5,15 +6,15 @@ import FollowingList from './FollowingList.js';
 import UserNavbar from './UserNavbar.js';
 import './PersonalArea.css';
 import './HomePage.css';
-// eslint-disable-next-line import/order
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function PersonalArea() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const [isFollowersListOpen, setIsFollowersListOpen] = useState(false);
   const [isFollowingListOpen, setIsFollowingListOpen] = useState(false);
   const [userListings, setUserListings] = useState([]);
-  const [UserDetails, setUserDetails] = useState([]);
+  const [userDetails, setUserDetails] = useState([])
   const [isGridView, setIsGridView] = useState(false); // Added state variable
 
   const fetchUserListings = async () => {
@@ -61,65 +62,51 @@ function PersonalArea() {
   };
 
   return (
-      <div>
-          <h1 className="listings">Profile</h1>
-          <header className="header">
-              <UserNavbar />
-          </header>
-          <main className="mainP">
-              <button type="button" className="buttonP" onClick={handleEditProfileClick}>
-                  Edit Profile
-              </button>
-              <button type="button" className="buttonP" onClick={handleFollowersListClick}>
-                  Followers List
-              </button>
-              <button type="button" className="buttonP" onClick={handleFollowingListClick}>
-                  Following List
-              </button>
-              {isEditProfileOpen && <EditProfile onClose={handleCloseModal} />}
-              {isFollowersListOpen && <FollowersList onClose={handleCloseModal} />}
-              {isFollowingListOpen && <FollowingList onClose={handleCloseModal} />}
-              <button
-                type="button"
-                className="buttonP"
-                onClick={() => setIsGridView(!isGridView)}
-              >
-                  {isGridView ? 'Row View' : 'Grid View'}
-              </button>
-              {' '}
-              {/* Added button for view mode */}
-          </main>
+    <div>
+      <h1 className="listings">Profile</h1>
+      <header className="header">
+        <UserNavbar />
+      </header>
+      <main className="mainP">
+        <button className="buttonP" onClick={handleEditProfileClick}>
+          Edit Profile
+        </button>
+        <button className="buttonP" onClick={handleFollowersListClick}>
+          Followers List
+        </button>
+        <button className="buttonP" onClick={handleFollowingListClick}>
+          Following List
+        </button>
 
-          <div className="listings">
-              <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
-                  {userListings.map((listing) => (
-                      <li key={listing.id}>
-                          <p>
-                              Title:
-                              {' '}
-                              {listing.title}
-                          </p>
-                          <p>
-                              Price:
-                              {' '}
-                              {listing.price}
-                          </p>
-                          <p>
-                              Category:
-                              {' '}
-                              {listing.category}
-                          </p>
-                          <p>
-                              Description:
-                              {' '}
-                              {listing.description}
-                          </p>
-                          <index name={UserDetails.length > 0 ? UserDetails[0].uid : ''} />
-                      </li>
-                  ))}
-              </ul>
-          </div>
+        {isEditProfileOpen && <EditProfile onClose={handleCloseModal} />}
+
+        {isFollowersListOpen && <FollowersList onClose={handleCloseModal} />}
+
+        {isFollowingListOpen && <FollowingList onClose={handleCloseModal} />}
+        <button type="button" className="buttonP" onClick={() => setIsGridView(!isGridView)}>
+          {isGridView ? 'Row View' : 'Grid View'}
+        </button>
+      </main>
+      <div className="listings">
+        <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
+          {userListings.map((listing) => {
+            const userDetail = userDetails.find(
+              (user) => user.uid === listing.userId
+            );
+            const username = userDetail ? userDetail.username : '';
+            return (
+              <li key={listing.id}>
+                <p>Title: {listing.title}</p>
+                <p>Price: {listing.price}</p>
+                <p>Category: {listing.category}</p>
+                <p>Description: {listing.description}</p>
+                <p>Username: {username}</p>
+              </li>
+            );
+          })}
+        </ul>
       </div>
+    </div>
   );
 }
 

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import './EditProfile.css';
 import './ProfilePopup.css';
@@ -53,11 +52,11 @@ function EditProfile({ onClose }) {
     }
   };
 
-  const setElementNameValue = (event) => {
+  const setElementNameValue = () => {
     setFullName(UserDetails.length > 0 ? UserDetails[0].name : '');
   };
 
-  const setElementPhoneValue = (event) => {
+  const setElementPhoneValue = () => {
     setPhoneNumber(UserDetails.length > 0 ? `+${UserDetails[0].phone}` : '');
   };
 
@@ -82,10 +81,7 @@ function EditProfile({ onClose }) {
                         onChange={handleFullName}
                       />
                       {nameError && (
-                      <span
-                        className="error"
-                        style={{ color: 'red' }}
-                      >
+                      <span className="error" style={{ color: 'red' }}>
                           {nameError}
                       </span>
                       )}

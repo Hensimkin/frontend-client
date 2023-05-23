@@ -9,10 +9,9 @@ import { useParams } from 'react-router-dom';
 function User() {
   const { uid } = useParams();
   const [userListings, setUserListings] = useState([]);
-  const [userDetails, setUserDetails] = useState([]);
+  const [userDetails, setUserDetails] = useState({});
   const [isFollowing, setIsFollowing] = useState(false);
   const [isGridView, setIsGridView] = useState(false); // Added state variable
-
 
   const fetchUserListings = async () => {
     try {
@@ -29,7 +28,7 @@ function User() {
 
   const fetchUserDetails = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/user_details');
+      const response = await axios.get(`http://localhost:5000/user_details/${uid}`);
       setUserDetails(response.data);
     } catch (error) {
       console.error('Error:', error);
@@ -38,11 +37,14 @@ function User() {
 
   useEffect(() => {
     fetchUserDetails();
-  }, []);
+  }, [uid]);
 
   const followUser = async () => {
     try {
-      await axios.post('http://localhost:5000/follow', { uid });
+      await axios.post('http://localhost:5000/follow', {
+        uid: uid,
+        currentUserUid: userDetails.uid,
+      });
       setIsFollowing(true);
     } catch (error) {
       console.log(error);
@@ -51,7 +53,10 @@ function User() {
 
   const unfollowUser = async () => {
     try {
-      await axios.post('http://localhost:5000/unfollow', { uid });
+      await axios.post('http://localhost:5000/unfollow', {
+        uid: uid,
+        currentUserUid: userDetails.uid,
+      });
       setIsFollowing(false);
     } catch (error) {
       console.log(error);
@@ -72,20 +77,22 @@ function User() {
       <header className="header">
         <UserNavbar />
       </header>
-      <main className="mainP">
-      <button type="button" className="buttonP" onClick={() => setIsGridView(!isGridView)}>
+      <main className="main">
+      <button type="button" onClick={() => setIsGridView(!isGridView)}>
         {isGridView ? 'Row View' : 'Grid View'}
-      </button> {/* Added button for view mode */}
+      </button>
     </main>
       <div className="listings">
         <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
+          {' '}
+          {/* Added dynamic class */}
           {userListings.map((listing) => (
             <li key={listing.id}>
               <p>Title: {listing.title}</p>
               <p>Price: {listing.price}</p>
               <p>Category: {listing.category}</p>
               <p>Description: {listing.description}</p>
-              {/* <p>User: {listing.name}</p> */}
+              <p>User: {listing.name}</p>
             </li>
           ))}
         </ul>
