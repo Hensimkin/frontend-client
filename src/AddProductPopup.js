@@ -15,24 +15,17 @@ function AddProductPopup(props) {
   async function post(e) {
     e.preventDefault();
     try {
-      const data = {
-        title,
-        price,
-        category,
-        description,
-        pictures,
-      };
-
-      const response = await axios.post('http://localhost:5000/post_all', data);
-      setTitleResponse(response.data);
-      console.log(response);
-
       const formData = new FormData();
+
+      formData.append('title', title);
+      formData.append('price', price);
+      formData.append('category', category);
+      formData.append('description', description);
       // eslint-disable-next-line no-plusplus
       for (let i = 0; i < pictures.length; i++) {
         formData.append('pictures', pictures[i]);
       }
-      const response_pictures = await axios.post('http://localhost:5000/post_pictures', formData, {
+      const response_pictures = await axios.post('http://localhost:5000/post_all', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

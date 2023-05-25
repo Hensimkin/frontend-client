@@ -15,7 +15,6 @@ function PersonalArea() {
   const [userListings, setUserListings] = useState([]);
   const [, setUserDetails] = useState([]);
   const [isGridView, setIsGridView] = useState(false); // Added state variable
-
   const fetchUserListings = async () => {
     try {
       const response = await axios.get('http://localhost:5000/user_listings');
@@ -109,6 +108,18 @@ function PersonalArea() {
                               Description:
                               {listing.description}
                           </p>
+                          <p>
+                              {(() => {
+                                const images = [];
+                                // eslint-disable-next-line no-plusplus
+                                for (let i = 0; i < listing.pictures.length; i++) {
+                                  // eslint-disable-next-line max-len,jsx-a11y/img-redundant-alt
+                                  images.push(<img key={i} src={listing.pictures[i]} alt={`Picture ${i + 1}`} />);
+                                }
+                                return images;
+                              })()}
+                          </p>
+
                       </li>
                   ))}
               </ul>

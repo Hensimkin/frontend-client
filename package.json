@@ -27,6 +27,7 @@
     "react-phone-number-input": "^3.2.23",
     "react-router-dom": "^6.11.2",
     "react-scripts": "^5.0.1",
+    "react-slideshow-image": "^4.2.1",
     "reactjs-popup": "^2.0.5",
     "semantic-ui-react": "^2.1.4",
     "web-vitals": "^2.1.4"

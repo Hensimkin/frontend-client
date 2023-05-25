@@ -108,9 +108,12 @@ function User() {
                       </li>
                   ))}
               </ul>
-              <button type="button" onClick={toggleFollow}>
-                  {isFollowing ? 'Unfollow' : 'Follow'}
-              </button>
+              <main className="main">
+                  <button type="button" onClick={toggleFollow}>
+                      {isFollowing ? 'Unfollow' : 'Follow'}
+                  </button>
+              </main>
+
           </div>
       </div>
   );

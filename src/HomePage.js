@@ -1,12 +1,16 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './HomePage.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage, faBookmark } from '@fortawesome/free-solid-svg-icons';
+import { Slide } from 'react-slideshow-image';
 import UserNavbar from './UserNavbar.js';
 import AddProductPopup from './AddProductPopup.js';
 import ContactDetailsPopup from './ContactDetailsPopup.js';
+// eslint-disable-next-line import/no-unresolved
+import 'react-slideshow-image/dist/styles.css';
 
 function HomePage() {
   const [addProductPopupIsOpen, setAddProductPopupIsOpen] = useState(false);
@@ -82,7 +86,7 @@ function HomePage() {
   };
 
   return (
-      <div className="App">
+      <div className="">
           <header className="header">
               <UserNavbar handleSearchChange={handleSearchChange} />
           </header>
@@ -98,36 +102,45 @@ function HomePage() {
               {' '}
               {/* Added button for view mode */}
           </main>
-          <div className="listings">
-              <div className="fonts">
+          <div className="listings fonts">
                   <h2>Your Listings</h2>
                   <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
                       {' '}
                       {/* Added dynamic class */}
                       {filteredUserListings.map((listing) => (
                           <li key={listing.userid}>
+                            <div className="left">
                               <p>
-                                  Title:
-                                  {listing.title}
+                                Title:
+                                {listing.title}
                               </p>
                               <p>
-                                  Price:
-                                  {listing.price}
+                                Price:
+                                {listing.price}
                               </p>
                               <p>
-                                  Category:
-                                  {listing.category}
+                                Category:
+                                {listing.category}
                               </p>
                               <p>
-                                  Description:
-                                  {listing.description}
+                                Description:
+                                {listing.description}
                               </p>
-                              <p>
-                                  User:
-                                  <Link to={`/User/${listing.userid}`}>
-                                      {listing.name}
-                                  </Link>
-                              </p>
+                            </div>
+                                  <div className="right">
+                                      <Slide>
+                                          {(() => {
+                                            const images = [];
+                                            // eslint-disable-next-line no-plusplus
+                                            for (let i = 0; i < listing.pictures.length; i++) {
+                                            // eslint-disable-next-line max-len
+                                            // eslint-disable-next-line max-len,jsx-a11y/img-redundant-alt
+                                              images.push(<img key={i} src={listing.pictures[i]} alt={`Picture ${i + 1}`} />);
+                                            }
+                                            return images;
+                                          })()}
+                                      </Slide>
+                                  </div>
                               <button
                                 type="button"
                                 onClick={() => openContactDetailsPopup(listing)}
@@ -149,7 +162,6 @@ function HomePage() {
                           </li>
                       ))}
                   </ul>
-              </div>
           </div>
           {addProductPopupIsOpen && (
           <AddProductPopup closePopup={closeAddProductPopup} />
