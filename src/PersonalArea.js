@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import EditProfile from './EditProfile.js';
 import FollowersList from './FollowersList.js';
 import FollowingList from './FollowingList.js';
+import ChangePassword from './ChangePassword.js';
 import UserNavbar from './UserNavbar.js';
 import './PersonalArea.css';
 import './HomePage.css';
@@ -12,6 +13,7 @@ function PersonalArea() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const [isFollowersListOpen, setIsFollowersListOpen] = useState(false);
   const [isFollowingListOpen, setIsFollowingListOpen] = useState(false);
+  const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
   const [userListings, setUserListings] = useState([]);
   const [, setUserDetails] = useState([]);
   const [isGridView, setIsGridView] = useState(false); // Added state variable
@@ -53,10 +55,15 @@ function PersonalArea() {
     setIsFollowingListOpen(true);
   };
 
+  const handleChangePasswordClick = () => {
+    setIsChangePasswordOpen(true);
+  };
+
   const handleCloseModal = () => {
     setIsEditProfileOpen(false);
     setIsFollowersListOpen(false);
     setIsFollowingListOpen(false);
+    setIsChangePasswordOpen(false);
   };
 
   return (
@@ -78,12 +85,18 @@ function PersonalArea() {
               <button className="buttonP" onClick={handleFollowingListClick}>
                   Following List
               </button>
+              {/* eslint-disable-next-line react/button-has-type */}
+              <button className="buttonP" onClick={handleChangePasswordClick}>
+                  Change Password
+              </button>
 
               {isEditProfileOpen && <EditProfile onClose={handleCloseModal} />}
 
               {isFollowersListOpen && <FollowersList onClose={handleCloseModal} />}
 
               {isFollowingListOpen && <FollowingList onClose={handleCloseModal} />}
+
+              {isChangePasswordOpen && <ChangePassword onClose={handleCloseModal} />}
               <button type="button" className="buttonP" onClick={() => setIsGridView(!isGridView)}>
                   {isGridView ? 'Row View' : 'Grid View'}
               </button>
