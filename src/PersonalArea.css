@@ -35,3 +35,40 @@
     margin-bottom: 30px;
 }
 
+
+
+.fontsC {
+    font-family: 'Oswald', sans-serif;
+    color: #0b6cb3;
+    width: 300px;
+    padding-right: 30px;
+}
+
+.input-container {
+    position: relative;
+}
+
+.popup-inner2 {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+}
+
+.password-toggle-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+/* Add these styles */
+.input-container input[type='password'],
+.input-container input[type='text'] {
+    padding-right: 30px;
+}
+
+
+

@@ -2,29 +2,39 @@
 import React, { useState } from 'react';
 import './ProfilePopup.css';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faEye,
+  faEyeSlash,
+} from '@fortawesome/free-solid-svg-icons';
 
 function ChangePassword({ onClose }) {
   const [newPassword, setNewPassword] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
-  const [ValidNewPassword, setValidNewPassword] = useState('');
+  const [validNewPassword, setValidNewPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [passwordChanged, setPasswordChanged] = useState(false);
+  const [currentPasswordVisible, setCurrentPasswordVisible] = useState(false);
+  const [newPasswordVisible, setNewPasswordVisible] = useState(false);
+  const [validNewPasswordVisible, setValidNewPasswordVisible] = useState(false);
+  const [passwordFocused, setPasswordFocused] = useState(false);
+  const [changeResponse, setChangeResponse] = useState('');
 
 
   const handleChangePassword = async (event) => {
     event.preventDefault();
     try {
-      await axios.post('http://localhost:5000/change_password', {
+     const response_change =  await axios.post('http://localhost:5000/change_password', {
+        validNewPassword,
         newPassword,
         currentPassword,
-        ValidNewPassword,
       });
-      console.log('Password has changed successfully');
-      setNewPassword(''); // Clear the input fields
-      setCurrentPassword(''); // Clear the input fields
-      setValidNewPassword(''); // Clear the input fields
-      setErrorMessage(''); // Clear any previous error message
-      setPasswordChanged(true); // Set the passwordChanged state to true
+      setChangeResponse(response_change.data);
+      setNewPassword('');
+      setCurrentPassword('');
+      setValidNewPassword('');
+      setErrorMessage('');
+      setPasswordChanged(true);
     } catch (error) {
       console.log('Error:', error.response.data);
       setErrorMessage('Failed to change password');
@@ -32,37 +42,97 @@ function ChangePassword({ onClose }) {
   };
 
 
+  const toggleCurrentPasswordVisibility = () => {
+    setCurrentPasswordVisible(!currentPasswordVisible);
+  };
+
+  const toggleNewPasswordVisibility = () => {
+    setNewPasswordVisible(!newPasswordVisible);
+  };
+
+  const toggleValidNewPasswordVisibility = () => {
+    setValidNewPasswordVisible(!validNewPasswordVisible);
+  };
+
   return (
-    <div className="modal">
+    <div className="popup">
       <div onClick={onClose} className="overlay" />
-      <div className="modal-content">
+      <div className="popup-inner2">
         <span className="close-button" onClick={onClose}>
           x
         </span>
         <h1 className="head">Change Password</h1>
         <form onSubmit={handleChangePassword}>
-          <input
-            type="password"
-            placeholder="Enter Current Password"
-            value={currentPassword}
-            onChange={(e) => setCurrentPassword(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder=" Enter New Password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Enter again New Password"
-            value={ValidNewPassword}
-            onChange={(e) => setValidNewPassword(e.target.value)}
-          />
+          <div className="input-container">
+            <input
+              className="fontsC"
+              type={currentPasswordVisible ? 'text' : 'password'}
+              placeholder="Enter Current Password"
+              value={currentPassword}
+              onFocus={() => setPasswordFocused(true)}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+              required
+            />
+            <div className="password-toggle-icon">
+              <FontAwesomeIcon
+                icon={currentPasswordVisible ? faEyeSlash : faEye}
+                onClick={toggleCurrentPasswordVisibility}
+              />
+            </div>
+          </div>
+          <br />
+          <br />
+          <div className="input-container">
+            <input
+              className="fontsC"
+              type={newPasswordVisible ? 'text' : 'password'}
+              placeholder="Enter New Password"
+              value={newPassword}
+              onFocus={() => setPasswordFocused(true)}
+              onChange={(e) => setNewPassword(e.target.value)}
+              required
+            />
+            <div className="password-toggle-icon">
+              <FontAwesomeIcon
+                icon={newPasswordVisible ? faEyeSlash : faEye}
+                onClick={toggleNewPasswordVisibility}
+              />
+
+            </div>
+          </div>
+          <br />
+          <br />
+          <div className="input-container">
+            <input
+              className="fontsC"
+              type={validNewPasswordVisible ? 'text' : 'password'}
+              placeholder="Enter The New Password Again"
+              value={validNewPassword}
+              onFocus={() => setPasswordFocused(true)}
+              onChange={(e) => setValidNewPassword(e.target.value)}
+              required
+            />
+            <div className="password-toggle-icon">
+              <FontAwesomeIcon
+                icon={validNewPasswordVisible ? faEyeSlash : faEye}
+                onClick={toggleValidNewPasswordVisibility}
+              />
+            </div>
+          </div>
+          <br />
+          <br />
           <button type="submit">Change Password</button>
         </form>
         {errorMessage && <p>{errorMessage}</p>}
-        {passwordChanged && <p>Password has changed successfully!</p>}
+        <p className="messages_fonts">
+          {changeResponse}
+          {' '}
+          {(() => {
+            if (changeResponse === 'Password has been changed successfully'){
+              window.location.href = '/PersonalArea';
+            }
+          })()}
+        </p>
       </div>
     </div>
   );
