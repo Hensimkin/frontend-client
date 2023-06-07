@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import './ProfilePopup.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom'
 
 function FollowingList({ onClose }) {
   const [following, setFollowing] = useState([]);
@@ -45,7 +46,7 @@ function FollowingList({ onClose }) {
   };
 
   return (
-    <div className="modal">
+    <div className="popup">
       <div onClick={onClose} className="overlay" />
       <div className="modal-content">
         <span className="close-button" onClick={onClose}>
@@ -56,21 +57,28 @@ function FollowingList({ onClose }) {
           <ul className="fonts">
             {following.map((user) => (
               <li key={user.id}>
-                <span>{user.name}</span>
-                <span> {user.username}</span> {/* Display the username */}
-                <button
-                  className="unfollow-button"
-                  type="button"
-                  onClick={(event) => handleUnfollow(event, user)}
-                >
-                  Unfollow
-                </button>
+                <div className="user-info">
+                  <p>
+                    <Link to={`/User/${user.id}`}>
+                      {user.name}
+                    </Link>
+                  </p>
+                  <button
+                    className="unfollow-button"
+                    type="button"
+                    onClick={(event) => handleUnfollow(event, user)}
+                  >
+                    Unfollow
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
           {followingError && <p className="error-message">{followingError}</p>}
           <br />
-          <button type="submit">Close</button>
+          <button type="button" className="close-button2"  onClick={onClose}>
+            Close
+          </button>
         </form>
         <br />
       </div>

@@ -107,3 +107,43 @@
 
 }
 
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.unfollow-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.unfollow-button:hover {
+    background-color: #0056b3;
+}
+
+
+.close-button2 {
+    background-color: #ccc;
+    color: #000;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.close-button2:hover {
+    background-color: #999;
+}
+
+
+
+
