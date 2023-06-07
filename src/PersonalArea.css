@@ -72,3 +72,83 @@
 
 
 
+/* Add the necessary styles for the delete confirmation popup */
+.delete-popup {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.delete-popup p {
+    margin-bottom: 10px;
+}
+
+.delete-popup input {
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.delete-popup .confirm-button,
+.delete-popup .cancel-button {
+    padding: 8px 16px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.delete-popup .confirm-button {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.delete-popup .cancel-button {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+/* Add the necessary styles for the grid view */
+.list.grid-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.list.grid-view li {
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.list.grid-view li p {
+    margin-bottom: 5px;
+}
+
+.list.grid-view li img {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+/* Add the necessary styles for the row view */
+.list li {
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.list li p {
+    margin-bottom: 5px;
+}
+
+
+

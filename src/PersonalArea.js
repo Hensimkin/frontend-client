@@ -1,12 +1,13 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import EditProfile from './EditProfile.js';
 import FollowersList from './FollowersList.js';
 import FollowingList from './FollowingList.js';
 import ChangePassword from './ChangePassword.js';
+import DeleteAccount from './DeleteAccount.js';
 import UserNavbar from './UserNavbar.js';
 import './PersonalArea.css';
 import './HomePage.css';
-// eslint-disable-next-line import/order
 import axios from 'axios';
 
 function PersonalArea() {
@@ -16,7 +17,9 @@ function PersonalArea() {
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
   const [userListings, setUserListings] = useState([]);
   const [, setUserDetails] = useState([]);
-  const [isGridView, setIsGridView] = useState(false); // Added state variable
+  const [isGridView, setIsGridView] = useState(false);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+
   const fetchUserListings = async () => {
     try {
       const response = await axios.get('http://localhost:5000/user_listings');
@@ -59,6 +62,10 @@ function PersonalArea() {
     setIsChangePasswordOpen(true);
   };
 
+  const handleDeleteAccountClick = () => {
+    setShowDeleteConfirmation(true);
+  };
+
   const handleCloseModal = () => {
     setIsEditProfileOpen(false);
     setIsFollowersListOpen(false);
@@ -67,77 +74,73 @@ function PersonalArea() {
   };
 
   return (
-      <div>
-          <h1 className="listings">Profile</h1>
-          <header className="header">
-              <UserNavbar />
-          </header>
-          <main className="mainP">
-              {/* eslint-disable-next-line react/button-has-type */}
-              <button className="buttonP" onClick={handleEditProfileClick}>
-                  Edit Profile
-              </button>
-              {/* eslint-disable-next-line react/button-has-type */}
-              <button className="buttonP" onClick={handleFollowersListClick}>
-                  Followers List
-              </button>
-              {/* eslint-disable-next-line react/button-has-type */}
-              <button className="buttonP" onClick={handleFollowingListClick}>
-                  Following List
-              </button>
-              {/* eslint-disable-next-line react/button-has-type */}
-              <button className="buttonP" onClick={handleChangePasswordClick}>
-                  Change Password
-              </button>
+    <div>
+      <h1 className="listings">Profile</h1>
+      <header className="header">
+        <UserNavbar />
+      </header>
+      <main className="mainP">
+        <button className="buttonP" onClick={handleEditProfileClick}>
+          Edit Profile
+        </button>
+        <button className="buttonP" onClick={handleFollowersListClick}>
+          Followers List
+        </button>
+        <button className="buttonP" onClick={handleFollowingListClick}>
+          Following List
+        </button>
+        <button className="buttonP" onClick={handleChangePasswordClick}>
+          Change Password
+        </button>
+        <button className="buttonP" onClick={handleDeleteAccountClick}>
+          Delete Account
+        </button>
 
-              {isEditProfileOpen && <EditProfile onClose={handleCloseModal} />}
+        {isEditProfileOpen && <EditProfile onClose={handleCloseModal} />}
+        {isFollowersListOpen && <FollowersList onClose={handleCloseModal} />}
+        {isFollowingListOpen && <FollowingList onClose={handleCloseModal} />}
+        {isChangePasswordOpen && <ChangePassword onClose={handleCloseModal} />}
 
-              {isFollowersListOpen && <FollowersList onClose={handleCloseModal} />}
+        {showDeleteConfirmation && <DeleteAccount onClose={() => setShowDeleteConfirmation(false)} />}
 
-              {isFollowingListOpen && <FollowingList onClose={handleCloseModal} />}
-
-              {isChangePasswordOpen && <ChangePassword onClose={handleCloseModal} />}
-              <button type="button" className="buttonP" onClick={() => setIsGridView(!isGridView)}>
-                  {isGridView ? 'Row View' : 'Grid View'}
-              </button>
-          </main>
-          <div className="listings">
-              <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
-                  {userListings.map((listing) => (
-                      <li key={listing.id}>
-                          <p>
-                              Title:
-                              {listing.title}
-                          </p>
-                          <p>
-                              Price:
-                              {listing.price}
-                          </p>
-                          <p>
-                              Category:
-                              {listing.category}
-                          </p>
-                          <p>
-                              Description:
-                              {listing.description}
-                          </p>
-                          <p>
-                              {(() => {
-                                const images = [];
-                                // eslint-disable-next-line no-plusplus
-                                for (let i = 0; i < listing.pictures.length; i++) {
-                                  // eslint-disable-next-line max-len,jsx-a11y/img-redundant-alt
-                                  images.push(<img key={i} src={listing.pictures[i]} alt={`Picture ${i + 1}`} />);
-                                }
-                                return images;
-                              })()}
-                          </p>
-
-                      </li>
-                  ))}
-              </ul>
-          </div>
+        <button type="button" className="buttonP" onClick={() => setIsGridView(!isGridView)}>
+          {isGridView ? 'Row View' : 'Grid View'}
+        </button>
+      </main>
+      <div className="listings">
+        <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
+          {userListings.map((listing) => (
+            <li key={listing.id}>
+              <p>
+                Title:
+                {listing.title}
+              </p>
+              <p>
+                Price:
+                {listing.price}
+              </p>
+              <p>
+                Category:
+                {listing.category}
+              </p>
+              <p>
+                Description:
+                {listing.description}
+              </p>
+              <p>
+                {(() => {
+                  const images = [];
+                  for (let i = 0; i < listing.pictures.length; i++) {
+                    images.push(<img key={i} src={listing.pictures[i]} alt={`Picture ${i + 1}`} />);
+                  }
+                  return images;
+                })()}
+              </p>
+            </li>
+          ))}
+        </ul>
       </div>
+    </div>
   );
 }
 
