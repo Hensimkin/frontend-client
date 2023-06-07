@@ -71,6 +71,7 @@ function PersonalArea() {
     setIsFollowersListOpen(false);
     setIsFollowingListOpen(false);
     setIsChangePasswordOpen(false);
+    setShowDeleteConfirmation(false);
   };
 
   return (
@@ -100,8 +101,6 @@ function PersonalArea() {
         {isFollowersListOpen && <FollowersList onClose={handleCloseModal} />}
         {isFollowingListOpen && <FollowingList onClose={handleCloseModal} />}
         {isChangePasswordOpen && <ChangePassword onClose={handleCloseModal} />}
-
-        {showDeleteConfirmation && <DeleteAccount onClose={() => setShowDeleteConfirmation(false)} />}
 
         <button type="button" className="buttonP" onClick={() => setIsGridView(!isGridView)}>
           {isGridView ? 'Row View' : 'Grid View'}
@@ -140,6 +139,7 @@ function PersonalArea() {
           ))}
         </ul>
       </div>
+      {showDeleteConfirmation && <DeleteAccount onClose={handleCloseModal} />}
     </div>
   );
 }

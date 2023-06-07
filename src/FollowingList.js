@@ -57,7 +57,7 @@ function FollowingList({ onClose }) {
             {following.map((user) => (
               <li key={user.id}>
                 <span>{user.name}</span>
-                <span> ({user.username})</span> {/* Display the username */}
+                <span> {user.username}</span> {/* Display the username */}
                 <button
                   className="unfollow-button"
                   type="button"
