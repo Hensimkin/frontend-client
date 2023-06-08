@@ -38,19 +38,11 @@ function HomePage() {
     // eslint-disable-next-line max-len
     const filteredListings = userListings.filter((listing) => listing.title.toLowerCase().includes(searchTerm.toLowerCase()));
     setFilteredUserListings(filteredListings);
-  }, [userListings, searchTerm]);
-
-  useEffect(() => {
-    const savedLikedState = localStorage.getItem('likedListings');
+    const savedLikedState = localStorage.getItem(filteredListings.id);
     if (savedLikedState) {
       setLikedListings(JSON.parse(savedLikedState));
     }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('likedListings', JSON.stringify(likedListings));
-  }, [likedListings]);
-
+  }, [userListings, searchTerm]);
   const openAddProductPopup = () => {
     setAddProductPopupIsOpen(true);
   };
@@ -108,7 +100,7 @@ function HomePage() {
       };
       setLikedListings(updatedLikedListings);
 
-      localStorage.setItem('likedListings', JSON.stringify(updatedLikedListings));
+      localStorage.setItem(listingId, JSON.stringify(updatedLikedListings));
 
       await axios.post('http://localhost:5000/likeListing', {
         listing: updatedListing,
