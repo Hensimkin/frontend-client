@@ -128,12 +128,6 @@ function PersonalArea() {
                   Description:
                   {listing.description}
                 </p>
-                <p>
-                  User:
-                  <Link to={`/User/${listing.userid}`}>
-                    {listing.name}
-                  </Link>
-                </p>
               </div>
               <div className="right">
                 <Slide>
