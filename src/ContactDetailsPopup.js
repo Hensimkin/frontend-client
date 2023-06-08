@@ -1,5 +1,5 @@
 import React from 'react';
-import './ContactDetailsPopup.css';
+import './cssFile.css';
 import { FloatingWhatsApp } from 'react-floating-whatsapp';
 
 function ContactDetailsPopup({ listing, closePopup }) {

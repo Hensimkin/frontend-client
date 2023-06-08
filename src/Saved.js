@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './SavedListings.css';
+import './cssFile.css';
 import { Slide } from 'react-slideshow-image';
 import UserNavbar from './UserNavbar.js';
 

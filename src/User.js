@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // eslint-disable-next-line import/order
 import UserNavbar from './UserNavbar.js';
-import './PersonalArea.css';
-import './HomePage.css';
+import './cssFile.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 

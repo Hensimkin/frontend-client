@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './HomePage.css';
+import './cssFile.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage, faBookmark, faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -172,33 +172,46 @@ function HomePage() {
                                     ))}
                                 </Slide>
                             </div>
-                            <button
-                              type="button"
-                              onClick={() => openContactDetailsPopup(listing)}
-                              className="buttonH"
-                            >
-                                <FontAwesomeIcon icon={faMessage} />
-                                {' '}
-                                {/* Contact Details Icon */}
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => openSaveForLaterPage(listing)}
-                              className="buttonH"
-                            >
-                                <FontAwesomeIcon icon={faBookmark} />
-                                {' '}
-                                {/* Save for Later Icon */}
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => likeListing(listing)}
-                              className={`buttonH ${isListingLiked ? 'liked' : ''}`}
-                            >
-                                <FontAwesomeIcon icon={faHeart} />
-                                {' '}
-                                {/* Like Icon */}
-                            </button>
+                            <div className="listing_buttons">
+                                <button
+                                  type="button"
+                                  onClick={() => openContactDetailsPopup(listing)}
+                                  className="buttonH"
+                                >
+                                    <FontAwesomeIcon icon={faMessage} />
+                                    {' '}
+                                    {/* Contact Details Icon */}
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => openSaveForLaterPage(listing)}
+                                  className="buttonH"
+                                >
+                                    <FontAwesomeIcon icon={faBookmark} />
+                                    {' '}
+                                    {/* Save for Later Icon */}
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => likeListing(listing)}
+                                  className={`buttonH ${isListingLiked ? 'liked' : ''}`}
+                                >
+                                    {isListingLiked ? (
+                                        <>
+                                            {/* eslint-disable-next-line max-len */}
+                                            <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
+                                        </>
+                                    ) : (
+                                        <>
+                                            {/* eslint-disable-next-line max-len */}
+                                            <FontAwesomeIcon icon={faHeart} style={{ color: 'white' }} />
+                                        </>
+                                    )}
+                                    {' '}
+                                    {/* Like Icon */}
+                                </button>
+
+                            </div>
                         </li>
                     );
                   })}

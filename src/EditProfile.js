@@ -1,8 +1,7 @@
 /* eslint-disable */
 
 import React, { useEffect, useState } from 'react';
-import './EditProfile.css';
-import './ProfilePopup.css';
+import './cssFile.css';
 import axios from 'axios';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';

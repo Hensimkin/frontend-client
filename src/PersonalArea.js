@@ -6,8 +6,7 @@ import FollowingList from './FollowingList.js';
 import ChangePassword from './ChangePassword.js';
 import DeleteAccount from './DeleteAccount.js';
 import UserNavbar from './UserNavbar.js';
-import './PersonalArea.css';
-import './HomePage.css';
+import './cssFile.css';
 import axios from 'axios';
 import { Slide } from 'react-slideshow-image'
 import { Link } from 'react-router-dom'

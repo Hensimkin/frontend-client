@@ -1,6 +1,6 @@
 import React from 'react';
 import Popup from 'reactjs-popup';
-import './PrivacyPolicy.css';
+import './cssFile.css';
 
 function PrivacyPopup() {
   return (

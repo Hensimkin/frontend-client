@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // eslint-disable-next-line import/order
 import Navbar from './Navbar.js';
-import './signup.css';
+import './cssFile.css';
 import GoogleFonts from 'google-fonts';
 import axios from 'axios';
 import 'react-phone-number-input/style.css';
