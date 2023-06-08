@@ -18,7 +18,9 @@ function HomePage() {
   const [filteredUserListings, setFilteredUserListings] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [isGridView, setIsGridView] = useState(false);
-  const [likedListings, setLikedListings] = useState({}); // Track liked state for each listing
+  const [likedListings, setLikedListings] = useState({});
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
   const fetchUserListings = async () => {
     try {
       const response = await axios.get('http://localhost:5000/home_listings');
@@ -95,6 +97,9 @@ function HomePage() {
   const likeListing = async (listing) => {
     const listingId = listing.id;
     const isListingLiked = likedListings[listingId] || false;
+    // eslint-disable-next-line max-len
+    const updatedListing = { ...listing, likes: isListingLiked ? listing.likes - 1 : listing.likes + 1 };
+    setIsButtonDisabled(true); // Disable the button
 
     try {
       const updatedLikedListings = {
@@ -106,14 +111,23 @@ function HomePage() {
       localStorage.setItem('likedListings', JSON.stringify(updatedLikedListings));
 
       await axios.post('http://localhost:5000/likeListing', {
-        listing,
+        listing: updatedListing,
         isLiked: !isListingLiked,
       });
+
+      const updatedUserListings = userListings.map((item) => {
+        if (item.id === listingId) {
+          return updatedListing;
+        }
+        return item;
+      });
+
+      setUserListings(updatedUserListings);
     } catch (error) {
       throw new Error('Error saving listing:', error);
     }
+    setIsButtonDisabled(false); // Enable the button
   };
-
   return (
       <div className="">
           <header className="header">
@@ -135,6 +149,7 @@ function HomePage() {
               <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
                   {filteredUserListings.map((listing) => {
                     const isListingLiked = likedListings[listing.id] || false;
+                    // setLikes(listing.likes);
                     return (
                         <li key={listing.userid}>
                             <div className="left">
@@ -157,6 +172,7 @@ function HomePage() {
                                 <p>
                                     <p>
                                         Likes:
+                                        {' '}
                                         {listing.likes}
                                     </p>
                                     User:
@@ -194,6 +210,7 @@ function HomePage() {
                                 <button
                                   type="button"
                                   onClick={() => likeListing(listing)}
+                                  disabled={isButtonDisabled} // Update the disabled attribute
                                   className={`buttonH ${isListingLiked ? 'liked' : ''}`}
                                 >
                                     {isListingLiked ? (
