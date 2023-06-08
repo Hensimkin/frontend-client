@@ -9,3 +9,24 @@ h1 {
     color: #333;
     margin-bottom: 10px;
 }
+
+.buttons {
+    margin-bottom: 80px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #0b6cb3;
+    color: white;
+    cursor: pointer;
+}
+
+.buttons:hover {
+    opacity: 0.8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    transition: 0.1s ease;
+}
+
+.view_user{
+    text-decoration: none;
+    color: #0b6cb3;
+}

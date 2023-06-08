@@ -1,15 +1,13 @@
-/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './HomePage.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMessage, faBookmark } from '@fortawesome/free-solid-svg-icons';
+import { faMessage, faBookmark, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { Slide } from 'react-slideshow-image';
 import UserNavbar from './UserNavbar.js';
 import AddProductPopup from './AddProductPopup.js';
 import ContactDetailsPopup from './ContactDetailsPopup.js';
-// eslint-disable-next-line import/no-unresolved
 import 'react-slideshow-image/dist/styles.css';
 
 function HomePage() {
@@ -19,8 +17,8 @@ function HomePage() {
   const [userListings, setUserListings] = useState([]);
   const [filteredUserListings, setFilteredUserListings] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [isGridView, setIsGridView] = useState(false); // Added state variable
-
+  const [isGridView, setIsGridView] = useState(false);
+  const [likedListings, setLikedListings] = useState({}); // Track liked state for each listing
   const fetchUserListings = async () => {
     try {
       const response = await axios.get('http://localhost:5000/home_listings');
@@ -35,11 +33,21 @@ function HomePage() {
   }, []);
 
   useEffect(() => {
-    // Filter the user listings based on the search term
     // eslint-disable-next-line max-len
     const filteredListings = userListings.filter((listing) => listing.title.toLowerCase().includes(searchTerm.toLowerCase()));
     setFilteredUserListings(filteredListings);
   }, [userListings, searchTerm]);
+
+  useEffect(() => {
+    const savedLikedState = localStorage.getItem('likedListings');
+    if (savedLikedState) {
+      setLikedListings(JSON.parse(savedLikedState));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('likedListings', JSON.stringify(likedListings));
+  }, [likedListings]);
 
   const openAddProductPopup = () => {
     setAddProductPopupIsOpen(true);
@@ -79,9 +87,30 @@ function HomePage() {
     try {
       await saveListingForLater(listing, userId);
       console.log(`Listing saved for later in user with ID ${userId}`);
-      // window.location.href = '/Saved';
     } catch (error) {
       console.error('Error saving listing:', error);
+    }
+  };
+
+  const likeListing = async (listing) => {
+    const listingId = listing.id;
+    const isListingLiked = likedListings[listingId] || false;
+
+    try {
+      const updatedLikedListings = {
+        ...likedListings,
+        [listingId]: !isListingLiked,
+      };
+      setLikedListings(updatedLikedListings);
+
+      localStorage.setItem('likedListings', JSON.stringify(updatedLikedListings));
+
+      await axios.post('http://localhost:5000/likeListing', {
+        listing,
+        isLiked: !isListingLiked,
+      });
+    } catch (error) {
+      throw new Error('Error saving listing:', error);
     }
   };
 
@@ -100,78 +129,82 @@ function HomePage() {
                   {isGridView ? 'Row View' : 'Grid View'}
               </button>
               {' '}
-              {/* Added button for view mode */}
           </main>
           <div className="listings fonts">
-                  <h2>Your Listings</h2>
-                  <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
-                      {' '}
-                      {/* Added dynamic class */}
-                      {filteredUserListings.map((listing) => (
-                          <li key={listing.userid}>
+              <h2>Your Listings</h2>
+              <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
+                  {filteredUserListings.map((listing) => {
+                    const isListingLiked = likedListings[listing.id] || false;
+                    return (
+                        <li key={listing.userid}>
                             <div className="left">
-                              <p>
-                                Title:
-                                {listing.title}
-                              </p>
-                              <p>
-                                Price:
-                                {listing.price}
-                              </p>
-                              <p>
-                                Category:
-                                {listing.category}
-                              </p>
-                              <p>
-                                Description:
-                                {listing.description}
-                              </p>
-                              <p>
-                                User:
-                                <Link to={`/User/${listing.userid}`}>
-                                  {listing.name}
-                                </Link>
-                              </p>
+                                <p>
+                                    Title:
+                                    {listing.title}
+                                </p>
+                                <p>
+                                    Price:
+                                    {listing.price}
+                                </p>
+                                <p>
+                                    Category:
+                                    {listing.category}
+                                </p>
+                                <p>
+                                    Description:
+                                    {listing.description}
+                                </p>
+                                <p>
+                                    <p>
+                                        Likes:
+                                        {listing.likes}
+                                    </p>
+                                    User:
+                                    <Link to={`/User/${listing.userid}`}>{listing.name}</Link>
+                                </p>
                             </div>
-                                  <div className="right">
-                                      <Slide>
-                                          {(() => {
-                                            const images = [];
-                                            // eslint-disable-next-line no-plusplus
-                                            for (let i = 0; i < listing.pictures.length; i++) {
-                                            // eslint-disable-next-line max-len
-                                            // eslint-disable-next-line max-len,jsx-a11y/img-redundant-alt
-                                              images.push(<img key={i} src={listing.pictures[i]} alt={`Picture ${i + 1}`} />);
-                                            }
-                                            return images;
-                                          })()}
-                                      </Slide>
-                                  </div>
-                              <button
-                                type="button"
-                                onClick={() => openContactDetailsPopup(listing)}
-                                className="buttonH"
-                              >
-                                  <FontAwesomeIcon icon={faMessage} />
-                                  {' '}
-                                  {/* Contact Details Icon */}
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => openSaveForLaterPage(listing)}
-                                className="buttonH"
-                              >
-                                  <FontAwesomeIcon icon={faBookmark} />
-                                  {' '}
-                                  {/* Save for Later Icon */}
-                              </button>
-                          </li>
-                      ))}
-                  </ul>
+                            <div className="right">
+                                <Slide>
+                                    {listing.pictures.map((picture, index) => (
+                                      // eslint-disable-next-line max-len
+                                      // eslint-disable-next-line max-len,jsx-a11y/img-redundant-alt,react/no-array-index-key
+                                        <img key={index} src={picture} alt={`Picture ${index + 1}`} />
+                                    ))}
+                                </Slide>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => openContactDetailsPopup(listing)}
+                              className="buttonH"
+                            >
+                                <FontAwesomeIcon icon={faMessage} />
+                                {' '}
+                                {/* Contact Details Icon */}
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => openSaveForLaterPage(listing)}
+                              className="buttonH"
+                            >
+                                <FontAwesomeIcon icon={faBookmark} />
+                                {' '}
+                                {/* Save for Later Icon */}
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => likeListing(listing)}
+                              className={`buttonH ${isListingLiked ? 'liked' : ''}`}
+                            >
+                                <FontAwesomeIcon icon={faHeart} />
+                                {' '}
+                                {/* Like Icon */}
+                            </button>
+                        </li>
+                    );
+                  })}
+              </ul>
           </div>
-          {addProductPopupIsOpen && (
-          <AddProductPopup closePopup={closeAddProductPopup} />
-          )}
+          {addProductPopupIsOpen && <AddProductPopup closePopup={closeAddProductPopup} />}
           {contactDetailsPopupIsOpen && selectedListing && (
           <ContactDetailsPopup
             listing={selectedListing}

@@ -9,6 +9,8 @@ import UserNavbar from './UserNavbar.js';
 import './PersonalArea.css';
 import './HomePage.css';
 import axios from 'axios';
+import { Slide } from 'react-slideshow-image'
+import { Link } from 'react-router-dom'
 
 function PersonalArea() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
@@ -110,31 +112,44 @@ function PersonalArea() {
         <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
           {userListings.map((listing) => (
             <li key={listing.id}>
-              <p>
-                Title:
-                {listing.title}
-              </p>
-              <p>
-                Price:
-                {listing.price}
-              </p>
-              <p>
-                Category:
-                {listing.category}
-              </p>
-              <p>
-                Description:
-                {listing.description}
-              </p>
-              <p>
-                {(() => {
-                  const images = [];
-                  for (let i = 0; i < listing.pictures.length; i++) {
-                    images.push(<img key={i} src={listing.pictures[i]} alt={`Picture ${i + 1}`} />);
-                  }
-                  return images;
-                })()}
-              </p>
+              <div className="left">
+                <p>
+                  Title:
+                  {listing.title}
+                </p>
+                <p>
+                  Price:
+                  {listing.price}
+                </p>
+                <p>
+                  Category:
+                  {listing.category}
+                </p>
+                <p>
+                  Description:
+                  {listing.description}
+                </p>
+                <p>
+                  User:
+                  <Link to={`/User/${listing.userid}`}>
+                    {listing.name}
+                  </Link>
+                </p>
+              </div>
+              <div className="right">
+                <Slide>
+                  {(() => {
+                    const images = [];
+                    // eslint-disable-next-line no-plusplus
+                    for (let i = 0; i < listing.pictures.length; i++) {
+                      // eslint-disable-next-line max-len
+                      // eslint-disable-next-line max-len,jsx-a11y/img-redundant-alt
+                      images.push(<img key={i} src={listing.pictures[i]} alt={`Picture ${i + 1}`} />);
+                    }
+                    return images;
+                  })()}
+                </Slide>
+              </div>
             </li>
           ))}
         </ul>

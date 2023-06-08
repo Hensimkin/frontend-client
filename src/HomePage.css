@@ -160,8 +160,20 @@
 }
 
 .right img {
-    max-width: 100%;
     height: auto;
     max-height: 300px;
 }
 
+.liked {
+    color: red; /* Change the color to your desired color */
+}
+
+.buttonL{
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #0b6cb3;
+    color: white;
+    cursor: pointer;
+}
