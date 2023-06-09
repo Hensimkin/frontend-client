@@ -5,7 +5,7 @@ import { Slide } from 'react-slideshow-image';
 import UserNavbar from './UserNavbar.js';
 
 function SavedListings() {
-  const [savedListings, setSavedListings] = useState([]);
+  const [savedListingsId, setSavedListingsId] = useState([]);
 
   useEffect(() => {
     // eslint-disable-next-line no-use-before-define
@@ -14,7 +14,7 @@ function SavedListings() {
 
   const fetchSavedListings = async () => {
     try {
-      const response = await fetch('http://localhost:5000/saved', {
+      const response = await fetch('http://localhost:5000/returnSavedListing', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ function SavedListings() {
 
       if (response.ok) {
         const savedListingsData = await response.json();
-        setSavedListings(savedListingsData);
+        setSavedListingsId(savedListingsData);
       } else {
         console.error('Failed to fetch saved listings');
       }
@@ -42,7 +42,7 @@ function SavedListings() {
               <div className="fonts">
                   <h1>Saved Items</h1>
                   <ul>
-                      {savedListings.map((listing) => (
+                      {savedListingsId.map((listing) => (
                           <li key={listing.userid}>
                               <div className="left">
                                   <p>

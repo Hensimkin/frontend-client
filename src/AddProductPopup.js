@@ -69,21 +69,15 @@ function AddProductPopup(props) {
   };
 
   const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
+    const inputDescription = event.target.value;
+    if (inputDescription.length <= 60) {
+      setDescription(inputDescription);
+    }
   };
 
   const handlePictureChange = (event) => {
     setPictures(event.target.files);
   };
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const category = event.target.category.value;
-  //   if (!category) {
-  //     alert('Please choose a category.');
-  //     // Stop form submission
-  //   }
-  // };
 
   return (
       <div className="popup">

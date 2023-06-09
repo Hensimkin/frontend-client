@@ -19,7 +19,10 @@ function HomePage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [isGridView, setIsGridView] = useState(false);
   const [likedListings, setLikedListings] = useState({});
+  const [savedListings, setSavedListings] = useState({});
+
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [isSavedDisabled, setIsSavedDisabled] = useState(false);
 
   const fetchUserListings = async () => {
     try {
@@ -38,9 +41,13 @@ function HomePage() {
     // eslint-disable-next-line max-len
     const filteredListings = userListings.filter((listing) => listing.title.toLowerCase().includes(searchTerm.toLowerCase()));
     setFilteredUserListings(filteredListings);
-    const savedLikedState = localStorage.getItem(filteredListings.id);
+    const savedLikedState = localStorage.getItem('listing likes');
+    const savedSavedState = localStorage.getItem('listing saved');
     if (savedLikedState) {
       setLikedListings(JSON.parse(savedLikedState));
+    }
+    if (savedSavedState) {
+      setSavedListings(JSON.parse(savedSavedState));
     }
   }, [userListings, searchTerm]);
   const openAddProductPopup = () => {
@@ -67,23 +74,24 @@ function HomePage() {
     setSearchTerm(event.target.value);
   };
 
-  const saveListingForLater = async (listing, userId) => {
-    try {
-      await axios.post('http://localhost:5000/save', { listing, userId });
-    } catch (error) {
-      throw new Error('Error saving listing:', error);
-    }
-  };
-
   const openSaveForLaterPage = async (listing) => {
-    const userId = listing.userid;
+    const listingId = listing.id;
+    const isListingSaved = savedListings[listingId] || false;
+    setIsSavedDisabled(true); // Disable the button
 
     try {
-      await saveListingForLater(listing, userId);
-      console.log(`Listing saved for later in user with ID ${userId}`);
+      const updatedSavedListings = {
+        ...savedListings,
+        [listingId]: !isListingSaved,
+      };
+      setSavedListings(updatedSavedListings);
+      localStorage.setItem('listing saved', JSON.stringify(updatedSavedListings));
+      const deleteOrSave = isListingSaved ? 'delete' : 'save';
+      await axios.post('http://localhost:5000/saveListing', { listingId, deleteOrSave });
     } catch (error) {
       console.error('Error saving listing:', error);
     }
+    setIsSavedDisabled(false); // Disable the button
   };
 
   const likeListing = async (listing) => {
@@ -92,15 +100,13 @@ function HomePage() {
     // eslint-disable-next-line max-len
     const updatedListing = { ...listing, likes: isListingLiked ? listing.likes - 1 : listing.likes + 1 };
     setIsButtonDisabled(true); // Disable the button
-
     try {
       const updatedLikedListings = {
         ...likedListings,
         [listingId]: !isListingLiked,
       };
       setLikedListings(updatedLikedListings);
-
-      localStorage.setItem(listingId, JSON.stringify(updatedLikedListings));
+      localStorage.setItem('listing likes', JSON.stringify(updatedLikedListings));
 
       await axios.post('http://localhost:5000/likeListing', {
         listing: updatedListing,
@@ -141,34 +147,39 @@ function HomePage() {
               <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
                   {filteredUserListings.map((listing) => {
                     const isListingLiked = likedListings[listing.id] || false;
-                    // setLikes(listing.likes);
+                    const isListingSaved = savedListings[listing.id] || false;
                     return (
                         <li key={listing.userid}>
-                            <div className="left">
+                            <div className="listing-details">
+
                                 <p>
-                                    Title:
-                                    {listing.title}
+                                    <span className="label">Title:</span>
+                                    <span className="value">{listing.title}</span>
                                 </p>
                                 <p>
-                                    Price:
-                                    {listing.price}
+                                    <span className="label">Price:</span>
+                                    <span className="value">{listing.price}</span>
                                 </p>
                                 <p>
-                                    Category:
-                                    {listing.category}
+                                    <span className="label">Category:</span>
+                                    <span className="value">{listing.category}</span>
                                 </p>
                                 <p>
-                                    Description:
-                                    {listing.description}
+                                    <span className="label">Description:</span>
+                                    <span className="value">{listing.description}</span>
                                 </p>
                                 <p>
-                                    <p>
-                                        Likes:
-                                        {' '}
-                                        {listing.likes}
-                                    </p>
-                                    User:
-                                    <Link to={`/User/${listing.userid}`}>{listing.name}</Link>
+                                    <span className="label">Likes:</span>
+                                    <span className="value">{listing.likes}</span>
+                                </p>
+                                <p>
+                                    <span className="label">User:</span>
+                                    <span className="value">
+                                        {/* eslint-disable-next-line max-len */}
+                                        <Link to={`/User/${listing.userid}`} style={{ color: '#0b6cb3', marginLeft: '2px' }}>
+                                            {listing.name}
+                                        </Link>
+                                    </span>
                                 </p>
                             </div>
                             <div className="right">
@@ -194,10 +205,21 @@ function HomePage() {
                                   type="button"
                                   onClick={() => openSaveForLaterPage(listing)}
                                   className="buttonH"
+                                  disabled={isSavedDisabled}
                                 >
-                                    <FontAwesomeIcon icon={faBookmark} />
+                                    {isListingSaved ? (
+                                        <>
+                                            {/* eslint-disable-next-line max-len */}
+                                            <FontAwesomeIcon icon={faBookmark} style={{ color: 'cyan' }} />
+                                        </>
+                                    ) : (
+                                        <>
+                                            {/* eslint-disable-next-line max-len */}
+                                            <FontAwesomeIcon icon={faBookmark} style={{ color: 'white' }} />
+                                        </>
+                                    )}
                                     {' '}
-                                    {/* Save for Later Icon */}
+                                    {/* Like Icon */}
                                 </button>
                                 <button
                                   type="button"
