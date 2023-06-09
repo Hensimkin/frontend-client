@@ -5,11 +5,16 @@ import FollowersList from './FollowersList.js';
 import FollowingList from './FollowingList.js';
 import ChangePassword from './ChangePassword.js';
 import DeleteAccount from './DeleteAccount.js';
+import EditListing from './EditListing.js';
 import UserNavbar from './UserNavbar.js';
 import './cssFile.css';
 import axios from 'axios';
-import { Slide } from 'react-slideshow-image'
-import { Link } from 'react-router-dom'
+import { Slide } from 'react-slideshow-image';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPenToSquare
+} from '@fortawesome/free-solid-svg-icons';
 
 function PersonalArea() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
@@ -20,6 +25,7 @@ function PersonalArea() {
   const [, setUserDetails] = useState([]);
   const [isGridView, setIsGridView] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [editListingId, setEditListingId] = useState(null);
 
   const fetchUserListings = async () => {
     try {
@@ -73,6 +79,11 @@ function PersonalArea() {
     setIsFollowingListOpen(false);
     setIsChangePasswordOpen(false);
     setShowDeleteConfirmation(false);
+    setEditListingId(null);
+  };
+
+  const handleEditListing = (listingId) => {
+    setEditListingId(listingId);
   };
 
   return (
@@ -129,25 +140,26 @@ function PersonalArea() {
                   {listing.description}
                 </p>
               </div>
-              <div className="right">
-                <Slide>
-                  {(() => {
-                    const images = [];
-                    // eslint-disable-next-line no-plusplus
-                    for (let i = 0; i < listing.pictures.length; i++) {
-                      // eslint-disable-next-line max-len
-                      // eslint-disable-next-line max-len,jsx-a11y/img-redundant-alt
-                      images.push(<img key={i} src={listing.pictures[i]} alt={`Picture ${i + 1}`} />);
-                    }
-                    return images;
-                  })()}
-                </Slide>
+              <div className={`slide-container ${isEditProfileOpen || isFollowersListOpen || isFollowingListOpen || isChangePasswordOpen || showDeleteConfirmation || editListingId ? 'hide-arrows' : ''}`}>
+                {listing.pictures.length > 0 && (
+                  <Slide>
+                    {listing.pictures.map((picture, index) => (
+                      <img key={index} src={picture} alt={`Picture ${index + 1}`} />
+                    ))}
+                  </Slide>
+                )}
+              </div>
+              <div className="actions">
+                <button className="edit-button" onClick={() => handleEditListing(listing.id)}>
+                  <FontAwesomeIcon icon={faPenToSquare} />
+                </button>
               </div>
             </li>
           ))}
         </ul>
       </div>
       {showDeleteConfirmation && <DeleteAccount onClose={handleCloseModal} />}
+      {editListingId && <EditListing listingId={editListingId} onClose={handleCloseModal} />}
     </div>
   );
 }

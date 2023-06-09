@@ -1,5 +1,5 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
-// eslint-disable-next-line import/order
 import UserNavbar from './UserNavbar.js';
 import './cssFile.css';
 import axios from 'axios';
@@ -10,7 +10,13 @@ function User() {
   const [userListings, setUserListings] = useState([]);
   const [userDetails, setUserDetails] = useState({});
   const [isFollowing, setIsFollowing] = useState(false);
-  const [isGridView, setIsGridView] = useState(false); // Added state variable
+  const [isGridView, setIsGridView] = useState(false);
+
+  useEffect(() => {
+    fetchUserListings();
+    fetchUserDetails();
+    checkIfFollowing();
+  }, [uid]);
 
   const fetchUserListings = async () => {
     try {
@@ -21,10 +27,6 @@ function User() {
     }
   };
 
-  useEffect(() => {
-    fetchUserListings();
-  }, [uid]);
-
   const fetchUserDetails = async () => {
     try {
       const response = await axios.get(`http://localhost:5000/user_details/${uid}`);
@@ -34,9 +36,16 @@ function User() {
     }
   };
 
-  useEffect(() => {
-    fetchUserDetails();
-  }, [uid]);
+  const checkIfFollowing = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/following');
+      const followingList = response.data;
+      const isFollowingUser = followingList.some((user) => user.id === uid);
+      setIsFollowing(isFollowingUser);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
   const followUser = async () => {
     try {
@@ -53,14 +62,16 @@ function User() {
   const unfollowUser = async () => {
     try {
       await axios.post('http://localhost:5000/unfollow', {
-        uid,
-        currentUserUid: userDetails.uid,
+        unfollowedUser: {
+          id: uid,
+        },
       });
       setIsFollowing(false);
     } catch (error) {
       console.log(error);
     }
   };
+
 
   const toggleFollow = () => {
     if (isFollowing) {
@@ -71,51 +82,36 @@ function User() {
   };
 
   return (
-      <div>
-          {/* eslint-disable-next-line max-len */}
-          <h1 className="listings">{userListings.length > 0 ? `${userListings[0].name}'s Listings` : ''}</h1>
-          <header className="header">
-              <UserNavbar />
-          </header>
-          <main className="main">
-              <button type="button" onClick={() => setIsGridView(!isGridView)}>
-                  {isGridView ? 'Row View' : 'Grid View'}
-              </button>
-          </main>
-          <div className="listings">
-              <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
-                  {' '}
-                  {/* Added dynamic class */}
-                  {userListings.map((listing) => (
-                      <li key={listing.id}>
-                          <p>
-                              Title:
-                              {listing.title}
-                          </p>
-                          <p>
-                              Price:
-                              {listing.price}
-                          </p>
-                          <p>
-                              Category:
-                              {listing.category}
-                          </p>
-                          <p>
-                              Description:
-                              {listing.description}
-                          </p>
-                      </li>
-                  ))}
-              </ul>
-              <main className="main">
-                  <button type="button" onClick={toggleFollow}>
-                      {isFollowing ? 'Unfollow' : 'Follow'}
-                  </button>
-              </main>
-
-          </div>
+    <div>
+      <h1 className="listings">{userListings.length > 0 ? `${userListings[0].name}'s Listings` : ''}</h1>
+      <header className="header">
+        <UserNavbar />
+      </header>
+      <main className="main">
+        <button type="button" onClick={() => setIsGridView(!isGridView)}>
+          {isGridView ? 'Row View' : 'Grid View'}
+        </button>
+      </main>
+      <div className="listings">
+        <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
+          {userListings.map((listing) => (
+            <li key={listing.id}>
+              <p>Title: {listing.title}</p>
+              <p>Price: {listing.price}</p>
+              <p>Category: {listing.category}</p>
+              <p>Description: {listing.description}</p>
+            </li>
+          ))}
+        </ul>
+        <main className="main">
+          <button type="button" onClick={toggleFollow}>
+            {isFollowing ? 'Unfollow' : 'Follow'}
+          </button>
+        </main>
       </div>
+    </div>
   );
 }
 
 export default User;
+

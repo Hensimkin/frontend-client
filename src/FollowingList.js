@@ -57,6 +57,7 @@ function FollowingList({ onClose }) {
           <ul className="fonts">
             {following.map((user) => (
               <li key={user.id}>
+                <span> {user.username}</span> {/* Display the username */}
                 <div className="user-info">
                   <p>
                     <Link to={`/User/${user.id}`}>
@@ -87,3 +88,4 @@ function FollowingList({ onClose }) {
 }
 
 export default FollowingList;
+

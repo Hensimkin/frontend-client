@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import './cssFile.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function FollowersList({ onClose }) {
   const [followers, setFollowers] = useState([]);
@@ -29,7 +30,7 @@ function FollowersList({ onClose }) {
   return (
     <div className="popup">
       <div onClick={onClose} className="overlay"></div>
-      <div className="popup-inner">
+      <div className="modal-content">
         <span className="close-button" onClick={onClose}>
           x
         </span>
@@ -38,12 +39,16 @@ function FollowersList({ onClose }) {
           <br></br>
           <ul>
             {followers.map((follower, index) => (
-              <li key={index}>{follower.name}</li>
+              <li key={index}>
+                <Link to={`/User/${follower.id}`}>
+                  {follower.name}
+                </Link>
+              </li>
             ))}
           </ul>
           {followersError && <p className="error-message">{followersError}</p>}
           <br></br>
-          <button type="submit">Close</button>
+          <button type="submit" className="close-button2" >Close</button>
         </form>
         <br></br>
       </div>
