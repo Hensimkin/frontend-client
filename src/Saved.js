@@ -68,7 +68,7 @@ function SavedListings() {
                                       </Link>
                                   </p>
                               </div>
-                              <div className="right">
+                              <div className="slide-container">
                                   <Slide>
                                       {(() => {
                                         const images = [];

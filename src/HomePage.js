@@ -182,14 +182,18 @@ function HomePage() {
                                     </span>
                                 </p>
                             </div>
-                            <div className="right">
+                            {/* eslint-disable-next-line max-len */}
+                            <div className={`slide-container ${addProductPopupIsOpen ? 'hide-arrows' : ''}`}>
+                                {listing.pictures.length > 0 && (
                                 <Slide>
                                     {listing.pictures.map((picture, index) => (
                                       // eslint-disable-next-line max-len
-                                      // eslint-disable-next-line max-len,jsx-a11y/img-redundant-alt,react/no-array-index-key
+                                      // eslint-disable-next-line max-len,react/no-array-index-key,jsx-a11y/img-redundant-alt
                                         <img key={index} src={picture} alt={`Picture ${index + 1}`} />
                                     ))}
                                 </Slide>
+                                )}
+
                             </div>
                             <div className="listing_buttons">
                                 <button
