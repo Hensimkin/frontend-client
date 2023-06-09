@@ -18,6 +18,7 @@ function EditListing({ listingId, onClose }) {
   const [description, setDescription] = useState('');
   const [pictures, setPictures] = useState([]);
 
+
   useEffect(() => {
     const fetchListing = async () => {
       try {
@@ -113,7 +114,7 @@ function EditListing({ listingId, onClose }) {
           </label>
           <br />
           Price:
-          <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required />
+          <input type="text" pattern="[0-9]*" value={price} onChange={(e) => setPrice(e.target.value)} required />
           <br />
           Title:
           <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
