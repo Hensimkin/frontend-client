@@ -525,14 +525,14 @@
     cursor: pointer;
 }
 
-body {
-    font-family: sans-serif;
-    margin-top: 80px;
-    padding: 30px;
-    background-image: url('/images/mainback.jpg');
-    background-size: cover;
-    background-position: center;
-}
+/*body {*/
+/*    font-family: sans-serif;*/
+/*    margin-top: 80px;*/
+/*    padding: 30px;*/
+/*    background-image: url('/images/mainback.jpg');*/
+/*    background-size: cover;*/
+/*    background-position: center;*/
+/*}*/
 
 .main {
     width: 70%;
@@ -542,21 +542,21 @@ body {
     background-position: center;
 }
 
-.header {
-    background-color: white;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 0 25px 0 black;
-}
+/*.header {*/
+/*    background-color: white;*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    right: 0;*/
+/*    height: 80px;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    box-shadow: 0 0 25px 0 black;*/
+/*}*/
 
-.header * {
-    display: inline;
-}
+/*.header * {*/
+/*    display: inline;*/
+/*}*/
 
 
 
@@ -580,8 +580,6 @@ body {
     margin: 0 auto;
 }
 
-
-/* Navbar.css */
 
 ul.ul {
     display: flex;
@@ -1121,15 +1119,15 @@ input[type="date"] {
 
 
 
-body{
-    font-family: sans-serif;
-    margin-top: 80px;
-    padding: 30px;
-    background-image: url('/images/mainback.jpg');
-    background-size: cover;
-    background-position: center;
+/*body{*/
+/*    font-family: sans-serif;*/
+/*    margin-top: 80px;*/
+/*    padding: 30px;*/
+/*    background-image: url('/images/mainback.jpg');*/
+/*    background-size: cover;*/
+/*    background-position: center;*/
 
-}
+/*}*/
 
 
 
@@ -1250,7 +1248,6 @@ header li a {
     margin-left: 10px; /* Add some space between the password input and the last character indicator */
 }
 
-/* UserNavbar.css */
 
 ul.ul {
     display: flex;
@@ -1273,7 +1270,6 @@ button.switch-button {
     /* Your button styles */
     margin-left: 10px; /* Adjust the margin as needed */
 }
-
 
 .listing_buttons{
     margin-right: 60px;
