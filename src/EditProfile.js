@@ -121,10 +121,7 @@ function EditProfile({ onClose }) {
             </span>
           )}
           <br />
-          <label className="fonts">Email: </label>
-          <label className="fonts">
-            {UserDetails.length > 0 ? UserDetails[0].mail : ''}
-          </label>
+          <label className="fonts">Email: {UserDetails.length > 0 ? UserDetails[0].mail : ''}</label>
           <br />
           <button type="submit" disabled={!isFormValid()}>
             Save Changes
