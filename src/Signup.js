@@ -30,21 +30,23 @@ function SignUp() {
   async function post(e) {
     e.preventDefault();
     try {
-      const response_mail = await axios.post('http://localhost:5000/post_email', { email });
+      // eslint-disable-next-line max-len
+      const response_mail = await axios.post('https://backend-server-qdnc.onrender.com/post_email', { email });
 
       const response_password = await axios.post(
-        'http://localhost:5000/post_password',
+        'https://backend-server-qdnc.onrender.com/post_password',
         { password },
       );
 
       const response_birthdate = await axios.post(
-        'http://localhost:5000/post_birthdate',
+        'https://backend-server-qdnc.onrender.com/post_birthdate',
         dateOfBirth,
       );
 
-      await axios.post('http://localhost:5000/post_phoneNumber', phoneNumber);
+      await axios.post('https://backend-server-qdnc.onrender.com/post_phoneNumber', phoneNumber);
 
-      const responseFromServer = await axios.post('http://localhost:5000/post_approve', fullName);
+      // eslint-disable-next-line max-len
+      const responseFromServer = await axios.post('https://backend-server-qdnc.onrender.com/post_approve', fullName);
 
       setEmailResponse(response_mail.data);
       setPasswordResponse(response_password.data);

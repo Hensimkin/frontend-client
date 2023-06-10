@@ -10,12 +10,12 @@ import {
 function UserNavbar() {
   const [searchTerm, setSearchTerm] = useState('');
   const handleLogout = async () => {
-    await axios.post('http://localhost:5000/signOut');
+    await axios.post('http://backend-server-qdnc.onrender.com/signOut');
   };
 
   const handleSearchEnter = (event) => {
     if (event.key === 'Enter') {
-      axios.post('http://localhost:5000/post_signOut');
+      axios.post('http://backend-server-qdnc.onrender.com/post_signOut');
       console.log('Search term:', searchTerm);
     }
   };

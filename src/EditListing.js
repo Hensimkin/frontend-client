@@ -22,7 +22,7 @@ function EditListing({ listingId, onClose }) {
   useEffect(() => {
     const fetchListing = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/listing/${listingId}`);
+        const response = await axios.get(`https://backend-server-qdnc.onrender.com/listing/${listingId}`);
         const { title, price, category, description, pictures } = response.data;
         setTitle(title);
         setPrice(price);
@@ -65,7 +65,7 @@ function EditListing({ listingId, onClose }) {
     }
 
     try {
-      const response = await axios.post(`http://localhost:5000/edit_listing/${listingId}`, {
+      const response = await axios.post(`https://backend-server-qdnc.onrender.com/edit_listing/${listingId}`, {
         title,
         price,
         category,

@@ -25,7 +25,8 @@ function AddProductPopup(props) {
       for (let i = 0; i < pictures.length; i++) {
         formData.append('pictures', pictures[i]);
       }
-      const response_pictures = await axios.post('http://localhost:5000/post_all', formData, {
+      // eslint-disable-next-line max-len
+      const response_pictures = await axios.post('https://backend-server-qdnc.onrender.com/post_all', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

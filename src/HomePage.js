@@ -26,7 +26,7 @@ function HomePage() {
 
   const fetchUserListings = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/home_listings');
+      const response = await axios.get('https://backend-server-qdnc.onrender.com/home_listings');
       setUserListings(response.data);
     } catch (error) {
       console.error('Error:', error);
