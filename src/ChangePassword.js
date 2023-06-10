@@ -124,7 +124,7 @@ function ChangePassword({ onClose }) {
           <button type="submit">Change Password</button>
         </form>
         {errorMessage && <p>{errorMessage}</p>}
-        <p className="messages_fonts">
+        <p className={`messages_fonts ${changeResponse === 'Password has been changed successfully' ? 'success' : 'error'}`}>
           {changeResponse}
           {' '}
           {(() => {

@@ -60,7 +60,8 @@ function ForgotPass() {
                   </form>
 
                   <div>
-                      <p className="messages_fonts">
+                      {/* eslint-disable-next-line max-len */}
+                      <p className={`messages_fonts ${serverResponse === 'Password reset email sent' ? 'success' : 'error'}`}>
                           {serverResponse}
                       </p>
                   </div>
