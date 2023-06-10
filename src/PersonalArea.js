@@ -10,7 +10,6 @@ import UserNavbar from './UserNavbar.js';
 import './cssFile.css';
 import axios from 'axios';
 import { Slide } from 'react-slideshow-image';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPenToSquare
