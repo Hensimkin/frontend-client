@@ -61,7 +61,8 @@ function SignIn() {
                       <input type="submit" className="signin_button" value="Sign in" onClick={post} />
                   </form>
                   <div>
-                      <p className="messages_fonts">
+                      {/* eslint-disable-next-line max-len */}
+                      <p className={`messages_fonts ${serverResponse === 'Welcome !' ? 'success' : 'error'}`}>
                           {serverResponse}
                       </p>
                   </div>

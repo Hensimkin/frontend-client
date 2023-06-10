@@ -1009,9 +1009,15 @@ h2 {
     font-size: 28px;
 }
 
-.messages_fonts{
+.messages_fonts.error{
     font-size: 14px; /* adjust font size as needed */
     color: red;
+
+}
+
+.messages_fonts.success{
+    font-size: 14px; /* adjust font size as needed */
+    color: green;
 
 }
 

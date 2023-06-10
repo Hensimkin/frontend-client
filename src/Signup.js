@@ -6,7 +6,8 @@ import './cssFile.css';
 import GoogleFonts from 'google-fonts';
 import axios from 'axios';
 import 'react-phone-number-input/style.css';
-import PhoneInput from 'react-phone-number-input';
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
+
 import 'reactjs-popup/dist/index.css';
 import PrivacyPolicy from './PrivacyPolicy.js';
 
@@ -20,6 +21,7 @@ function SignUp() {
   const [password, setPassword] = useState('');
   const [passwordResponse, setPasswordResponse] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumberError, setPhoneNumberError] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [dateOfBirthResponse, setDateOfBirthResponse] = useState('');
   const [showLastChar, setShowLastChar] = useState(false);
@@ -81,9 +83,21 @@ function SignUp() {
     }, 1000);
   };
 
+  const handlePhoneNumber = (value) => {
+    setPhoneNumber(value);
+    if (!value) {
+      setPhoneNumberError('Phone number is required');
+    } else if (!isValidPhoneNumber(value)) {
+      setPhoneNumberError('Invalid phone number');
+    } else {
+      setPhoneNumberError('');
+    }
+  };
   return (
       <>
-          <div className="header"><Navbar /></div>
+          <header className="header">
+              <Navbar />
+          </header>
           <form id="signup-form" onSubmit={post}>
               <div className="mainlabel">
                   <h1 className="head">Sign up</h1>
@@ -107,7 +121,8 @@ function SignUp() {
                         onChange={handleEmailChange}
                         required
                       />
-                      <p className="messages_fonts">
+                      {/* eslint-disable-next-line max-len */}
+                      <p className={`messages_fonts ${emailResponse === 'Email is available' ? 'success' : 'error'}`}>
                           {emailResponse}
                           {' '}
                       </p>
@@ -123,7 +138,8 @@ function SignUp() {
                           />
                           {showLastChar && <span className="fonts">{lastChar}</span>}
                       </div>
-                      <p className="messages_fonts">
+                      {/* eslint-disable-next-line max-len */}
+                      <p className={`messages_fonts ${passwordResponse === 'Password received' ? 'success' : 'error'}`}>
                           {passwordResponse}
                           {' '}
                       </p>
@@ -142,15 +158,24 @@ function SignUp() {
                         onChange={handleBirthdateChange}
                         required
                       />
-                      <p className="messages_fonts">{dateOfBirthResponse}</p>
+                      {/* eslint-disable-next-line max-len */}
+                      <p className={`messages_fonts ${dateOfBirthResponse === 'Date received' ? 'success' : 'error'}`}>
+                          {dateOfBirthResponse}
+                      </p>
                       <label className="fonts">Enter phone number:</label>
                       <PhoneInput
                         type="text"
                         value={phoneNumber}
-                        onChange={setPhoneNumber}
+                        onChange={handlePhoneNumber}
                         required
                         defaultCountry="IL"
+                        error={phoneNumberError}
                       />
+                      {phoneNumberError && (
+                      <span className="error" style={{ color: 'red' }}>
+                          {phoneNumberError}
+                      </span>
+                      )}
                       <div>
                           <PrivacyPolicy />
                       </div>
