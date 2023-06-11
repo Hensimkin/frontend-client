@@ -23,11 +23,24 @@ function HomePage() {
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [isSavedDisabled, setIsSavedDisabled] = useState(false);
+  const [userId, setUserId] = useState('');
+  useEffect(() => {
+    const savedLikedState = localStorage.getItem(`${userId}`);
+    const savedSavedState = localStorage.getItem(`${userId}1`);
+    if (savedLikedState) {
+      setLikedListings(JSON.parse(savedLikedState));
+    }
+    if (savedSavedState) {
+      setSavedListings(JSON.parse(savedSavedState));
+    }
+  }, [userId]);
 
   const fetchUserListings = async () => {
     try {
-      const response = await axios.get('https://backend-server-qdnc.onrender.com/home_listings');
+      const response = await axios.get('http://localhost:5000/home_listings');
       setUserListings(response.data);
+      const user = await axios.post('http://localhost:5000/get_uid');
+      setUserId(user.data);
     } catch (error) {
       console.error('Error:', error);
     }
@@ -41,14 +54,6 @@ function HomePage() {
     // eslint-disable-next-line max-len
     const filteredListings = userListings.filter((listing) => listing.title.toLowerCase().includes(searchTerm.toLowerCase()));
     setFilteredUserListings(filteredListings);
-    const savedLikedState = localStorage.getItem('listing likes');
-    const savedSavedState = localStorage.getItem('listing saved');
-    if (savedLikedState) {
-      setLikedListings(JSON.parse(savedLikedState));
-    }
-    if (savedSavedState) {
-      setSavedListings(JSON.parse(savedSavedState));
-    }
   }, [userListings, searchTerm]);
   const openAddProductPopup = () => {
     setAddProductPopupIsOpen(true);
@@ -85,7 +90,7 @@ function HomePage() {
         [listingId]: !isListingSaved,
       };
       setSavedListings(updatedSavedListings);
-      localStorage.setItem('listing saved', JSON.stringify(updatedSavedListings));
+      localStorage.setItem(`${userId}1`, JSON.stringify(updatedSavedListings));
       const deleteOrSave = isListingSaved ? 'delete' : 'save';
       await axios.post('http://localhost:5000/saveListing', { listingId, deleteOrSave });
     } catch (error) {
@@ -106,7 +111,7 @@ function HomePage() {
         [listingId]: !isListingLiked,
       };
       setLikedListings(updatedLikedListings);
-      localStorage.setItem('listing likes', JSON.stringify(updatedLikedListings));
+      localStorage.setItem(`${userId}`, JSON.stringify(updatedLikedListings));
 
       await axios.post('http://localhost:5000/likeListing', {
         listing: updatedListing,

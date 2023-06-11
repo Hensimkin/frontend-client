@@ -28,7 +28,7 @@ function PersonalArea() {
 
   const fetchUserListings = async () => {
     try {
-      const response = await axios.get('https://backend-server-qdnc.onrender.com/user_listings');
+      const response = await axios.get('http://localhost:5000/user_listings');
       setUserListings(response.data);
     } catch (error) {
       console.error('Error:', error);
@@ -41,7 +41,7 @@ function PersonalArea() {
 
   const fetchUserDetails = async () => {
     try {
-      const response = await axios.get('https://backend-server-qdnc.onrender.com/user_details');
+      const response = await axios.get('http://localhost:5000/user_details');
       setUserDetails(response.data);
     } catch (error) {
       console.error('Error:', error);

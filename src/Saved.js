@@ -14,7 +14,7 @@ function SavedListings() {
 
   const fetchSavedListings = async () => {
     try {
-      const response = await fetch('https://backend-server-qdnc.onrender.com/returnSavedListing', {
+      const response = await fetch('http://localhost:5000/returnSavedListing', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

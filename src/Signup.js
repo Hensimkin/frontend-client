@@ -12,7 +12,7 @@ import 'reactjs-popup/dist/index.css';
 import PrivacyPolicy from './PrivacyPolicy.js';
 
 GoogleFonts.add({
-  Oswald: 'https://fonts.googleapis.com/css2?family=Oswald&display=swap',
+  Oswald: 'http://fonts.googleapis.com/css2?family=Oswald&display=swap',
 });
 function SignUp() {
   const [fullName, setFullName] = useState('');
@@ -31,22 +31,22 @@ function SignUp() {
     e.preventDefault();
     try {
       // eslint-disable-next-line max-len
-      const response_mail = await axios.post('https://backend-server-qdnc.onrender.com/post_email', { email });
+      const response_mail = await axios.post('localhost:5000/post_email', { email });
 
       const response_password = await axios.post(
-        'https://backend-server-qdnc.onrender.com/post_password',
+        'localhost:5000/post_password',
         { password },
       );
 
       const response_birthdate = await axios.post(
-        'https://backend-server-qdnc.onrender.com/post_birthdate',
+        'http://localhost:5000/post_birthdate',
         dateOfBirth,
       );
 
-      await axios.post('https://backend-server-qdnc.onrender.com/post_phoneNumber', phoneNumber);
+      await axios.post('http://localhost:5000/post_phoneNumber', phoneNumber);
 
       // eslint-disable-next-line max-len
-      const responseFromServer = await axios.post('https://backend-server-qdnc.onrender.com/post_approve', fullName);
+      const responseFromServer = await axios.post('http://localhost:5000/post_approve', fullName);
 
       setEmailResponse(response_mail.data);
       setPasswordResponse(response_password.data);

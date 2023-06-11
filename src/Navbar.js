@@ -10,7 +10,7 @@ function Navbar() {
                   <li className="logo-container">
                       <Link to="/" className="logo-link">
                           <img
-                            src="https://i.ibb.co/JBSRQjR/output-onlinepngtools.png"
+                            src="http://i.ibb.co/JBSRQjR/output-onlinepngtools.png"
                             alt="Logo"
                             className="logo-image"
                           />

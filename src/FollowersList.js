@@ -14,7 +14,7 @@ function FollowersList({ onClose }) {
 
   const fetchFollowers = async () => {
     try {
-      const response = await axios.get('https://backend-server-qdnc.onrender.com/followers');
+      const response = await axios.get('http://localhost:5000/followers');
       setFollowers(response.data);
     } catch (error) {
       console.log(error);

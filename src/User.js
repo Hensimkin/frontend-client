@@ -21,7 +21,7 @@ function User() {
 
   const fetchUserListings = async () => {
     try {
-      const response = await axios.get(`https://backend-server-qdnc.onrender.com/User/${uid}`);
+      const response = await axios.get(`http://localhost:5000/User/${uid}`);
       setUserListings(response.data);
     } catch (error) {
       console.error('Error:', error);
@@ -30,7 +30,7 @@ function User() {
 
   const fetchUserDetails = async () => {
     try {
-      const response = await axios.get(`https://backend-server-qdnc.onrender.com/user_details/${uid}`);
+      const response = await axios.get(`http://localhost:5000/user_details/${uid}`);
       setUserDetails(response.data);
     } catch (error) {
       console.error('Error:', error);
@@ -39,7 +39,7 @@ function User() {
 
   const checkIfFollowing = async () => {
     try {
-      const response = await axios.get('https://backend-server-qdnc.onrender.com/following');
+      const response = await axios.get('http://localhost:5000/following');
       const followingList = response.data;
       const isFollowingUser = followingList.some((user) => user.id === uid);
       setIsFollowing(isFollowingUser);
@@ -50,7 +50,7 @@ function User() {
 
   const followUser = async () => {
     try {
-      await axios.post('https://backend-server-qdnc.onrender.com/follow', {
+      await axios.post('http://localhost:5000/follow', {
         uid,
         currentUserUid: userDetails.uid,
       });
@@ -62,7 +62,7 @@ function User() {
 
   const unfollowUser = async () => {
     try {
-      await axios.post('https://backend-server-qdnc.onrender.com/unfollow', {
+      await axios.post('http://localhost:5000/unfollow', {
         unfollowedUser: {
           id: uid,
         },

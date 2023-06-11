@@ -10,12 +10,12 @@ import {
 function UserNavbar() {
   const [searchTerm, setSearchTerm] = useState('');
   const handleLogout = async () => {
-    await axios.post('http://backend-server-qdnc.onrender.com/signOut');
+    await axios.post('http://localhost:5000/signOut');
   };
 
   const handleSearchEnter = (event) => {
     if (event.key === 'Enter') {
-      axios.post('http://backend-server-qdnc.onrender.com/post_signOut');
+      axios.post('http://localhost:5000/post_signOut');
       console.log('Search term:', searchTerm);
     }
   };
@@ -31,7 +31,7 @@ function UserNavbar() {
                   <li className="logo-container">
                       <Link to="/HomePage" className="logo-link">
                           <img
-                            src="https://i.ibb.co/JBSRQjR/output-onlinepngtools.png"
+                            src="http://i.ibb.co/JBSRQjR/output-onlinepngtools.png"
                             alt="Logo"
                             className="logo-image"
                           />
