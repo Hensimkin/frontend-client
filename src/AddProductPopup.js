@@ -36,6 +36,9 @@ function AddProductPopup(props) {
       console.log(response_pictures); // Log the response received from the server
 
       // eslint-disable-next-line react/destructuring-assignment,react/prop-types
+      const message = 'The listing has been uploaded';
+      alert(message); // Display the server response in an alert window
+      // eslint-disable-next-line react/destructuring-assignment
       props.closePopup();
     } catch (error) {
       console.log(error);

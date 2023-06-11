@@ -1342,5 +1342,15 @@ button.switch-button {
     display: none;
 }
 
+button.delete-button {
+    background-color: #dc3545 !important;
+    color: #fff !important;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
 
-
+button.delete-button:hover {
+    opacity: 0.8;
+}

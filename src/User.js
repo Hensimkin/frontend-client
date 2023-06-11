@@ -4,6 +4,7 @@ import UserNavbar from './UserNavbar.js';
 import './cssFile.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { Slide } from 'react-slideshow-image'
 
 function User() {
   const { uid } = useParams();
@@ -96,10 +97,33 @@ function User() {
         <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
           {userListings.map((listing) => (
             <li key={listing.id}>
-              <p>Title: {listing.title}</p>
-              <p>Price: {listing.price}</p>
-              <p>Category: {listing.category}</p>
-              <p>Description: {listing.description}</p>
+              <div className="left">
+                <p>
+                  Title:
+                  {listing.title}
+                </p>
+                <p>
+                  Price:
+                  {listing.price}
+                </p>
+                <p>
+                  Category:
+                  {listing.category}
+                </p>
+                <p>
+                  Description:
+                  {listing.description}
+                </p>
+              </div>
+              <div className="slide-container">
+                {listing.pictures.length > 0 && (
+                  <Slide>
+                    {listing.pictures.map((picture, index) => (
+                      <img key={index} src={picture} alt={`Picture ${index + 1}`} />
+                    ))}
+                  </Slide>
+                )}
+              </div>
             </li>
           ))}
         </ul>

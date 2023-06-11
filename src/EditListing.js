@@ -18,6 +18,8 @@ function EditListing({ listingId, onClose }) {
   const [description, setDescription] = useState('');
   const [pictures, setPictures] = useState([]);
 
+  // New state to track whether the listing has been deleted
+  const [isDeleted, setIsDeleted] = useState(false);
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -86,12 +88,31 @@ function EditListing({ listingId, onClose }) {
     }
   };
 
-
+  const handleDelete = async () => {
+    if (window.confirm('Are you sure you want to delete this listing?')) {
+      try {
+        const response = await axios.post(`https://backend-server-qdnc.onrender.com/delete_listing/${listingId}`);
+        setIsDeleted(true);
+        const confirmMessage = 'The listing has been deleted. Press OK to refresh the page.';
+        if (window.confirm(confirmMessage)) {
+          window.location.reload();
+        }
+      } catch (error) {
+        console.error('Error deleting listing:', error);
+        // Handle error deleting listing
+      }
+    }
+  };
 
   const handleCancel = () => {
     // Close the EditListing modal
     onClose();
   };
+
+  // Render null if the listing has been deleted
+  if (isDeleted) {
+    return null;
+  }
 
   return (
     <div className="popup">
@@ -131,9 +152,11 @@ function EditListing({ listingId, onClose }) {
               </button>
             </div>
           ))}
+          <br />
           <input type="file" accept="image/*" onChange={handlePictureAdd}  />
           <br />
           <button type="submit">Save Changes</button>
+          <button type="button" onClick={handleDelete} className="delete-button">Delete Listing</button>
         </form>
       </div>
     </div>
