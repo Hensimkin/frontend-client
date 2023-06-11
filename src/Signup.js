@@ -31,10 +31,10 @@ function SignUp() {
     e.preventDefault();
     try {
       // eslint-disable-next-line max-len
-      const response_mail = await axios.post('localhost:5000/post_email', { email });
+      const response_mail = await axios.post('http://localhost:5000/post_email', { email });
 
       const response_password = await axios.post(
-        'localhost:5000/post_password',
+        'http://localhost:5000/post_password',
         { password },
       );
 
