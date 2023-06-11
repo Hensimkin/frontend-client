@@ -13,6 +13,7 @@ import ForgotPass from './ForgotPassword.js';
 import ResetMess from './ResetMessage.js';
 import User from './User.js';
 import Saved from './Saved.js';
+import Liked from './Liked.js';
 
 ReactDOM.render(
 
@@ -28,6 +29,7 @@ ReactDOM.render(
             <Route path="/ResetMessage" element={<ResetMess />} />
             <Route path="/User/:uid" element={<User />} />
             <Route path="/Saved" element={<Saved />} />
+            <Route path="/Liked" element={<Liked />} />
 
         </Routes>
     </Router>,

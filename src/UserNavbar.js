@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faBookmark, faHome, faUser, faSignOutAlt, faBell,
-} from '@fortawesome/free-solid-svg-icons';
+  faBookmark, faHome, faUser, faSignOutAlt, faBell, faHeart,
+} from '@fortawesome/free-solid-svg-icons'
 
 function UserNavbar() {
   const [showWindow, setShowWindow] = useState(false);
