@@ -25,7 +25,7 @@ function SignIn() {
       const responseFromServer = await axios.post('https://backend-server-qdnc.onrender.com/post_signin', { credentials });
       setServerResponse(responseFromServer.data);
       if (responseFromServer.data === 'Welcome !') {
-        window.location.assign('/HomePage');
+        window.location.replace('/HomePage');
       }
     } catch (error) {
       console.log(error);
