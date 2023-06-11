@@ -1354,3 +1354,40 @@ button.delete-button {
 button.delete-button:hover {
     opacity: 0.8;
 }
+
+
+.notification-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+
+.notification-window {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+    width: 300px;
+    height: 300px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 999;
+}
+
+.close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #999;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #555;
+}
