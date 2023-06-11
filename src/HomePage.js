@@ -87,7 +87,8 @@ function HomePage() {
       setSavedListings(updatedSavedListings);
       localStorage.setItem('listing saved', JSON.stringify(updatedSavedListings));
       const deleteOrSave = isListingSaved ? 'delete' : 'save';
-      await axios.post('http://localhost:5000/saveListing', { listingId, deleteOrSave });
+      // eslint-disable-next-line max-len
+      await axios.post('https://backend-server-qdnc.onrender.com/saveListing', { listingId, deleteOrSave });
     } catch (error) {
       console.error('Error saving listing:', error);
     }
@@ -108,7 +109,7 @@ function HomePage() {
       setLikedListings(updatedLikedListings);
       localStorage.setItem('listing likes', JSON.stringify(updatedLikedListings));
 
-      await axios.post('http://localhost:5000/likeListing', {
+      await axios.post('https://backend-server-qdnc.onrender.com/likeListing', {
         listing: updatedListing,
         isLiked: !isListingLiked,
       });

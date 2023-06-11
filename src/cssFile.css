@@ -504,11 +504,11 @@
 /*    margin-right: 0; !* Remove margin-right for the last button *!*/
 /*}*/
 
-.listings ul.grid-view {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
+/*.listings ul.grid-view {*/
+/*    display: grid;*/
+/*    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));*/
+/*    gap: 20px;*/
+/*}*/
 
 
 
@@ -626,11 +626,11 @@ button.switch-button {
     transition: 0.1s ease;
 }
 
-.listings ul.grid-view {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
+/*.listings ul.grid-view {*/
+/*    display: grid;*/
+/*    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));*/
+/*    gap: 20px;*/
+/*}*/
 
 .listings {
     text-align: center;
@@ -722,9 +722,10 @@ button.switch-button {
 /* Add the necessary styles for the grid view */
 .list.grid-view {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); /* Updated line */
+    gap: 50px;
     margin-top: 20px;
+    justify-items: start;
 }
 
 .list.grid-view li {
