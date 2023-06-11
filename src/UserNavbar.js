@@ -4,7 +4,7 @@ import './cssFile.css';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faBookmark, faHome, faUser, faSignOutAlt,
+  faBookmark, faHome, faUser, faSignOutAlt, faHeart,
 } from '@fortawesome/free-solid-svg-icons';
 
 function UserNavbar() {
@@ -54,6 +54,11 @@ function UserNavbar() {
                   <li>
                       <Link to="/Saved">
                           <FontAwesomeIcon icon={faBookmark} />
+                      </Link>
+                  </li>
+                  <li>
+                      <Link to="/Liked">
+                          <FontAwesomeIcon icon={faHeart} />
                       </Link>
                   </li>
                   <li>
