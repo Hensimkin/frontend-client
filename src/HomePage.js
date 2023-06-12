@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './cssFile.css';
@@ -10,20 +11,22 @@ import AddProductPopup from './AddProductPopup.js';
 import ContactDetailsPopup from './ContactDetailsPopup.js';
 import 'react-slideshow-image/dist/styles.css';
 
+
 function HomePage() {
   const [addProductPopupIsOpen, setAddProductPopupIsOpen] = useState(false);
   const [contactDetailsPopupIsOpen, setContactDetailsPopupIsOpen] = useState(false);
   const [selectedListing, setSelectedListing] = useState(null);
   const [userListings, setUserListings] = useState([]);
-  const [filteredUserListings, setFilteredUserListings] = useState([]);
+  let [filteredUserListings, setFilteredUserListings] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [isGridView, setIsGridView] = useState(false);
   const [likedListings, setLikedListings] = useState({});
   const [savedListings, setSavedListings] = useState({});
 
+
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [isSavedDisabled, setIsSavedDisabled] = useState(false);
-  const [userId, setUserId] = useState('');
+  const [userId, setUserId] = useState('');;
   useEffect(() => {
     const savedLikedState = localStorage.getItem(`${userId}`);
     const savedSavedState = localStorage.getItem(`${userId}1`);
@@ -48,13 +51,9 @@ function HomePage() {
 
   useEffect(() => {
     fetchUserListings();
-  }, []);
+  }, [filteredUserListings]); // Add filteredUserListings as a dependency
 
-  useEffect(() => {
-    // eslint-disable-next-line max-len
-    const filteredListings = userListings.filter((listing) => listing.title.toLowerCase().includes(searchTerm.toLowerCase()));
-    setFilteredUserListings(filteredListings);
-  }, [userListings, searchTerm]);
+
   const openAddProductPopup = () => {
     setAddProductPopupIsOpen(true);
   };
@@ -66,17 +65,14 @@ function HomePage() {
 
   const closeAddProductPopup = async () => {
     setAddProductPopupIsOpen(false);
-    await fetchUserListings();
     window.location.reload();
+    await fetchUserListings();
+
   };
 
   const closeContactDetailsPopup = () => {
     setContactDetailsPopupIsOpen(false);
     setSelectedListing(null);
-  };
-
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
   };
 
   const openSaveForLaterPage = async (listing) => {
@@ -96,13 +92,12 @@ function HomePage() {
     } catch (error) {
       console.error('Error saving listing:', error);
     }
-    setIsSavedDisabled(false); // Disable the button
+    setIsSavedDisabled(false); // Enable the button
   };
 
   const likeListing = async (listing) => {
     const listingId = listing.id;
     const isListingLiked = likedListings[listingId] || false;
-    // eslint-disable-next-line max-len
     const updatedListing = { ...listing, likes: isListingLiked ? listing.likes - 1 : listing.likes + 1 };
     setIsButtonDisabled(true); // Disable the button
     try {
@@ -127,146 +122,228 @@ function HomePage() {
 
       setUserListings(updatedUserListings);
     } catch (error) {
-      throw new Error('Error saving listing:', error);
+      console.error('Error saving listing:', error);
     }
     setIsButtonDisabled(false); // Enable the button
   };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/search_listings', {
+        params: { search: searchTerm },
+      });
+      console.log(response.data); // Check the value of response.data
+      setFilteredUserListings(response.data);
+
+    } catch (error) {
+      console.error('Error searching listings:', error);
+
+    }
+  };
+
+  useEffect(() => {
+    console.log(filteredUserListings.length);
+  }, [filteredUserListings]);
+
+
+
+
+
+  useEffect(() => {
+    if (searchTerm === '') {
+      setFilteredUserListings([]);
+    } else {
+      handleSearch();
+    }
+  }, [searchTerm]);
+
+
+
   return (
-      <div className="">
-          <header className="header">
-              <UserNavbar handleSearchChange={handleSearchChange} />
-          </header>
-          <main className="main">
-              {!addProductPopupIsOpen && (
-              <button type="button" onClick={openAddProductPopup}>
-                  Add Product
-              </button>
-              )}
-              <button type="button" onClick={() => setIsGridView(!isGridView)}>
-                  {isGridView ? 'Row View' : 'Grid View'}
-              </button>
-              {' '}
-          </main>
-          <div className="listings fonts">
-              <h2>Your Listings</h2>
-              <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
-                  {filteredUserListings.map((listing) => {
-                    const isListingLiked = likedListings[listing.id] || false;
-                    const isListingSaved = savedListings[listing.id] || false;
-                    return (
-                        <li key={listing.userid}>
-                            <div className="listing-details">
-
-                                <p>
-                                    <span className="label">Title:</span>
-                                    <span className="value">{listing.title}</span>
-                                </p>
-                                <p>
-                                    <span className="label">Price:</span>
-                                    <span className="value">{listing.price}</span>
-                                </p>
-                                <p>
-                                    <span className="label">Category:</span>
-                                    <span className="value">{listing.category}</span>
-                                </p>
-                                <p>
-                                    <span className="label">Description:</span>
-                                    <span className="value">{listing.description}</span>
-                                </p>
-                                <p>
-                                    <span className="label">Likes:</span>
-                                    <span className="value">{listing.likes}</span>
-                                </p>
-                                <p>
-                                    <span className="label">User:</span>
-                                    <span className="value">
-                                        {/* eslint-disable-next-line max-len */}
-                                        <Link to={`/User/${listing.userid}`} style={{ color: '#0b6cb3', marginLeft: '2px' }}>
-                                            {listing.name}
-                                        </Link>
-                                    </span>
-                                </p>
-                            </div>
-                            {/* eslint-disable-next-line max-len */}
-                            <div className={`slide-container ${addProductPopupIsOpen ? 'hide-arrows' : ''}`}>
-                                {listing.pictures.length > 0 && (
-                                <Slide>
-                                    {listing.pictures.map((picture, index) => (
-                                      // eslint-disable-next-line max-len
-                                      // eslint-disable-next-line max-len,react/no-array-index-key,jsx-a11y/img-redundant-alt
-                                        <img key={index} src={picture} alt={`Picture ${index + 1}`} />
-                                    ))}
-                                </Slide>
-                                )}
-
-                            </div>
-                            <div className="listing_buttons">
-                                <button
-                                  type="button"
-                                  onClick={() => openContactDetailsPopup(listing)}
-                                  className="buttonH"
-                                >
-                                    <FontAwesomeIcon icon={faMessage} />
-                                    {' '}
-                                    {/* Contact Details Icon */}
-                                </button>
-                                <button
-                                  type="button"
-                                  onClick={() => openSaveForLaterPage(listing)}
-                                  className="buttonH"
-                                  disabled={isSavedDisabled}
-                                >
-                                    {isListingSaved ? (
-                                        <>
-                                            {/* eslint-disable-next-line max-len */}
-                                            <FontAwesomeIcon icon={faBookmark} style={{ color: 'cyan' }} />
-                                        </>
-                                    ) : (
-                                        <>
-                                            {/* eslint-disable-next-line max-len */}
-                                            <FontAwesomeIcon icon={faBookmark} style={{ color: 'white' }} />
-                                        </>
-                                    )}
-                                    {' '}
-                                    {/* Like Icon */}
-                                </button>
-                                <button
-                                  type="button"
-                                  onClick={() => likeListing(listing)}
-                                  disabled={isButtonDisabled} // Update the disabled attribute
-                                  className={`buttonH ${isListingLiked ? 'liked' : ''}`}
-                                >
-                                    {isListingLiked ? (
-                                        <>
-                                            {/* eslint-disable-next-line max-len */}
-                                            <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
-                                        </>
-                                    ) : (
-                                        <>
-                                            {/* eslint-disable-next-line max-len */}
-                                            <FontAwesomeIcon icon={faHeart} style={{ color: 'white' }} />
-                                        </>
-                                    )}
-                                    {' '}
-                                    {/* Like Icon */}
-                                </button>
-
-                            </div>
-                        </li>
-                    );
-                  })}
-              </ul>
-          </div>
-          {addProductPopupIsOpen && <AddProductPopup closePopup={closeAddProductPopup} />}
-          {contactDetailsPopupIsOpen && selectedListing && (
-          <ContactDetailsPopup
-            listing={selectedListing}
-            phoneNumber={selectedListing.phoneNumber}
-            name={selectedListing.name}
-            closePopup={closeContactDetailsPopup}
-          />
-          )}
+    <div className="">
+      <header className="header">
+        <UserNavbar />
+      </header>
+      <main className="main">
+        {!addProductPopupIsOpen && (
+          <button type="button" onClick={openAddProductPopup}>
+            Add Product
+          </button>
+        )}
+        <button type="button" onClick={() => setIsGridView(!isGridView)}>
+          {isGridView ? 'Row View' : 'Grid View'}
+        </button>
+      </main>
+      <input type="text" placeholder="Search User/Title" value={searchTerm} onChange={handleSearchChange} />
+      <div className="listings fonts">
+        <h2>Your Listings</h2>
+        <ul className={`list ${isGridView ? 'grid-view' : ''}`} >
+          {filteredUserListings.length > 0
+            ? filteredUserListings.map((listing) => {
+              const isListingLiked = likedListings[listing.id] || false;
+              const isListingSaved = savedListings[listing.id] || false;
+              return (
+                <li key={listing.id}>
+                  <div className="listing-details">
+                    <p>
+                      <span className="label">Title:</span>
+                      <span className="value">{listing.title}</span>
+                    </p>
+                    <p>
+                      <span className="label">Price:</span>
+                      <span className="value">{listing.price}</span>
+                    </p>
+                    <p>
+                      <span className="label">Category:</span>
+                      <span className="value">{listing.category}</span>
+                    </p>
+                    <p>
+                      <span className="label">Description:</span>
+                      <span className="value">{listing.description}</span>
+                    </p>
+                    <p>
+                      <span className="label">Likes:</span>
+                      <span className="value">{listing.likes}</span>
+                    </p>
+                    <p>
+                      <span className="label">User:</span>
+                      <span className="value">
+                          <Link to={`/User/${listing.userid}`} style={{ color: '#0b6cb3', marginLeft: '2px' }}>
+                            {listing.name}
+                          </Link>
+                        </span>
+                    </p>
+                  </div>
+                  <div className={`slide-container ${addProductPopupIsOpen ? 'hide-arrows' : ''}`}>
+                    {listing.pictures.length > 0 && (
+                      <Slide>
+                        {listing.pictures.map((picture, index) => (
+                          <img key={index} src={picture} alt={`Picture ${index + 1}`} />
+                        ))}
+                      </Slide>
+                    )}
+                  </div>
+                  <div className="listing_buttons">
+                    <button type="button" onClick={() => openContactDetailsPopup(listing)} className="buttonH">
+                      <FontAwesomeIcon icon={faMessage} /> {/* Contact Details Icon */}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => openSaveForLaterPage(listing)}
+                      className="buttonH"
+                      disabled={isSavedDisabled}
+                    >
+                      {isListingSaved ? (
+                        <FontAwesomeIcon icon={faBookmark} style={{ color: 'cyan' }} />
+                      ) : (
+                        <FontAwesomeIcon icon={faBookmark} style={{ color: 'white' }} />
+                      )}{' '}
+                      {/* Like Icon */}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => likeListing(listing)}
+                      disabled={isButtonDisabled}
+                      className={`buttonH ${isListingLiked ? 'liked' : ''}`}
+                    >
+                      {isListingLiked ? (
+                        <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
+                      ) : (
+                        <FontAwesomeIcon icon={faHeart} style={{ color: 'white' }} />
+                      )}{' '}
+                      {/* Like Icon */}
+                    </button>
+                  </div>
+                </li>
+              );
+            })
+            : searchTerm === '' && userListings.map((listing) => {
+              const isListingLiked = likedListings[listing.id] || false;
+              const isListingSaved = savedListings[listing.id] || false;
+              return (
+                <li key={listing.id}>
+                  <div className="listing-details">
+                    <p>
+                      <span className="label">Title:</span>
+                      <span className="value">{listing.title}</span>
+                    </p>
+                    <p>
+                      <span className="label">Price:</span>
+                      <span className="value">{listing.price}</span>
+                    </p>
+                    <p>
+                      <span className="label">Category:</span>
+                      <span className="value">{listing.category}</span>
+                    </p>
+                    <p>
+                      <span className="label">Description:</span>
+                      <span className="value">{listing.description}</span>
+                    </p>
+                    <p>
+                      <span className="label">Likes:</span>
+                      <span className="value">{listing.likes}</span>
+                    </p>
+                    <p>
+                      <span className="label">User:</span>
+                      <span className="value">
+                          <Link to={`/User/${listing.userid}`} style={{ color: '#0b6cb3', marginLeft: '2px' }}>
+                            {listing.name}
+                          </Link>
+                        </span>
+                    </p>
+                  </div>
+                  <div className={`slide-container ${addProductPopupIsOpen ? 'hide-arrows' : ''}`}>
+                    {listing.pictures.length > 0 && (
+                      <Slide>
+                        {listing.pictures.map((picture, index) => (
+                          <img key={index} src={picture} alt={`Picture ${index + 1}`} />
+                        ))}
+                      </Slide>
+                    )}
+                  </div>
+                  <div className="listing_buttons">
+                    <button type="button" onClick={() => openContactDetailsPopup(listing)} className="buttonH">
+                      <FontAwesomeIcon icon={faMessage} /> {/* Contact Details Icon */}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => openSaveForLaterPage(listing)}
+                      className="buttonH"
+                      disabled={isSavedDisabled}
+                    >
+                      {isListingSaved ? (
+                        <FontAwesomeIcon icon={faBookmark} style={{ color: 'cyan' }} />
+                      ) : (
+                        <FontAwesomeIcon icon={faBookmark} style={{ color: 'white' }} />
+                      )}{' '}
+                      {/* Like Icon */}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => likeListing(listing)}
+                      disabled={isButtonDisabled}
+                      className={`buttonH ${isListingLiked ? 'liked' : ''}`}
+                    >
+                      {isListingLiked ? (
+                        <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
+                      ) : (
+                        <FontAwesomeIcon icon={faHeart} style={{ color: 'white' }} />
+                      )}{' '}
+                      {/* Like Icon */}
+                    </button>
+                  </div>
+                </li>
+              );
+            })}
+        </ul>
       </div>
+      {addProductPopupIsOpen && <AddProductPopup closePopup={closeAddProductPopup} />}
+      {contactDetailsPopupIsOpen && <ContactDetailsPopup listing={selectedListing} closePopup={closeContactDetailsPopup} />}
+    </div>
   );
 }
 
