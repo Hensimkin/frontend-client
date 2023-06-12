@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import EditProfile from './EditProfile.js';
+import StatsInfo from './StatsInfo.js';
 import FollowersList from './FollowersList.js';
 import FollowingList from './FollowingList.js';
 import ChangePassword from './ChangePassword.js';
@@ -18,6 +19,8 @@ import { Link } from 'react-router-dom'
 
 function PersonalArea() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
+  const [isStatsticsOpen, setisStatsticsOpen] = useState(false);
+
   const [isFollowersListOpen, setIsFollowersListOpen] = useState(false);
   const [isFollowingListOpen, setIsFollowingListOpen] = useState(false);
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
@@ -27,6 +30,12 @@ function PersonalArea() {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [editListingId, setEditListingId] = useState(null);
   const [totalLikes,setTotalLikes] = useState(0);
+  const [statsInfo, setStatsInfo] = useState({
+    totalLikes: 0,
+    followers: 0,
+    following: 0,
+    avgLikes: 0,
+  });
   const fetchUserListings = async () => {
     try {
       const response = await axios.get('http://localhost:5000/user_listings');
@@ -44,9 +53,8 @@ function PersonalArea() {
     try {
       const response = await axios.get('http://localhost:5000/user_details');
       setUserDetails(response.data);
-      const response1 = await axios.post('http://localhost:5000/get_total_likes');
-      const { totalLikes } = response1.data;
-      setTotalLikes(totalLikes);
+      const statsResponse = await axios.post('http://localhost:5000/getStatistics',{statsInfo});
+      setStatsInfo(statsResponse.data.stats);
     } catch (error) {
       console.error('Error:', error);
     }
@@ -58,6 +66,10 @@ function PersonalArea() {
 
   const handleEditProfileClick = () => {
     setIsEditProfileOpen(true);
+  };
+
+  const handleStatisticsClick = () => {
+    setisStatsticsOpen(true);
   };
 
   const handleFollowersListClick = () => {
@@ -78,6 +90,7 @@ function PersonalArea() {
 
   const handleCloseModal = () => {
     setIsEditProfileOpen(false);
+    setisStatsticsOpen(false);
     setIsFollowersListOpen(false);
     setIsFollowingListOpen(false);
     setIsChangePasswordOpen(false);
@@ -111,8 +124,12 @@ function PersonalArea() {
         <button className="buttonP" onClick={handleDeleteAccountClick}>
           Delete Account
         </button>
+        <button className="buttonP" onClick={handleStatisticsClick}>
+          Statistics
+        </button>
 
         {isEditProfileOpen && <EditProfile onClose={handleCloseModal} />}
+        {isStatsticsOpen && <StatsInfo onClose={handleCloseModal} />}
         {isFollowersListOpen && <FollowersList onClose={handleCloseModal} />}
         {isFollowingListOpen && <FollowingList onClose={handleCloseModal} />}
         {isChangePasswordOpen && <ChangePassword onClose={handleCloseModal} />}
@@ -120,8 +137,7 @@ function PersonalArea() {
         <button type="button" className="buttonP" onClick={() => setIsGridView(!isGridView)}>
           {isGridView ? 'Row View' : 'Grid View'}
         </button>
-        <label>Total likes:</label>
-        {totalLikes}
+
       </main>
       <div className="listings">
         <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
@@ -151,7 +167,7 @@ function PersonalArea() {
                 </p>
               </div>
               {/* eslint-disable-next-line max-len */}
-              <div className={`slide-container ${isEditProfileOpen || isFollowersListOpen || isFollowingListOpen || isChangePasswordOpen ? 'hide-arrows' : ''}`}>
+              <div className={`slide-container ${isEditProfileOpen || isFollowersListOpen || isFollowingListOpen || isChangePasswordOpen || isStatsticsOpen ? 'hide-arrows' : ''}`}>
                 {listing.pictures.length > 0 && (
                   <Slide>
                     {listing.pictures.map((picture, index) => (
