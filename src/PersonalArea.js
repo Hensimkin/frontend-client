@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPenToSquare
 } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom'
 
 function PersonalArea() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
@@ -121,32 +122,41 @@ function PersonalArea() {
         <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
           {userListings.map((listing) => (
             <li key={listing.id}>
-              <div className="left">
+              <div className="listing-details">
+
                 <p>
-                  Title:
-                  {listing.title}
+                  <span className="label">Title:</span>
+                  <span className="value">{listing.title}</span>
                 </p>
                 <p>
-                  Price:
-                  {listing.price}
+                  <span className="label">Price:</span>
+                  <span className="value">{listing.price}</span>
                 </p>
                 <p>
-                  Category:
-                  {listing.category}
+                  <span className="label">Category:</span>
+                  <span className="value">{listing.category}</span>
                 </p>
                 <p>
-                  Description:
-                  {listing.description}
+                  <span className="label">Description:</span>
+                  <span className="value">{listing.description}</span>
+                </p>
+                <p>
+                  <span className="label">Likes:</span>
+                  <span className="value">{listing.likes}</span>
                 </p>
               </div>
-              <div className={`slide-container ${isEditProfileOpen || isFollowersListOpen || isFollowingListOpen || isChangePasswordOpen || showDeleteConfirmation || editListingId ? 'hide-arrows' : ''}`}>
+              {/* eslint-disable-next-line max-len */}
+              <div className={`slide-container ${isEditProfileOpen || isFollowersListOpen || isFollowingListOpen || isChangePasswordOpen ? 'hide-arrows' : ''}`}>
                 {listing.pictures.length > 0 && (
                   <Slide>
                     {listing.pictures.map((picture, index) => (
+                      // eslint-disable-next-line max-len
+                      // eslint-disable-next-line max-len,react/no-array-index-key,jsx-a11y/img-redundant-alt
                       <img key={index} src={picture} alt={`Picture ${index + 1}`} />
                     ))}
                   </Slide>
                 )}
+
               </div>
               <div className="actions">
                 <button className="edit-button" onClick={() => handleEditListing(listing.id)}>
