@@ -19,11 +19,13 @@ function User() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [isSavedDisabled, setIsSavedDisabled] = useState(false);
   const [userId, setUserId] = useState('');
+  const [isBlocked, setIsBlocked] = useState(false);
 
   useEffect(() => {
     fetchUserListings();
     fetchUserDetails();
     checkIfFollowing();
+    checkIfBlocked();
   }, [uid]);
 
   useEffect(() => {
@@ -94,6 +96,54 @@ function User() {
       console.log(error);
     }
   };
+
+
+  const checkIfBlocked = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/check_blocked');
+      const blockedList = response.data;
+      const isBlockedUser = blockedList.some((user) => user.id === uid);
+      setIsBlocked(isBlockedUser);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+
+
+  const blockUser = async () => {
+    try {
+      await axios.post('http://localhost:5000/block-user', {
+        uid,
+      });
+      setIsBlocked(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const unblockUser = async () => {
+    try {
+      await axios.post('http://localhost:5000/block-user', {
+        uid,
+      });
+      setIsBlocked(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
+
+  const toggleBlock = () => {
+    if (isBlocked) {
+      unblockUser();
+    } else {
+      blockUser();
+    }
+  };
+
 
 
   const toggleFollow = () => {
@@ -280,6 +330,9 @@ function User() {
           <button type="button" onClick={toggleFollow}>
             {isFollowing ? 'Unfollow' : 'Follow'}
           </button>
+        <button type="button" onClick={toggleBlock}>
+          {isBlocked ? 'Unblock' : 'Block'}
+        </button>
         </main>
       </div>
     </div>
