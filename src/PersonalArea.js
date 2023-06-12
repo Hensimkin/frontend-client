@@ -26,7 +26,7 @@ function PersonalArea() {
   const [isGridView, setIsGridView] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [editListingId, setEditListingId] = useState(null);
-
+  const [totalLikes,setTotalLikes] = useState(0);
   const fetchUserListings = async () => {
     try {
       const response = await axios.get('http://localhost:5000/user_listings');
@@ -44,6 +44,9 @@ function PersonalArea() {
     try {
       const response = await axios.get('http://localhost:5000/user_details');
       setUserDetails(response.data);
+      const response1 = await axios.post('http://localhost:5000/get_total_likes');
+      const { totalLikes } = response1.data;
+      setTotalLikes(totalLikes);
     } catch (error) {
       console.error('Error:', error);
     }
@@ -117,6 +120,8 @@ function PersonalArea() {
         <button type="button" className="buttonP" onClick={() => setIsGridView(!isGridView)}>
           {isGridView ? 'Row View' : 'Grid View'}
         </button>
+        <label>Total likes:</label>
+        {totalLikes}
       </main>
       <div className="listings">
         <ul className={`list ${isGridView ? 'grid-view' : ''}`}>
