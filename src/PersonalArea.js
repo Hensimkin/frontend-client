@@ -29,7 +29,6 @@ function PersonalArea() {
   const [isGridView, setIsGridView] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [editListingId, setEditListingId] = useState(null);
-  const [totalLikes,setTotalLikes] = useState(0);
   const [statsInfo, setStatsInfo] = useState({
     totalLikes: 0,
     followers: 0,
