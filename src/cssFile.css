@@ -1391,3 +1391,12 @@ button.delete-button:hover {
 .close-button:hover {
     color: #555;
 }
+
+.popup-inner3 {
+    background-color: #fff;
+    border-radius: 5px;
+    position: relative;
+    width: 300px;
+    text-align: center;
+    height: 250px;
+}
