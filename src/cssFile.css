@@ -525,14 +525,7 @@
     cursor: pointer;
 }
 
-/*body {*/
-/*    font-family: sans-serif;*/
-/*    margin-top: 80px;*/
-/*    padding: 30px;*/
-/*    background-image: url('/images/mainback.jpg');*/
-/*    background-size: cover;*/
-/*    background-position: center;*/
-/*}*/
+
 
 .main {
     width: 70%;
@@ -900,8 +893,8 @@ body{
     margin-top: 80px;
     padding: 30px;
     background-image: url('/images/mainback.jpg');
-    background-size: cover;
-    background-position: center;
+    /*background-size: cover;*/
+    /*background-position: center;*/
 
 }
 
@@ -1125,15 +1118,6 @@ input[type="date"] {
 
 
 
-/*body{*/
-/*    font-family: sans-serif;*/
-/*    margin-top: 80px;*/
-/*    padding: 30px;*/
-/*    background-image: url('/images/mainback.jpg');*/
-/*    background-size: cover;*/
-/*    background-position: center;*/
-
-/*}*/
 
 
 

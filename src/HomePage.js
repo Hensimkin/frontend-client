@@ -218,7 +218,7 @@ function HomePage() {
                         </span>
                     </p>
                   </div>
-                  <div className={`slide-container ${addProductPopupIsOpen ? 'hide-arrows' : ''}`}>
+                  <div className={`slide-container ${addProductPopupIsOpen || contactDetailsPopupIsOpen ? 'hide-arrows' : ''}`}>
                     {listing.pictures.length > 0 && (
                       <Slide>
                         {listing.pictures.map((picture, index) => (
@@ -296,7 +296,7 @@ function HomePage() {
                         </span>
                     </p>
                   </div>
-                  <div className={`slide-container ${addProductPopupIsOpen ? 'hide-arrows' : ''}`}>
+                  <div className={`slide-container ${addProductPopupIsOpen || contactDetailsPopupIsOpen ? 'hide-arrows' : ''}`}>
                     {listing.pictures.length > 0 && (
                       <Slide>
                         {listing.pictures.map((picture, index) => (
