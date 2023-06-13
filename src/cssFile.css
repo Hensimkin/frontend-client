@@ -1368,7 +1368,7 @@ button.delete-button:hover {
     position: absolute;
     top: 40px;
     right: 50px;
-    width: 300px;
+    width: 400px;
     height: 300px;
     background-color: #f5f5f5;
     border: 1px solid #ccc;
@@ -1400,3 +1400,69 @@ button.delete-button:hover {
     text-align: center;
     height: 250px;
 }
+
+
+
+.notification-window {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 340px;
+    height: 150px;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.notification-window .close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 14px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #888;
+}
+
+.notification-window ul {
+    list-style-type: none; /* Remove bullets/dots */
+    padding: 0;
+    margin: 0;
+}
+
+.notification-window ul li {
+    padding: 10px;
+    /*border-bottom: 1px solid #eee;*/
+    /*color: black;*/
+    white-space: pre-wrap;
+}
+
+/*.notification-window ul li:last-child {*/
+/*    border-bottom: none;*/
+/*}*/
+
+.notification-window ul li a {
+    color: #333;
+    text-decoration: none;
+}
+
+.notification-window ul li a:hover {
+    text-decoration: underline;
+}
+
+.notification-window p {
+    padding: 10px;
+    text-align: center;
+    color: black;
+}
+
+
+/*body {*/
+/*    overflow: hidden;*/
+/*}*/
+
+/*body {*/
+/*    overflow: auto;*/
+/*}*/

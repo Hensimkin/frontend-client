@@ -34,6 +34,7 @@ function UserNavbar() {
 
   const handleNotificationClick = () => {
     setShowWindow(!showWindow);
+    // document.body.style.overflow = showWindow ? 'auto' : 'hidden';
   };
 
   const handleCloseClick = () => {
@@ -90,6 +91,9 @@ function UserNavbar() {
 
                                       <li key={index}>
                                           {notifications}
+                                       <br/>
+                                       <br/>
+
                                       </li>
                                   ))}
                               </ul>
