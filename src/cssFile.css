@@ -500,15 +500,9 @@
 }
 
 
-/*.listings li .buttonH:last-child {*/
-/*    margin-right: 0; !* Remove margin-right for the last button *!*/
-/*}*/
 
-.listings ul.grid-view {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
+
+
 
 
 
@@ -525,14 +519,7 @@
     cursor: pointer;
 }
 
-/*body {*/
-/*    font-family: sans-serif;*/
-/*    margin-top: 80px;*/
-/*    padding: 30px;*/
-/*    background-image: url('/images/mainback.jpg');*/
-/*    background-size: cover;*/
-/*    background-position: center;*/
-/*}*/
+
 
 .main {
     width: 70%;
@@ -626,11 +613,6 @@ button.switch-button {
     transition: 0.1s ease;
 }
 
-.listings ul.grid-view {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
 
 .listings {
     text-align: center;
@@ -722,8 +704,8 @@ button.switch-button {
 /* Add the necessary styles for the grid view */
 .list.grid-view {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(2,  1fr);
+    gap: 50px;
     margin-top: 20px;
 }
 
@@ -900,8 +882,8 @@ body{
     margin-top: 80px;
     padding: 30px;
     background-image: url('/images/mainback.jpg');
-    background-size: cover;
-    background-position: center;
+    /*background-size: cover;*/
+    /*background-position: center;*/
 
 }
 
@@ -1125,15 +1107,6 @@ input[type="date"] {
 
 
 
-/*body{*/
-/*    font-family: sans-serif;*/
-/*    margin-top: 80px;*/
-/*    padding: 30px;*/
-/*    background-image: url('/images/mainback.jpg');*/
-/*    background-size: cover;*/
-/*    background-position: center;*/
-
-/*}*/
 
 
 
