@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import './cssFile.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Navbar from './Navbar.js';
 
 function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [serverResponse, setServerResponse] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   let credentials = {
     email: '',
@@ -25,7 +26,9 @@ function SignIn() {
       const responseFromServer = await axios.post('http://localhost:5000/post_signin', { credentials });
       setServerResponse(responseFromServer.data);
       if (responseFromServer.data === 'Welcome !') {
-        window.location.assign('/HomePage');
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
       }
     } catch (error) {
       console.log(error);
@@ -74,6 +77,8 @@ function SignIn() {
               </label>
 
           </div>
+          {isAuthenticated && <Navigate to="/HomePage" />}
+
       </div>
   );
 }
