@@ -11,6 +11,7 @@ function UserNavbar() {
   const [showWindow, setShowWindow] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [bell,setbell]=useState('');
 
   useEffect(() => {
     // eslint-disable-next-line no-use-before-define
@@ -20,7 +21,24 @@ function UserNavbar() {
   const fetchNotifications = async () => {
     try {
       const response = await axios.get('https://backend-server-qdnc.onrender.com/get_notifications');
-      setNotifications(response.data);
+      //setNotifications(response.data);
+      const storedNotifications = JSON.parse(localStorage.getItem('notifications')) || [];//return the stored not
+
+      const newNotifications = response.data;
+      const newNotificationsCount = countNewNotifications(newNotifications, storedNotifications);
+
+
+      if (newNotificationsCount) {
+        const user = await axios.post('https://backend-server-qdnc.onrender.com/get_uid');
+        const user2=user.data;
+        localStorage.setItem(`${user2}`, JSON.stringify(newNotifications));
+        setNotifications(response.data);
+        setbell("[New notification]");
+      }
+      else
+      {
+        setNotifications(storedNotifications);
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -28,12 +46,23 @@ function UserNavbar() {
     }
   };
 
+
+  const countNewNotifications = (newNotifications, storedNotifications) => {
+    const newNotificationsString = JSON.stringify(newNotifications);
+    const storedNotificationsString = JSON.stringify(storedNotifications);
+
+    // Compare the strings to check if they are different
+    return newNotificationsString !== storedNotificationsString;
+  };
+
+
   const handleLogout = async () => {
     await axios.post('https://backend-server-qdnc.onrender.com/signOut');
   };
 
   const handleNotificationClick = () => {
     setShowWindow(!showWindow);
+    setbell('');
     // document.body.style.overflow = showWindow ? 'auto' : 'hidden';
   };
 
@@ -77,8 +106,11 @@ function UserNavbar() {
                   </li>
                   <li>
                       {/* eslint-disable-next-line react/button-has-type */}
-                      <button onClick={handleNotificationClick} className="notification-button">
+                      <button onClick={handleNotificationClick} className="notification-button ">
                           <FontAwesomeIcon icon={faBell} />
+                        {bell && (
+                          <span className="bell-message" style={{ right: '100px' }}>{bell}</span>
+                        )}
                       </button>
                       {showWindow && (
                       <div className="notification-window">
