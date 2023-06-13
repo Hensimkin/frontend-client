@@ -37,7 +37,7 @@ function SavedListings() {
 
   const fetchSavedListings = async () => {
     try {
-      const response = await fetch('http://localhost:5000/returnSavedListing', {
+      const response = await fetch('https://backend-server-qdnc.onrender.com/returnSavedListing', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ function SavedListings() {
       if (response.ok) {
         const savedListingsData = await response.json();
         setSavedListingsId(savedListingsData);
-        const user = await axios.post('http://localhost:5000/get_uid');
+        const user = await axios.post('https://backend-server-qdnc.onrender.com/get_uid');
         setUserId(user.data);
       } else {
         console.error('Failed to fetch saved listings');
@@ -79,7 +79,8 @@ function SavedListings() {
       setSavedListings(updatedSavedListings);
       localStorage.setItem(`${userId}1`, JSON.stringify(updatedSavedListings));
       const deleteOrSave = isListingSaved ? 'delete' : 'save';
-      await axios.post('http://localhost:5000/saveListing', { listingId, deleteOrSave });
+      // eslint-disable-next-line max-len
+      await axios.post('https://backend-server-qdnc.onrender.com/saveListing', { listingId, deleteOrSave });
     } catch (error) {
       console.error('Error saving listing:', error);
     }
@@ -100,7 +101,7 @@ function SavedListings() {
       setLikedListings(updatedLikedListings);
       localStorage.setItem(`${userId}`, JSON.stringify(updatedLikedListings));
 
-      await axios.post('http://localhost:5000/likeListing', {
+      await axios.post('https://backend-server-qdnc.onrender.com/likeListing', {
         listing: updatedListing,
         isLiked: !isListingLiked,
       });

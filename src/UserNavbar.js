@@ -19,7 +19,7 @@ function UserNavbar() {
 
   const fetchNotifications = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/get_notifications');
+      const response = await axios.get('https://backend-server-qdnc.onrender.com/get_notifications');
       setNotifications(response.data);
     } catch (error) {
       console.log(error);
@@ -29,7 +29,7 @@ function UserNavbar() {
   };
 
   const handleLogout = async () => {
-    await axios.post('http://localhost:5000/signOut');
+    await axios.post('https://backend-server-qdnc.onrender.com/signOut');
   };
 
   const handleNotificationClick = () => {

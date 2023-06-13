@@ -41,9 +41,9 @@ function User() {
 
   const fetchUserListings = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/User/${uid}`);
+      const response = await axios.get(`https://backend-server-qdnc.onrender.com/User/${uid}`);
       setUserListings(response.data);
-      const user = await axios.post('http://localhost:5000/get_uid');
+      const user = await axios.post('https://backend-server-qdnc.onrender.com/get_uid');
       setUserId(user.data);
 
     } catch (error) {
@@ -53,7 +53,7 @@ function User() {
 
   const fetchUserDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/user_details/${uid}`);
+      const response = await axios.get(`https://backend-server-qdnc.onrender.com/user_details/${uid}`);
       setUserDetails(response.data);
     } catch (error) {
       console.error('Error:', error);
@@ -63,7 +63,7 @@ function User() {
 
   const checkIfFollowing = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/following');
+      const response = await axios.get('https://backend-server-qdnc.onrender.com/following');
       const followingList = response.data;
       const isFollowingUser = followingList.some((user) => user.id === uid);
       setIsFollowing(isFollowingUser);
@@ -74,7 +74,7 @@ function User() {
 
   const followUser = async () => {
     try {
-      await axios.post('http://localhost:5000/follow', {
+      await axios.post('https://backend-server-qdnc.onrender.com/follow', {
         uid,
         currentUserUid: userDetails.uid,
       });
@@ -86,7 +86,7 @@ function User() {
 
   const unfollowUser = async () => {
     try {
-      await axios.post('http://localhost:5000/unfollow', {
+      await axios.post('https://backend-server-qdnc.onrender.com/unfollow', {
         unfollowedUser: {
           id: uid,
         },
@@ -100,7 +100,7 @@ function User() {
 
   const checkIfBlocked = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/check_blocked');
+      const response = await axios.get('https://backend-server-qdnc.onrender.com/check_blocked');
       const blockedList = response.data;
       const isBlockedUser = blockedList.some((user) => user.id === uid);
       setIsBlocked(isBlockedUser);
@@ -113,7 +113,7 @@ function User() {
 
   const blockUser = async () => {
     try {
-      await axios.post('http://localhost:5000/block-user', {
+      await axios.post('https://backend-server-qdnc.onrender.com/block-user', {
         uid,
       });
       setIsBlocked(true);
@@ -124,7 +124,7 @@ function User() {
 
   const unblockUser = async () => {
     try {
-      await axios.post('http://localhost:5000/block-user', {
+      await axios.post('https://backend-server-qdnc.onrender.com/block-user', {
         uid,
       });
       setIsBlocked(false);
@@ -167,7 +167,7 @@ function User() {
       setSavedListings(updatedSavedListings);
       localStorage.setItem(`${userId}1`, JSON.stringify(updatedSavedListings));
       const deleteOrSave = isListingSaved ? 'delete' : 'save';
-      await axios.post('http://localhost:5000/saveListing', { listingId, deleteOrSave });
+      await axios.post('https://backend-server-qdnc.onrender.com/saveListing', { listingId, deleteOrSave });
     } catch (error) {
       console.error('Error saving listing:', error);
     }
@@ -188,7 +188,7 @@ function User() {
       setLikedListings(updatedLikedListings);
       localStorage.setItem(`${userId}`, JSON.stringify(updatedLikedListings));
 
-      await axios.post('http://localhost:5000/likeListing', {
+      await axios.post('https://backend-server-qdnc.onrender.com/likeListing', {
         listing: updatedListing,
         isLiked: !isListingLiked,
       });
