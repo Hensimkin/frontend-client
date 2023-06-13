@@ -40,9 +40,9 @@ function HomePage() {
 
   const fetchUserListings = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/home_listings');
+      const response = await axios.get('https://backend-server-qdnc.onrender.com/home_listings');
       setUserListings(response.data);
-      const user = await axios.post('http://localhost:5000/get_uid');
+      const user = await axios.post('https://backend-server-qdnc.onrender.com/get_uid');
       setUserId(user.data);
     } catch (error) {
       console.error('Error:', error);
@@ -88,7 +88,7 @@ function HomePage() {
       setSavedListings(updatedSavedListings);
       localStorage.setItem(`${userId}1`, JSON.stringify(updatedSavedListings));
       const deleteOrSave = isListingSaved ? 'delete' : 'save';
-      await axios.post('http://localhost:5000/saveListing', { listingId, deleteOrSave });
+      await axios.post('https://backend-server-qdnc.onrender.com/saveListing', { listingId, deleteOrSave });
     } catch (error) {
       console.error('Error saving listing:', error);
     }
@@ -108,7 +108,7 @@ function HomePage() {
       setLikedListings(updatedLikedListings);
       localStorage.setItem(`${userId}`, JSON.stringify(updatedLikedListings));
 
-      await axios.post('http://localhost:5000/likeListing', {
+      await axios.post('https://backend-server-qdnc.onrender.com/likeListing', {
         listing: updatedListing,
         isLiked: !isListingLiked,
       });
@@ -133,7 +133,7 @@ function HomePage() {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/search_listings', {
+      const response = await axios.get('https://backend-server-qdnc.onrender.com/search_listings', {
         params: { search: searchTerm },
       });
       console.log(response.data); // Check the value of response.data
