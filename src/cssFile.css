@@ -1,6 +1,6 @@
 .popup {
     position: fixed;
-    z-index: 100;
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
@@ -473,7 +473,7 @@
 .listings li {
     position: relative;
     margin: 5% auto;
-    width: 850px;
+    width: 700px;
     height: 350px;
     background: #FFF;
     border-radius: 8px;
@@ -529,6 +529,21 @@
     background-position: center;
 }
 
+/*.header {*/
+/*    background-color: white;*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    right: 0;*/
+/*    height: 80px;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    box-shadow: 0 0 25px 0 black;*/
+/*}*/
+
+/*.header * {*/
+/*    display: inline;*/
+/*}*/
 
 
 
@@ -1333,27 +1348,8 @@ button.delete-button:hover {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
-    overflow-y: auto; /* Enable vertical scrolling if content exceeds height */
     z-index: 999;
 }
-
-.notification-window p {
-    margin-bottom: 8px; /* Add some spacing between paragraphs */
-}
-
-.notification-window .close-button {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    cursor: pointer;
-    color: #999;
-}
-
-.notification-window .close-button:hover {
-    color: #666;
-}
-
 
 .close-button {
     position: absolute;
@@ -1378,6 +1374,72 @@ button.delete-button:hover {
     text-align: center;
     height: 250px;
 }
+
+
+
+.notification-window {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 340px;
+    height: 150px;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.notification-window .close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 14px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #888;
+}
+
+.notification-window ul {
+    list-style-type: none; /* Remove bullets/dots */
+    padding: 0;
+    margin: 0;
+}
+
+.notification-window ul li {
+    padding: 10px;
+    /*border-bottom: 1px solid #eee;*/
+    /*color: black;*/
+    white-space: pre-wrap;
+}
+
+/*.notification-window ul li:last-child {*/
+/*    border-bottom: none;*/
+/*}*/
+
+.notification-window ul li a {
+    color: #333;
+    text-decoration: none;
+}
+
+.notification-window ul li a:hover {
+    text-decoration: underline;
+}
+
+.notification-window p {
+    padding: 10px;
+    text-align: center;
+    color: black;
+}
+
+
+/*body {*/
+/*    overflow: hidden;*/
+/*}*/
+
+/*body {*/
+/*    overflow: auto;*/
+/*}*/
 
 .followers{
     text-decoration: underline;

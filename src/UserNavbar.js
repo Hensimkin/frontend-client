@@ -58,7 +58,7 @@ function UserNavbar() {
 
 
   const handleLogout = async () => {
-    await axios.post('http://localhost:5000/signOut');
+    await axios.post('https://backend-server-qdnc.onrender.com/signOut');
   };
 
   const handleNotificationClick = () => {
