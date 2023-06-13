@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App.js';
 import './cssFile.css';
 // eslint-disable-next-line import/order
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import Signup from './Signup.js';
 import SignIn from './SignIn.js';
 import HomePage from './HomePage.js';

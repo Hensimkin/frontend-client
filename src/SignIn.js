@@ -22,6 +22,7 @@ function SignIn() {
         email,
         password,
       };
+      setIsAuthenticated(false);
       // eslint-disable-next-line max-len
       const responseFromServer = await axios.post('http://localhost:5000/post_signin', { credentials });
       setServerResponse(responseFromServer.data);
