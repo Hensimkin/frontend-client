@@ -31,6 +31,7 @@ function AddProductPopup(props) {
           'Content-Type': 'multipart/form-data',
         },
       });
+
       // eslint-disable-next-line max-len
       setTitleResponse(response_pictures.data); // Set the response from the server to the state variable
       console.log(response_pictures); // Log the response received from the server
