@@ -51,6 +51,7 @@ function UserNavbar() {
                             src="https://i.ibb.co/JBSRQjR/output-onlinepngtools.png"
                             alt="Logo"
                             className="logo-image"
+
                           />
                       </Link>
                   </li>
