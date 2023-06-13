@@ -24,7 +24,7 @@ function ChangePassword({ onClose }) {
   const handleChangePassword = async (event) => {
     event.preventDefault();
     try {
-     const response_change =  await axios.post('http://localhost:5000/change_password', {
+     const response_change =  await axios.post('https://frontend-site.onrender.com/change_password', {
         validNewPassword,
         newPassword,
         currentPassword,

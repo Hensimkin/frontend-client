@@ -26,7 +26,7 @@ function AddProductPopup(props) {
         formData.append('pictures', pictures[i]);
       }
       // eslint-disable-next-line max-len
-      const response_pictures = await axios.post('http://localhost:5000/post_all', formData, {
+      const response_pictures = await axios.post('https://frontend-site.onrender.com/post_all', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

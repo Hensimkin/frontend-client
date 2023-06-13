@@ -20,8 +20,8 @@ function UserNavbar() {
 
   const fetchNotifications = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/get_notifications');
-      const user = await axios.post('http://localhost:5000/get_uid');
+      const response = await axios.get('https://frontend-site.onrender.com/get_notifications');
+      const user = await axios.post('https://frontend-site.onrender.com/get_uid');
       const user2=user.data;
       //setNotifications(response.data);
       const storedNotifications = JSON.parse(localStorage.getItem(`${user2}`)) || [];//return the stored not

@@ -14,7 +14,7 @@ function FollowersList({ onClose }) {
 
   const fetchFollowers = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/followers');
+      const response = await axios.get('https://frontend-site.onrender.com/followers');
       setFollowers(response.data);
     } catch (error) {
       console.log(error);

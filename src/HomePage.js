@@ -54,7 +54,7 @@ function HomePage() {
 
   const fetchUserListings = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/home_listings');
+      const response = await axios.get('https://frontend-site.onrender.com/home_listings');
       let listings = response.data;
 
       if (sortCriteria === 'category') {
@@ -66,7 +66,7 @@ function HomePage() {
       }
 
       setUserListings(listings);
-      const user = await axios.post('http://localhost:5000/get_uid');
+      const user = await axios.post('https://frontend-site.onrender.com/get_uid');
       setUserId(user.data);
     } catch (error) {
       console.error('Error:', error);
@@ -126,7 +126,7 @@ function HomePage() {
       setSavedListings(updatedSavedListings);
       localStorage.setItem(`${userId}1`, JSON.stringify(updatedSavedListings));
       const deleteOrSave = isListingSaved ? 'delete' : 'save';
-      await axios.post('http://localhost:5000/saveListing', { listingId, deleteOrSave });
+      await axios.post('https://frontend-site.onrender.com/saveListing', { listingId, deleteOrSave });
     } catch (error) {
       console.error('Error saving listing:', error);
     }
@@ -145,7 +145,7 @@ function HomePage() {
       setSharedListings(updatedSharedListings);
       localStorage.setItem(`${userId}12`, JSON.stringify(updatedSharedListings));
       const deleteOrSave = isListingShared ? 'delete' : 'save';
-      await axios.post('http://localhost:5000/shareListing', { listingId, deleteOrSave });
+      await axios.post('https://frontend-site.onrender.com/shareListing', { listingId, deleteOrSave });
     } catch (error) {
       console.error('Error saving listing:', error);
     }
@@ -165,7 +165,7 @@ function HomePage() {
       setLikedListings(updatedLikedListings);
       localStorage.setItem(`${userId}`, JSON.stringify(updatedLikedListings));
 
-      await axios.post('http://localhost:5000/likeListing', {
+      await axios.post('https://frontend-site.onrender.com/likeListing', {
         listing: updatedListing,
         isLiked: !isListingLiked,
       });
@@ -191,7 +191,7 @@ function HomePage() {
   const handleSearch = async () => {
     try {
       if (searchTerm !== '') {
-        const response = await axios.get('http://localhost:5000/search_listings', {
+        const response = await axios.get('https://frontend-site.onrender.com/search_listings', {
           params: { search: searchTerm },
         });
         console.log(response.data); // Check the value of response.data
@@ -229,7 +229,7 @@ function HomePage() {
   }, []);
   const fetchLastSearches = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/lastsearches');
+      const response = await axios.get('https://frontend-site.onrender.com/lastsearches');
       setLastsearches(response.data);
     } catch (error) {
       console.log(error);
