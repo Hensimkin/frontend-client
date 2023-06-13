@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 // eslint-disable-next-line import/order
 import Navbar from './Navbar.js';
 import './cssFile.css';
@@ -26,34 +26,37 @@ function SignUp() {
   const [dateOfBirthResponse, setDateOfBirthResponse] = useState('');
   const [showLastChar, setShowLastChar] = useState(false);
   const [lastChar, setLastChar] = useState('');
+  const [isValid, setisValid] = useState('');
 
   async function post(e) {
     e.preventDefault();
     try {
       // eslint-disable-next-line max-len
-      const response_mail = await axios.post('https://backend-server-qdnc.onrender.com/post_email', { email });
+      const response_mail = await axios.post('http://localhost:5000/post_email', { email });
 
       const response_password = await axios.post(
-        'https://backend-server-qdnc.onrender.com/post_password',
+        'http://localhost:5000/post_password',
         { password },
       );
 
       const response_birthdate = await axios.post(
-        'https://backend-server-qdnc.onrender.com/post_birthdate',
+        'http://localhost:5000/post_birthdate',
         dateOfBirth,
       );
 
-      await axios.post('https://backend-server-qdnc.onrender.com/post_phoneNumber', phoneNumber);
+      await axios.post('http://localhost:5000/post_phoneNumber', phoneNumber);
 
       // eslint-disable-next-line max-len
-      const responseFromServer = await axios.post('https://backend-server-qdnc.onrender.com/post_approve', fullName);
+      const responseFromServer = await axios.post('http://localhost:5000/post_approve', fullName);
 
       setEmailResponse(response_mail.data);
       setPasswordResponse(response_password.data);
       setDateOfBirthResponse(response_birthdate.data);
-
+      setisValid(false);
       if (responseFromServer.data === 'yes') {
-        window.location.href = '/emailValidation';
+        setisValid(true);
+      } else {
+        setisValid(false);
       }
     } catch (error) {
       console.log(error);
@@ -192,6 +195,7 @@ function SignUp() {
                   </div>
               </div>
           </form>
+          {isValid && <Navigate to="/emailValidation" />}
           <div />
       </>
   );

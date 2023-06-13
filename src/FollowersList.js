@@ -14,11 +14,11 @@ function FollowersList({ onClose }) {
 
   const fetchFollowers = async () => {
     try {
-      const response = await axios.get('https://backend-server-qdnc.onrender.com/followers');
+      const response = await axios.get('http://localhost:5000/followers');
       setFollowers(response.data);
     } catch (error) {
       console.log(error);
-      setFollowersError('Failed to fetch followers list.');
+      setFollowersError('There is no followers.');
     }
   };
 
@@ -37,10 +37,10 @@ function FollowersList({ onClose }) {
         <h1 className="head">Followers</h1>
         <form onSubmit={handleSubmit}>
           <br></br>
-          <ul>
+          <ul >
             {followers.map((follower, index) => (
               <li key={index}>
-                <Link to={`/User/${follower.id}`}>
+                <Link to={`/User/${follower.id}`} className="fonts followers">
                   {follower.name}
                 </Link>
               </li>

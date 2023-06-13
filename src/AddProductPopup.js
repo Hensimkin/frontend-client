@@ -26,7 +26,7 @@ function AddProductPopup(props) {
         formData.append('pictures', pictures[i]);
       }
       // eslint-disable-next-line max-len
-      const response_pictures = await axios.post('https://backend-server-qdnc.onrender.com/post_all', formData, {
+      const response_pictures = await axios.post('http://localhost:5000/post_all', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -124,7 +124,7 @@ function AddProductPopup(props) {
                   <label>
                       Title:
                       {/* eslint-disable-next-line max-len */}
-                      <input type="text" pattern="[0-9a-zA-Z]*" value={title} onChange={handleTitleChange} />
+                      <input type="text" pattern="[0-9a-zA-Z ]*" value={title} onChange={handleTitleChange} />
                       {/* eslint-disable-next-line max-len */}
                       {titleError && <span className="error" style={{ color: 'red' }}>{titleError}</span>}
                   </label>

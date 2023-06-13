@@ -29,15 +29,15 @@ function PersonalArea() {
   const [isGridView, setIsGridView] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [editListingId, setEditListingId] = useState(null);
-  const [statsInfo, setStatsInfo] = useState({
-    totalLikes: 0,
-    followers: 0,
-    following: 0,
-    avgLikes: 0,
-  });
+  // const [statsInfo, setStatsInfo] = useState({
+  //   totalLikes: 0,
+  //   followers: 0,
+  //   following: 0,
+  //   avgLikes: 0,
+  // });
   const fetchUserListings = async () => {
     try {
-      const response = await axios.get('https://backend-server-qdnc.onrender.com/user_listings');
+      const response = await axios.get('http://localhost:5000/user_listings');
       setUserListings(response.data);
     } catch (error) {
       console.error('Error:', error);
@@ -50,10 +50,10 @@ function PersonalArea() {
 
   const fetchUserDetails = async () => {
     try {
-      const response = await axios.get('https://backend-server-qdnc.onrender.com/user_details');
+      const response = await axios.get('http://localhost:5000/user_details');
       setUserDetails(response.data);
-      const statsResponse = await axios.post('https://backend-server-qdnc.onrender.com/getStatistics',{statsInfo});
-      setStatsInfo(statsResponse.data.stats);
+      // const statsResponse = await axios.post('https://http://localhost:5000/getStatistics',{statsInfo});
+      // setStatsInfo(statsResponse.data.stats);
     } catch (error) {
       console.error('Error:', error);
     }

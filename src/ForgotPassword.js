@@ -12,7 +12,7 @@ function ForgotPass() {
     e.preventDefault();
     try {
       // eslint-disable-next-line max-len
-      const responseFromServer = await axios.post('https://backend-server-qdnc.onrender.com/post_reset', { email });
+      const responseFromServer = await axios.post('http://localhost:5000/post_reset', { email });
       setServerResponse(responseFromServer.data);
       // Set the response from the server to the state variable
       if (responseFromServer.data === 'Password reset email sent') {

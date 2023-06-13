@@ -14,7 +14,7 @@ function FollowingList({ onClose }) {
 
   const fetchFollowing = async () => {
     try {
-      const response = await axios.get('https://backend-server-qdnc.onrender.com/following');
+      const response = await axios.get('http://localhost:5000/following');
       setFollowing(response.data);
     } catch (error) {
       console.log(error);
@@ -25,7 +25,7 @@ function FollowingList({ onClose }) {
   async function unfollowUser(e, unfollowedUser) {
     try {
       e.preventDefault();
-      const response = await axios.post('https://backend-server-qdnc.onrender.com/unfollow', {
+      const response = await axios.post('http://localhost:5000/unfollow', {
         unfollowedUser
       });
       console.log(response.data); // "Unfollow successful"
