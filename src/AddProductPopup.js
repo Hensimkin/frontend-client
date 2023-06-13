@@ -124,9 +124,16 @@ function AddProductPopup(props) {
                   <label>
                       Title:
                       {/* eslint-disable-next-line max-len */}
-                      <input type="text" pattern="[0-9a-zA-Z]*" value={title} onChange={handleTitleChange} />
+                      <input type="text" pattern="[0-9a-z A-Z]*" value={title} onChange={handleTitleChange} />
                       {/* eslint-disable-next-line max-len */}
-                      {titleError && <span className="error" style={{ color: 'red' }}>{titleError}</span>}
+                      {titleError && (
+                      <span
+                        className="error"
+                        style={{ color: 'red' }}
+                      >
+                          {titleError}
+                      </span>
+                      )}
                   </label>
                   <br />
                   <label>
