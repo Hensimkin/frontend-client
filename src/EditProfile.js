@@ -19,11 +19,11 @@ function EditProfile({ onClose }) {
     e.preventDefault();
     try {
       const response_name = await axios.post(
-        'https://frontend-site.onrender.com/edit_name',
+        'https://backend-server-qdnc.onrender.com/edit_name',
         { FullName },
       );
       const response_phone_number = await axios.post(
-        'https://frontend-site.onrender.com/edit_phone_number',
+        'https://backend-server-qdnc.onrender.com/edit_phone_number',
         { PhoneNumber: PhoneNumber.slice(1) },
       );
       const message = `${response_name.data}\n${response_phone_number.data}`;
@@ -36,7 +36,7 @@ function EditProfile({ onClose }) {
 
   const fetchUserDetails = async () => {
     try {
-      const response = await axios.get('https://frontend-site.onrender.com/user_details');
+      const response = await axios.get('https://backend-server-qdnc.onrender.com/user_details');
       setUserDetails(response.data);
     } catch (error) {
       console.error('Error:', error);

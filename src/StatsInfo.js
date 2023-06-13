@@ -15,7 +15,7 @@ function StatsInfo({ onClose }) {
   useEffect(() => {
     async function fetchStatistics() {
       try {
-        const statsResponse = await axios.post('https://frontend-site.onrender.com/getStatistics',{statsInfo});
+        const statsResponse = await axios.post('https://backend-server-qdnc.onrender.com/getStatistics',{statsInfo});
         setStatsInfo(statsResponse.data.stats);
       } catch (error) {
         console.log('Error fetching statistics:', error);

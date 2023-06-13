@@ -30,7 +30,7 @@ function DeleteAccount({ onClose }) {
       // Show the final confirmation popup
       const confirmed = window.confirm('Press on "Confirm" will delete the user permanently. Are you sure you want to delete?');
       if (confirmed) {
-        const response = await axios.post('https://frontend-site.onrender.com/delete_account', {
+        const response = await axios.post('https://backend-server-qdnc.onrender.com/delete_account', {
           password: deletePassword,
         });
 

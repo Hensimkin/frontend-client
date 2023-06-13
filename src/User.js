@@ -43,12 +43,12 @@ function User() {
 
   const fetchUserListings = async () => {
     try {
-      const response = await axios.get(`https://frontend-site.onrender.com/User/${uid}`);
+      const response = await axios.get(`https://backend-server-qdnc.onrender.com/User/${uid}`);
       setUserListings(response.data);
-      const shareResponse = await axios.get(`https://frontend-site.onrender.com/UserShareListing/${uid}`);
+      const shareResponse = await axios.get(`https://backend-server-qdnc.onrender.com/UserShareListing/${uid}`);
       setUserSharedListings(shareResponse.data);
 
-      const user = await axios.post('https://frontend-site.onrender.com/get_uid');
+      const user = await axios.post('https://backend-server-qdnc.onrender.com/get_uid');
       setUserId(user.data);
 
     } catch (error) {
@@ -58,7 +58,7 @@ function User() {
 
   const fetchUserDetails = async () => {
     try {
-      const response = await axios.get(`https://frontend-site.onrender.com/user_details/${uid}`);
+      const response = await axios.get(`https://backend-server-qdnc.onrender.com/user_details/${uid}`);
       setUserDetails(response.data);
     } catch (error) {
       console.error('Error:', error);
@@ -68,7 +68,7 @@ function User() {
 
   const checkIfFollowing = async () => {
     try {
-      const response = await axios.get('https://frontend-site.onrender.com/following');
+      const response = await axios.get('https://backend-server-qdnc.onrender.com/following');
       const followingList = response.data;
       const isFollowingUser = followingList.some((user) => user.id === uid);
       setIsFollowing(isFollowingUser);
@@ -79,7 +79,7 @@ function User() {
 
   const followUser = async () => {
     try {
-      await axios.post('https://frontend-site.onrender.com/follow', {
+      await axios.post('https://backend-server-qdnc.onrender.com/follow', {
         uid,
         currentUserUid: userDetails.uid,
       });
@@ -91,7 +91,7 @@ function User() {
 
   const unfollowUser = async () => {
     try {
-      await axios.post('https://frontend-site.onrender.com/unfollow', {
+      await axios.post('https://backend-server-qdnc.onrender.com/unfollow', {
         unfollowedUser: {
           id: uid,
         },
@@ -105,7 +105,7 @@ function User() {
 
   const checkIfBlocked = async () => {
     try {
-      const response = await axios.get('https://frontend-site.onrender.com/check_blocked');
+      const response = await axios.get('https://backend-server-qdnc.onrender.com/check_blocked');
       const blockedList = response.data;
       const isBlockedUser = blockedList.some((user) => user.id === uid);
       setIsBlocked(isBlockedUser);
@@ -118,7 +118,7 @@ function User() {
 
   const blockUser = async () => {
     try {
-      await axios.post('https://frontend-site.onrender.com/block-user', {
+      await axios.post('https://backend-server-qdnc.onrender.com/block-user', {
         uid,
       });
       setIsBlocked(true);
@@ -129,7 +129,7 @@ function User() {
 
   const unblockUser = async () => {
     try {
-      await axios.post('https://frontend-site.onrender.com/block-user', {
+      await axios.post('https://backend-server-qdnc.onrender.com/block-user', {
         uid,
       });
       setIsBlocked(false);
@@ -172,7 +172,7 @@ function User() {
       setSavedListings(updatedSavedListings);
       localStorage.setItem(`${userId}1`, JSON.stringify(updatedSavedListings));
       const deleteOrSave = isListingSaved ? 'delete' : 'save';
-      await axios.post('https://frontend-site.onrender.com/saveListing', { listingId, deleteOrSave });
+      await axios.post('https://backend-server-qdnc.onrender.com/saveListing', { listingId, deleteOrSave });
     } catch (error) {
       console.error('Error saving listing:', error);
     }
@@ -193,7 +193,7 @@ function User() {
       setLikedListings(updatedLikedListings);
       localStorage.setItem(`${userId}`, JSON.stringify(updatedLikedListings));
 
-      await axios.post('https://frontend-site.onrender.com/likeListing', {
+      await axios.post('https://backend-server-qdnc.onrender.com/likeListing', {
         listing: updatedListing,
         isLiked: !isListingLiked,
       });
